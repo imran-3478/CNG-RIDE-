@@ -27,10 +27,11 @@ jobs:
           gradle-version: '8.9'
 
       - name: Build Debug APK
+        working-directory: ./CNG-RIDE-
         run: gradle assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: CNG-RIDE-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: CNG-RIDE-/app/build/outputs/apk/debug/app-debug.apk
