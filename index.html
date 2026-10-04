@@ -4,18 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CNG RIDE — Smart CNG Ride Service</title>
+<title>CNG RIDE — Live CNG Ride Service</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link
- rel="stylesheet"
- href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -24,18 +23,17 @@
 
 :root{
     --primary:#087f5b;
-    --primary-dark:#056044;
-    --primary-light:#e8f8f2;
+    --primary-dark:#063b2b;
+    --light:#e8f8f2;
     --accent:#f5c542;
+    --danger:#dc3545;
+    --success:#198754;
     --dark:#10231d;
     --text:#263a33;
     --muted:#71817b;
-    --white:#fff;
     --bg:#f4f8f6;
-    --danger:#dc3545;
-    --success:#198754;
+    --white:#fff;
     --shadow:0 12px 35px rgba(0,0,0,.08);
-    --radius:20px;
 }
 
 body{
@@ -45,10 +43,7 @@ body{
     line-height:1.6;
 }
 
-button,
-input,
-select,
-textarea{
+button,input,textarea,select{
     font-family:inherit;
 }
 
@@ -56,87 +51,75 @@ button{
     cursor:pointer;
 }
 
-a{
-    text-decoration:none;
-}
-
-/* HEADER */
-
 .header{
     position:sticky;
     top:0;
-    z-index:1000;
-    background:rgba(255,255,255,.96);
+    z-index:2000;
+    background:rgba(255,255,255,.97);
+    border-bottom:1px solid #e5eee9;
     backdrop-filter:blur(12px);
-    border-bottom:1px solid #e6eee9;
 }
 
 .navbar{
     max-width:1200px;
     margin:auto;
-    padding:14px 20px;
+    padding:13px 20px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:20px;
+    align-items:center;
+    gap:15px;
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
     color:var(--primary-dark);
     font-size:25px;
     font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .logo-icon{
     width:43px;
     height:43px;
+    background:var(--primary);
+    color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
     border-radius:13px;
-    background:var(--primary);
-    color:white;
-    font-size:23px;
-    box-shadow:0 7px 18px rgba(8,127,91,.25);
 }
 
 .nav-links{
     display:flex;
-    align-items:center;
-    gap:7px;
+    gap:5px;
 }
 
 .nav-links button{
     border:0;
     background:transparent;
-    color:#52635c;
-    padding:9px 13px;
+    padding:9px 12px;
     border-radius:10px;
-    font-size:15px;
+    color:#52635c;
     font-weight:600;
 }
 
 .nav-links button:hover{
-    background:var(--primary-light);
+    background:var(--light);
     color:var(--primary);
 }
 
 #logoutBtn{
-    background:#fff1f2;
-    color:#c92a3b;
+    background:#fff0f1;
+    color:#c82333;
 }
-
-/* HERO */
 
 .hero{
     background:
-      radial-gradient(circle at 10% 20%,rgba(245,197,66,.20),transparent 30%),
-      linear-gradient(135deg,#063b2b,#087f5b);
-    color:white;
-    padding:65px 20px 75px;
+    radial-gradient(circle at 10% 20%,rgba(245,197,66,.2),transparent 30%),
+    linear-gradient(135deg,#063b2b,#087f5b);
+    color:#fff;
+    padding:65px 20px 80px;
 }
 
 .hero-inner{
@@ -144,32 +127,47 @@ a{
     margin:auto;
     display:grid;
     grid-template-columns:1.15fr .85fr;
-    align-items:center;
     gap:50px;
+    align-items:center;
 }
 
 .hero h1{
-    font-size:clamp(35px,5vw,62px);
+    font-size:clamp(36px,5vw,60px);
     line-height:1.15;
-    margin-bottom:18px;
+    margin-bottom:17px;
 }
 
 .hero p{
-    font-size:18px;
     color:#e2f4ed;
+    font-size:18px;
     max-width:650px;
 }
 
 .hero-actions{
-    margin-top:28px;
     display:flex;
     flex-wrap:wrap;
-    gap:12px;
+    gap:10px;
+    margin-top:27px;
+}
+
+.hero-card{
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:25px;
+    padding:28px;
+}
+
+.hero-card-icon{
+    font-size:55px;
+}
+
+.hero-card h3{
+    font-size:24px;
 }
 
 .btn{
     border:0;
-    padding:12px 19px;
+    padding:11px 17px;
     border-radius:12px;
     font-size:15px;
     font-weight:700;
@@ -182,26 +180,7 @@ a{
 
 .btn-primary{
     background:var(--primary);
-    color:white;
-}
-
-.btn-primary:hover{
-    background:var(--primary-dark);
-}
-
-.btn-white{
-    background:white;
-    color:var(--primary-dark);
-}
-
-.btn-warning{
-    background:var(--accent);
-    color:#342900;
-}
-
-.btn-danger{
-    background:#fff0f1;
-    color:#c82333;
+    color:#fff;
 }
 
 .btn-success{
@@ -209,68 +188,48 @@ a{
     color:#16794b;
 }
 
+.btn-danger{
+    background:#fff0f1;
+    color:#c82333;
+}
+
+.btn-warning{
+    background:var(--accent);
+    color:#352900;
+}
+
 .btn-secondary{
     background:#eef2f0;
     color:#34463f;
 }
 
-.btn-small{
-    padding:9px 13px;
-    font-size:14px;
+.btn-white{
+    background:#fff;
+    color:var(--primary-dark);
 }
 
-.hero-card{
-    background:rgba(255,255,255,.12);
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:25px;
-    padding:28px;
-    backdrop-filter:blur(10px);
+.btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
 }
-
-.hero-card-icon{
-    font-size:55px;
-    margin-bottom:10px;
-}
-
-.hero-card h3{
-    font-size:24px;
-    margin-bottom:8px;
-}
-
-/* MAIN */
 
 .container{
     max-width:1200px;
     margin:auto;
-    padding:35px 20px;
+    padding:32px 20px;
 }
-
-.section-title{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.section-title h2{
-    font-size:30px;
-    color:var(--dark);
-}
-
-.section-title p{
-    color:var(--muted);
-}
-
-/* AUTH */
 
 .auth-section{
     margin-top:-35px;
     position:relative;
-    z-index:5;
+    z-index:10;
 }
 
 .auth-card{
     max-width:620px;
     margin:auto;
-    background:white;
+    background:#fff;
     border-radius:25px;
     box-shadow:var(--shadow);
     padding:28px;
@@ -280,22 +239,22 @@ a{
     display:grid;
     grid-template-columns:1fr 1fr;
     background:#f1f5f3;
-    border-radius:13px;
     padding:4px;
-    margin-bottom:24px;
+    border-radius:13px;
+    margin-bottom:23px;
 }
 
 .auth-tabs button{
     border:0;
+    background:transparent;
     padding:11px;
     border-radius:10px;
-    background:transparent;
     font-weight:700;
     color:#66766f;
 }
 
 .auth-tabs button.active{
-    background:white;
+    background:#fff;
     color:var(--primary);
     box-shadow:0 4px 12px rgba(0,0,0,.06);
 }
@@ -318,13 +277,11 @@ a{
     outline:none;
     background:#fbfdfc;
     font-size:15px;
-    transition:.2s;
 }
 
 .form-control:focus{
     border-color:var(--primary);
     box-shadow:0 0 0 3px rgba(8,127,91,.09);
-    background:white;
 }
 
 .form-grid{
@@ -334,10 +291,10 @@ a{
 }
 
 .message{
+    display:none;
+    margin-top:12px;
     padding:11px 13px;
     border-radius:11px;
-    margin-top:12px;
-    display:none;
     font-size:14px;
 }
 
@@ -353,8 +310,6 @@ a{
     color:#b42333;
 }
 
-/* APP */
-
 #appSection{
     display:none;
 }
@@ -363,60 +318,51 @@ a{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:15px;
-    margin-bottom:22px;
+    margin-bottom:20px;
 }
 
 .welcome{
-    font-size:26px;
+    font-size:27px;
     font-weight:700;
     color:var(--dark);
 }
 
 .user-badge{
-    background:var(--primary-light);
+    background:var(--light);
     color:var(--primary-dark);
     padding:8px 14px;
     border-radius:30px;
     font-weight:700;
 }
 
-/* DASHBOARD CARDS */
-
 .dashboard-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:17px;
-    margin-bottom:22px;
+    margin-bottom:20px;
 }
 
 .stat-card{
-    background:white;
+    background:#fff;
     border-radius:18px;
     padding:20px;
     box-shadow:0 7px 24px rgba(0,0,0,.05);
     border:1px solid #edf2ef;
 }
 
-.stat-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
 .stat-icon{
     width:43px;
     height:43px;
-    border-radius:12px;
-    background:var(--primary-light);
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:var(--light);
     font-size:21px;
 }
 
 .stat-card h3{
-    margin-top:12px;
+    margin-top:10px;
     font-size:23px;
 }
 
@@ -425,10 +371,8 @@ a{
     font-size:14px;
 }
 
-/* PANELS */
-
 .panel{
-    background:white;
+    background:#fff;
     border-radius:22px;
     box-shadow:var(--shadow);
     padding:23px;
@@ -439,8 +383,8 @@ a{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:12px;
-    margin-bottom:18px;
+    gap:10px;
+    margin-bottom:17px;
 }
 
 .panel-title{
@@ -453,17 +397,15 @@ a{
     font-size:14px;
 }
 
-/* DRIVER STATUS */
-
 .driver-status{
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
     gap:15px;
-    padding:17px;
-    border-radius:16px;
     background:#f7faf8;
     border:1px solid #e5eee9;
+    border-radius:16px;
+    padding:17px;
 }
 
 .status-left{
@@ -486,36 +428,56 @@ a{
 
 .status-dot.busy{
     background:#dc3545;
-    box-shadow:0 0 0 6px rgba(220,53,69,.10);
 }
-
-/* MAP */
 
 .map-wrap{
     position:relative;
 }
 
 #map{
-    height:430px;
+    height:480px;
     width:100%;
     border-radius:18px;
     overflow:hidden;
 }
 
-.map-overlay{
+.map-info{
     position:absolute;
-    top:13px;
-    left:13px;
-    z-index:500;
-    background:white;
+    top:12px;
+    left:12px;
+    z-index:600;
+    background:#fff;
     padding:9px 13px;
-    border-radius:11px;
-    box-shadow:0 5px 18px rgba(0,0,0,.12);
+    border-radius:12px;
+    box-shadow:0 5px 18px rgba(0,0,0,.15);
     font-size:13px;
-    font-weight:600;
+    font-weight:700;
 }
 
-/* SEARCH */
+.live-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:#eaf8f0;
+    color:#147746;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.live-dot{
+    width:8px;
+    height:8px;
+    background:#20a464;
+    border-radius:50%;
+    animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        opacity:.3;
+    }
+}
 
 .search-row{
     display:grid;
@@ -528,27 +490,24 @@ a{
 }
 
 .search-box input{
-    padding-left:43px;
+    padding-left:42px;
 }
 
 .search-icon{
     position:absolute;
     left:14px;
     top:10px;
-    font-size:20px;
+    font-size:19px;
 }
-
-/* DRIVER CARDS */
 
 .cards-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:16px;
-    margin-top:18px;
 }
 
 .driver-card{
-    border:1px solid #e4ece8;
+    border:1px solid #e3ebe7;
     border-radius:18px;
     padding:18px;
     background:linear-gradient(180deg,#fff,#fbfdfc);
@@ -557,17 +516,17 @@ a{
 .driver-card-top{
     display:flex;
     align-items:center;
-    gap:13px;
+    gap:12px;
 }
 
 .driver-avatar{
-    width:52px;
-    height:52px;
+    width:53px;
+    height:53px;
+    background:var(--light);
     border-radius:15px;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:var(--primary-light);
     font-size:25px;
 }
 
@@ -583,10 +542,10 @@ a{
 }
 
 .driver-meta{
-    margin-top:15px;
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:9px;
+    margin-top:15px;
 }
 
 .meta-box{
@@ -606,22 +565,61 @@ a{
 
 .card-actions{
     display:grid;
-    grid-template-columns:1.2fr .8fr .8fr;
+    grid-template-columns:1.3fr .8fr .8fr;
     gap:8px;
     margin-top:15px;
 }
 
-.card-actions button{
-    width:100%;
+.card-actions a{
+    text-align:center;
 }
 
-/* RIDE */
+.empty{
+    text-align:center;
+    padding:35px 15px;
+    color:var(--muted);
+}
 
-.ride-card{
-    border:1px solid #e4ece8;
+.empty-icon{
+    font-size:45px;
+    margin-bottom:8px;
+}
+
+.loading{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:25px;
+    color:var(--muted);
+}
+
+.spinner{
+    width:21px;
+    height:21px;
+    border:3px solid #dbe8e2;
+    border-top-color:var(--primary);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.ride-card,
+.request-card{
+    border:1px solid #e1eae5;
     border-radius:17px;
     padding:17px;
     margin-bottom:12px;
+}
+
+.request-card.new{
+    border-color:#f1cc5a;
+    box-shadow:0 5px 20px rgba(245,197,66,.15);
 }
 
 .ride-top{
@@ -680,72 +678,18 @@ a{
     font-size:14px;
 }
 
-/* REQUEST */
-
-.request-card{
-    border:1px solid #e1eae5;
-    border-radius:17px;
-    padding:17px;
-    margin-bottom:12px;
-    background:#fff;
-}
-
-.request-card.new{
-    border-color:#f1cc5a;
-    box-shadow:0 5px 20px rgba(245,197,66,.15);
-}
-
 .request-buttons{
     display:flex;
     gap:8px;
     margin-top:15px;
 }
 
-/* EMPTY */
-
-.empty{
-    text-align:center;
-    padding:35px 15px;
-    color:var(--muted);
-}
-
-.empty-icon{
-    font-size:45px;
-    margin-bottom:8px;
-}
-
-/* LOADING */
-
-.loading{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    padding:25px;
-    color:var(--muted);
-}
-
-.spinner{
-    width:21px;
-    height:21px;
-    border:3px solid #dbe8e2;
-    border-top-color:var(--primary);
-    border-radius:50%;
-    animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-    to{transform:rotate(360deg);}
-}
-
-/* MODAL */
-
 .modal{
     display:none;
     position:fixed;
     inset:0;
+    z-index:5000;
     background:rgba(5,30,22,.58);
-    z-index:3000;
     align-items:center;
     justify-content:center;
     padding:18px;
@@ -756,12 +700,11 @@ a{
 }
 
 .modal-box{
-    background:white;
     width:100%;
     max-width:480px;
+    background:#fff;
     border-radius:22px;
     padding:23px;
-    box-shadow:0 25px 70px rgba(0,0,0,.22);
 }
 
 .modal-header{
@@ -772,10 +715,10 @@ a{
 }
 
 .close-btn{
-    border:0;
-    background:#f0f3f1;
     width:35px;
     height:35px;
+    border:0;
+    background:#f0f3f1;
     border-radius:10px;
     font-size:20px;
 }
@@ -787,50 +730,34 @@ a{
     margin-top:15px;
 }
 
-/* TOAST */
-
 #toast{
     position:fixed;
     right:20px;
     bottom:20px;
-    z-index:5000;
+    z-index:7000;
     max-width:350px;
     background:#10231d;
-    color:white;
+    color:#fff;
     padding:13px 17px;
     border-radius:13px;
-    box-shadow:0 10px 35px rgba(0,0,0,.2);
     display:none;
+    box-shadow:0 10px 35px rgba(0,0,0,.2);
 }
 
 #toast.show{
     display:block;
-    animation:toastIn .25s ease;
 }
-
-@keyframes toastIn{
-    from{transform:translateY(15px);opacity:0}
-    to{transform:translateY(0);opacity:1}
-}
-
-/* FOOTER */
 
 .footer{
     background:#062f24;
     color:#d9eee6;
     padding:35px 20px;
-    margin-top:30px;
-}
-
-.footer-inner{
-    max-width:1200px;
-    margin:auto;
+    margin-top:25px;
     text-align:center;
 }
 
 .footer h3{
     font-size:23px;
-    margin-bottom:5px;
 }
 
 .footer p{
@@ -838,9 +765,8 @@ a{
     font-size:14px;
 }
 
-/* RESPONSIVE */
-
 @media(max-width:900px){
+
     .hero-inner{
         grid-template-columns:1fr;
     }
@@ -855,6 +781,7 @@ a{
 }
 
 @media(max-width:700px){
+
     .navbar{
         flex-wrap:wrap;
     }
@@ -862,7 +789,6 @@ a{
     .nav-links{
         width:100%;
         overflow-x:auto;
-        justify-content:flex-start;
     }
 
     .nav-links button{
@@ -900,742 +826,866 @@ a{
     }
 
     .app-header{
-        align-items:flex-start;
         flex-direction:column;
+        align-items:flex-start;
     }
 
     #map{
-        height:350px;
+        height:390px;
     }
 
-    .welcome{
-        font-size:22px;
+    .driver-status{
+        flex-direction:column;
+        align-items:flex-start;
     }
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+
 <header class="header">
-    <nav class="navbar">
 
-        <a href="#" class="logo" onclick="goHome();return false;">
-            <span class="logo-icon">🚕</span>
-            <span>CNG RIDE</span>
-        </a>
+<nav class="navbar">
 
-        <div class="nav-links">
-            <button onclick="goHome()">হোম</button>
-            <button onclick="openFind()">CNG খুঁজুন</button>
-            <button onclick="openRides()">আমার Ride</button>
-            <button id="logoutBtn" onclick="logout()" style="display:none">
-                Logout
-            </button>
-        </div>
+<a href="#" class="logo" onclick="goHome();return false;">
+<span class="logo-icon">🚕</span>
+<span>CNG RIDE</span>
+</a>
 
-    </nav>
+<div class="nav-links">
+
+<button onclick="goHome()">হোম</button>
+
+<button onclick="openFind()">CNG খুঁজুন</button>
+
+<button onclick="openRides()">আমার Ride</button>
+
+<button id="logoutBtn"
+onclick="logout()"
+style="display:none">
+Logout
+</button>
+
+</div>
+
+</nav>
+
 </header>
 
 
-<!-- HERO -->
 <section class="hero" id="homeSection">
 
-    <div class="hero-inner">
+<div class="hero-inner">
 
-        <div>
-            <h1>আপনার কাছের CNG খুঁজুন সহজেই 🚕</h1>
+<div>
 
-            <p>
-                কাছাকাছি Available CNG Driver খুঁজুন,
-                Ride Request পাঠান এবং সহজেই আপনার যাত্রা সম্পন্ন করুন।
-            </p>
+<h1>
+আপনার কাছের CNG খুঁজুন সহজেই 🚕
+</h1>
 
-            <div class="hero-actions">
-                <button class="btn btn-warning" onclick="scrollToAuth()">
-                    🚕 Ride শুরু করুন
-                </button>
+<p>
+Live Location ব্যবহার করে আপনার কাছাকাছি
+Available CNG Driver খুঁজুন এবং সহজেই Ride Request পাঠান।
+</p>
 
-                <button class="btn btn-white" onclick="scrollToAuth()">
-                    👨‍✈️ Driver হিসেবে যোগ দিন
-                </button>
-            </div>
-        </div>
+<div class="hero-actions">
 
-        <div class="hero-card">
-            <div class="hero-card-icon">📍</div>
-            <h3>Smart Location Search</h3>
-            <p>
-                আপনার বর্তমান অবস্থানের কাছাকাছি Available
-                CNG Driver খুঁজে নিন।
-            </p>
-        </div>
+<button
+class="btn btn-warning"
+onclick="scrollToAuth()">
+🚕 Ride শুরু করুন
+</button>
 
-    </div>
+<button
+class="btn btn-white"
+onclick="scrollToAuth()">
+👨‍✈️ Driver হিসেবে যোগ দিন
+</button>
+
+</div>
+
+</div>
+
+<div class="hero-card">
+
+<div class="hero-card-icon">
+📍
+</div>
+
+<h3>
+Live CNG Location
+</h3>
+
+<p>
+Map-এ আপনার অবস্থান এবং কাছাকাছি
+Available CNG কত KM দূরে তা দেখতে পারবেন।
+</p>
+
+</div>
+
+</div>
+
 </section>
 
 
-<!-- AUTH -->
 <section class="auth-section" id="authSection">
 
-    <div class="auth-card">
+<div class="auth-card">
 
-        <div class="auth-tabs">
+<div class="auth-tabs">
 
-            <button id="loginTab"
-                    class="active"
-                    onclick="switchAuth('login')">
-                Login
-            </button>
+<button
+id="loginTab"
+class="active"
+onclick="switchAuth('login')">
+Login
+</button>
 
-            <button id="registerTab"
-                    onclick="switchAuth('register')">
-                Register
-            </button>
+<button
+id="registerTab"
+onclick="switchAuth('register')">
+Register
+</button>
 
-        </div>
-
-
-        <!-- LOGIN -->
-
-        <form id="loginForm">
-
-            <div class="section-title" style="margin-bottom:20px">
-                <h2 style="font-size:24px">Welcome Back 👋</h2>
-                <p>আপনার account-এ Login করুন</p>
-            </div>
-
-            <div class="form-group">
-                <label>Email</label>
-                <input
-                    id="loginEmail"
-                    type="email"
-                    class="form-control"
-                    placeholder="আপনার Email"
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <input
-                    id="loginPassword"
-                    type="password"
-                    class="form-control"
-                    placeholder="Password"
-                    required
-                >
-            </div>
-
-            <button
-                type="submit"
-                class="btn btn-primary"
-                style="width:100%"
-                id="loginBtn"
-            >
-                Login
-            </button>
-
-            <div id="loginMessage" class="message"></div>
-
-        </form>
+</div>
 
 
-        <!-- REGISTER -->
+<form id="loginForm">
 
-        <form id="registerForm" style="display:none">
+<div style="text-align:center;margin-bottom:20px">
 
-            <div class="section-title" style="margin-bottom:20px">
-                <h2 style="font-size:24px">Create Account</h2>
-                <p>Passenger অথবা Driver হিসেবে Register করুন</p>
-            </div>
+<h2>Welcome Back 👋</h2>
 
-            <div class="form-group">
-                <label>আপনার নাম</label>
-                <input
-                    id="regName"
-                    type="text"
-                    class="form-control"
-                    placeholder="পূর্ণ নাম"
-                    required
-                >
-            </div>
+<p class="panel-subtitle">
+আপনার account-এ Login করুন
+</p>
 
-            <div class="form-grid">
+</div>
 
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input
-                        id="regPhone"
-                        type="tel"
-                        class="form-control"
-                        placeholder="01XXXXXXXXX"
-                        required
-                    >
-                </div>
+<div class="form-group">
 
-                <div class="form-group">
-                    <label>আপনি কী?</label>
+<label>Email</label>
 
-                    <select
-                        id="regType"
-                        class="form-control"
-                        onchange="toggleVehicleField()"
-                    >
-                        <option value="passenger">Passenger</option>
-                        <option value="driver">Driver</option>
-                    </select>
-                </div>
+<input
+id="loginEmail"
+type="email"
+class="form-control"
+placeholder="আপনার Email"
+required>
 
-            </div>
+</div>
 
-            <div
-                class="form-group"
-                id="vehicleField"
-                style="display:none"
-            >
-                <label>CNG Number</label>
+<div class="form-group">
 
-                <input
-                    id="regVehicle"
-                    type="text"
-                    class="form-control"
-                    placeholder="যেমন: ঢাকা-থ-১২-৩৪৫৬"
-                >
-            </div>
+<label>Password</label>
 
-            <div class="form-group">
-                <label>Email</label>
+<input
+id="loginPassword"
+type="password"
+class="form-control"
+placeholder="Password"
+required>
 
-                <input
-                    id="regEmail"
-                    type="email"
-                    class="form-control"
-                    placeholder="আপনার Email"
-                    required
-                >
-            </div>
+</div>
 
-            <div class="form-group">
-                <label>Password</label>
+<button
+type="submit"
+id="loginBtn"
+class="btn btn-primary"
+style="width:100%">
+Login
+</button>
 
-                <input
-                    id="regPassword"
-                    type="password"
-                    class="form-control"
-                    placeholder="কমপক্ষে ৬ অক্ষর"
-                    minlength="6"
-                    required
-                >
-            </div>
+<div id="loginMessage"
+class="message"></div>
 
-            <button
-                type="submit"
-                class="btn btn-primary"
-                style="width:100%"
-                id="registerBtn"
-            >
-                Register
-            </button>
+</form>
 
-            <div id="registerMessage" class="message"></div>
 
-        </form>
+<form
+id="registerForm"
+style="display:none">
 
-    </div>
+<div style="text-align:center;margin-bottom:20px">
+
+<h2>Create Account</h2>
+
+<p class="panel-subtitle">
+Passenger অথবা Driver হিসেবে Register করুন
+</p>
+
+</div>
+
+<div class="form-group">
+
+<label>আপনার নাম</label>
+
+<input
+id="regName"
+type="text"
+class="form-control"
+placeholder="পূর্ণ নাম"
+required>
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Phone</label>
+
+<input
+id="regPhone"
+type="tel"
+class="form-control"
+placeholder="01XXXXXXXXX"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>আপনি কী?</label>
+
+<select
+id="regType"
+class="form-control"
+onchange="toggleVehicleField()">
+
+<option value="passenger">
+Passenger
+</option>
+
+<option value="driver">
+Driver
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div
+id="vehicleField"
+class="form-group"
+style="display:none">
+
+<label>CNG Number</label>
+
+<input
+id="regVehicle"
+type="text"
+class="form-control"
+placeholder="CNG Number">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+id="regEmail"
+type="email"
+class="form-control"
+placeholder="আপনার Email"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input
+id="regPassword"
+type="password"
+class="form-control"
+placeholder="কমপক্ষে ৬ অক্ষর"
+minlength="6"
+required>
+
+</div>
+
+
+<button
+type="submit"
+id="registerBtn"
+class="btn btn-primary"
+style="width:100%">
+Register
+</button>
+
+<div
+id="registerMessage"
+class="message">
+</div>
+
+</form>
+
+</div>
 
 </section>
 
 
-<!-- APP -->
 <section id="appSection">
 
-    <main class="container">
+<main class="container">
 
-        <div class="app-header">
 
-            <div>
-                <div class="welcome">
-                    Hello, <span id="userName">User</span> 👋
-                </div>
+<div class="app-header">
 
-                <div class="panel-subtitle">
-                    CNG RIDE Dashboard
-                </div>
-            </div>
+<div>
 
-            <div class="user-badge" id="userTypeBadge">
-                Passenger
-            </div>
+<div class="welcome">
+Hello, <span id="userName">User</span> 👋
+</div>
 
-        </div>
+<div class="panel-subtitle">
+CNG RIDE Dashboard
+</div>
 
+</div>
 
-        <!-- DRIVER DASHBOARD -->
+<div
+id="userTypeBadge"
+class="user-badge">
+Passenger
+</div>
 
-        <div id="driverPanel" style="display:none">
+</div>
 
-            <div class="dashboard-grid">
 
-                <div class="stat-card">
+<!-- DRIVER -->
 
-                    <div class="stat-top">
-                        <span>🚕</span>
-                        <div class="stat-icon">🚕</div>
-                    </div>
+<div id="driverPanel" style="display:none">
 
-                    <h3 id="driverStatusText">
-                        Busy
-                    </h3>
 
-                    <p>বর্তমান Status</p>
+<div class="dashboard-grid">
 
-                </div>
+<div class="stat-card">
 
-                <div class="stat-card">
+<div class="stat-icon">
+🚕
+</div>
 
-                    <div class="stat-top">
-                        <span>📍</span>
-                        <div class="stat-icon">📍</div>
-                    </div>
+<h3 id="driverStatusText">
+Busy
+</h3>
 
-                    <h3 id="locationStatus">
-                        Waiting
-                    </h3>
+<p>বর্তমান Status</p>
 
-                    <p>Location Status</p>
+</div>
 
-                </div>
 
-                <div class="stat-card">
+<div class="stat-card">
 
-                    <div class="stat-top">
-                        <span>🔔</span>
-                        <div class="stat-icon">🔔</div>
-                    </div>
+<div class="stat-icon">
+📍
+</div>
 
-                    <h3 id="requestCount">
-                        0
-                    </h3>
+<h3 id="locationStatus">
+Waiting
+</h3>
 
-                    <p>Ride Requests</p>
+<p>Live Location</p>
 
-                </div>
+</div>
 
-            </div>
 
+<div class="stat-card">
 
-            <div class="panel">
+<div class="stat-icon">
+🔔
+</div>
 
-                <div class="panel-header">
+<h3 id="requestCount">
+0
+</h3>
 
-                    <div>
-                        <h2 class="panel-title">
-                            Driver Control
-                        </h2>
+<p>Pending Requests</p>
 
-                        <p class="panel-subtitle">
-                            আপনার CNG বর্তমানে Ride নেওয়ার জন্য প্রস্তুত কি না সেট করুন।
-                        </p>
-                    </div>
+</div>
 
-                </div>
+</div>
 
-                <div class="driver-status">
 
-                    <div class="status-left">
+<div class="panel">
 
-                        <span
-                            id="statusDot"
-                            class="status-dot"
-                        ></span>
+<div class="panel-header">
 
-                        <div>
-                            <strong id="availabilityText">
-                                আপনি এখন Busy
-                            </strong>
+<div>
 
-                            <div class="panel-subtitle">
-                                Passenger আপনাকে Available হিসেবে দেখতে পারবে।
-                            </div>
-                        </div>
+<h2 class="panel-title">
+Driver Control
+</h2>
 
-                    </div>
+<p class="panel-subtitle">
+Available হলে Passenger আপনাকে Map-এ দেখতে পারবে।
+</p>
 
-                    <button
-                        id="availabilityBtn"
-                        class="btn btn-success"
-                        onclick="toggleAvailability()"
-                    >
-                        Available করুন
-                    </button>
+</div>
 
-                </div>
+<span class="live-badge">
+<span class="live-dot"></span>
+Live GPS
+</span>
 
-                <div style="margin-top:13px">
+</div>
 
-                    <button
-                        class="btn btn-secondary btn-small"
-                        onclick="updateLocation()"
-                    >
-                        📍 আমার Location Update করুন
-                    </button>
 
-                </div>
+<div class="driver-status">
 
-            </div>
+<div class="status-left">
 
+<span
+id="statusDot"
+class="status-dot">
+</span>
 
-            <div class="panel">
+<div>
 
-                <div class="panel-header">
+<strong id="availabilityText">
+আপনি এখন Busy
+</strong>
 
-                    <div>
-                        <h2 class="panel-title">
-                            🔔 Ride Requests
-                        </h2>
+<div class="panel-subtitle">
+Available করলে আপনার GPS Location নিয়মিত update হবে।
+</div>
 
-                        <p class="panel-subtitle">
-                            Passenger-এর নতুন Ride Request এখানে দেখতে পাবেন।
-                        </p>
-                    </div>
+</div>
 
-                    <button
-                        class="btn btn-secondary btn-small"
-                        onclick="loadDriverRequests()"
-                    >
-                        ↻ Refresh
-                    </button>
+</div>
 
-                </div>
 
-                <div id="driverRequests"></div>
+<button
+id="availabilityBtn"
+class="btn btn-success"
+onclick="toggleAvailability()">
+Available করুন
+</button>
 
-            </div>
+</div>
 
-        </div>
 
+<div style="margin-top:13px">
 
-        <!-- PASSENGER DASHBOARD -->
+<button
+class="btn btn-secondary"
+onclick="updateLocation()">
+📍 এখনই Location Update
+</button>
 
-        <div id="passengerPanel">
+</div>
 
-            <div class="dashboard-grid">
+</div>
 
-                <div class="stat-card">
 
-                    <div class="stat-top">
-                        <span>📍</span>
-                        <div class="stat-icon">📍</div>
-                    </div>
+<div class="panel">
 
-                    <h3 id="passengerLocationStatus">
-                        Waiting
-                    </h3>
+<div class="panel-header">
 
-                    <p>আপনার Location</p>
+<div>
 
-                </div>
+<h2 class="panel-title">
+🔔 Ride Requests
+</h2>
 
-                <div class="stat-card">
+<p class="panel-subtitle">
+Passenger-এর Ride Request
+</p>
 
-                    <div class="stat-top">
-                        <span>🚕</span>
-                        <div class="stat-icon">🚕</div>
-                    </div>
+</div>
 
-                    <h3 id="nearbyCount">
-                        0
-                    </h3>
+<button
+class="btn btn-secondary"
+onclick="loadDriverRequests()">
+↻ Refresh
+</button>
 
-                    <p>Nearby CNG</p>
+</div>
 
-                </div>
+<div id="driverRequests"></div>
 
-                <div class="stat-card">
+</div>
 
-                    <div class="stat-top">
-                        <span>🧾</span>
-                        <div class="stat-icon">🧾</div>
-                    </div>
+</div>
 
-                    <h3 id="myRideCount">
-                        0
-                    </h3>
 
-                    <p>আমার Ride</p>
+<!-- PASSENGER -->
 
-                </div>
+<div id="passengerPanel">
 
-            </div>
 
+<div class="dashboard-grid">
 
-            <div class="panel">
+<div class="stat-card">
 
-                <div class="panel-header">
+<div class="stat-icon">
+📍
+</div>
 
-                    <div>
-                        <h2 class="panel-title">
-                            🚕 কাছাকাছি CNG খুঁজুন
-                        </h2>
+<h3 id="passengerLocationStatus">
+Waiting
+</h3>
 
-                        <p class="panel-subtitle">
-                            আপনার Location-এর কাছাকাছি Available Driver দেখুন।
-                        </p>
-                    </div>
+<p>Your Live Location</p>
 
-                </div>
+</div>
 
-                <div class="form-group">
 
-                    <label>
-                        কোথায় যেতে চান?
-                    </label>
+<div class="stat-card">
 
-                    <textarea
-                        id="destination"
-                        class="form-control"
-                        rows="2"
-                        placeholder="গন্তব্য লিখুন, যেমন: ভূঞাপুর বাজার"
-                    ></textarea>
+<div class="stat-icon">
+🚕
+</div>
 
-                </div>
+<h3 id="nearbyCount">
+0
+</h3>
 
-                <div class="search-row">
+<p>Nearby CNG</p>
 
-                    <div class="search-box">
+</div>
 
-                        <span class="search-icon">🔎</span>
 
-                        <input
-                            id="driverSearch"
-                            class="form-control"
-                            placeholder="Driver / CNG Number দিয়ে খুঁজুন..."
-                            oninput="filterDrivers()"
-                        >
+<div class="stat-card">
 
-                    </div>
+<div class="stat-icon">
+🧾
+</div>
 
-                    <button
-                        class="btn btn-primary"
-                        onclick="searchDrivers()"
-                        id="searchBtn"
-                    >
-                        🔎 CNG খুঁজুন
-                    </button>
+<h3 id="myRideCount">
+0
+</h3>
 
-                </div>
+<p>My Rides</p>
 
-            </div>
+</div>
 
+</div>
 
-            <div class="panel">
 
-                <div class="panel-header">
+<div class="panel">
 
-                    <div>
-                        <h2 class="panel-title">
-                            📍 Map
-                        </h2>
+<div class="panel-header">
 
-                        <p class="panel-subtitle">
-                            আপনার এবং কাছাকাছি Driver-এর অবস্থান।
-                        </p>
-                    </div>
+<div>
 
-                </div>
+<h2 class="panel-title">
+🚕 কাছাকাছি CNG খুঁজুন
+</h2>
 
-                <div class="map-wrap">
+<p class="panel-subtitle">
+Live GPS দিয়ে ২০ KM-এর মধ্যে Available CNG খুঁজুন।
+</p>
 
-                    <div class="map-overlay">
-                        📍 Location Map
-                    </div>
+</div>
 
-                    <div id="map"></div>
+<span class="live-badge">
+<span class="live-dot"></span>
+LIVE
+</span>
 
-                </div>
+</div>
 
-            </div>
 
+<div class="form-group">
 
-            <div class="panel">
+<label>
+কোথায় যেতে চান?
+</label>
 
-                <div class="panel-header">
+<textarea
+id="destination"
+class="form-control"
+rows="2"
+placeholder="যেমন: ভূঞাপুর বাজার">
+</textarea>
 
-                    <div>
-                        <h2 class="panel-title">
-                            🚕 Available CNG
-                        </h2>
+</div>
 
-                        <p class="panel-subtitle">
-                            আপনার কাছাকাছি Available Driver
-                        </p>
-                    </div>
 
-                </div>
+<div class="search-row">
 
-                <div id="driversContainer">
+<div class="search-box">
 
-                    <div class="empty">
+<span class="search-icon">
+🔎
+</span>
 
-                        <div class="empty-icon">🚕</div>
+<input
+id="driverSearch"
+class="form-control"
+placeholder="Driver / CNG Number"
+oninput="filterDrivers()">
 
-                        <p>
-                            CNG খুঁজতে উপরের Search button চাপুন।
-                        </p>
+</div>
 
-                    </div>
 
-                </div>
+<button
+id="searchBtn"
+class="btn btn-primary"
+onclick="searchDrivers()">
+🔎 CNG খুঁজুন
+</button>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
 
-        <!-- MY RIDES -->
+<!-- MAP -->
 
-        <div class="panel" id="ridesPanel">
+<div class="panel">
 
-            <div class="panel-header">
+<div class="panel-header">
 
-                <div>
-                    <h2 class="panel-title">
-                        🧾 আমার Ride
-                    </h2>
+<div>
 
-                    <p class="panel-subtitle">
-                        আপনার Ride-এর বর্তমান ও আগের তথ্য।
-                    </p>
-                </div>
+<h2 class="panel-title">
+🗺️ Live CNG Map
+</h2>
 
-                <button
-                    class="btn btn-secondary btn-small"
-                    onclick="loadMyRides()"
-                >
-                    ↻ Refresh
-                </button>
+<p class="panel-subtitle">
+Map-এ আপনি এবং Available CNG-এর অবস্থান দেখুন।
+</p>
 
-            </div>
+</div>
 
-            <div id="myRides"></div>
+</div>
 
-        </div>
 
-    </main>
+<div class="map-wrap">
+
+<div class="map-info">
+📍 আপনি &nbsp; 🚕 CNG &nbsp; 📏 KM
+</div>
+
+<div id="map"></div>
+
+</div>
+
+</div>
+
+
+<!-- DRIVER LIST -->
+
+<div class="panel">
+
+<div class="panel-header">
+
+<div>
+
+<h2 class="panel-title">
+🚕 Available CNG
+</h2>
+
+<p class="panel-subtitle">
+সবচেয়ে কাছের CNG আগে দেখানো হবে।
+</p>
+
+</div>
+
+</div>
+
+<div id="driversContainer">
+
+<div class="empty">
+
+<div class="empty-icon">
+🚕
+</div>
+
+<p>
+CNG খুঁজতে Search button চাপুন।
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MY RIDES -->
+
+<div
+class="panel"
+id="ridesPanel">
+
+<div class="panel-header">
+
+<div>
+
+<h2 class="panel-title">
+🧾 আমার Ride
+</h2>
+
+<p class="panel-subtitle">
+আপনার Ride History
+</p>
+
+</div>
+
+<button
+class="btn btn-secondary"
+onclick="loadMyRides()">
+↻ Refresh
+</button>
+
+</div>
+
+<div id="myRides"></div>
+
+</div>
+
+
+</main>
 
 </section>
 
 
 <!-- MESSAGE MODAL -->
 
-<div class="modal" id="messageModal">
+<div
+class="modal"
+id="messageModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <div>
-                <h2>💬 Message</h2>
-                <p class="panel-subtitle">
-                    আপনার message লিখুন
-                </p>
-            </div>
+<div>
 
-            <button
-                class="close-btn"
-                onclick="closeMessageModal()"
-            >
-                ×
-            </button>
+<h2>💬 Message</h2>
 
-        </div>
+<p class="panel-subtitle">
+Driver-কে message পাঠান
+</p>
 
-        <textarea
-            id="messageInput"
-            class="form-control"
-            rows="5"
-            placeholder="আপনার message লিখুন..."
-        ></textarea>
+</div>
 
-        <div class="modal-actions">
-
-            <button
-                class="btn btn-secondary"
-                onclick="closeMessageModal()"
-            >
-                Cancel
-            </button>
-
-            <button
-                class="btn btn-primary"
-                onclick="sendMessage()"
-            >
-                Send Message
-            </button>
-
-        </div>
-
-    </div>
+<button
+class="close-btn"
+onclick="closeMessageModal()">
+×
+</button>
 
 </div>
 
 
-<!-- RIDE CONFIRM MODAL -->
+<textarea
+id="messageInput"
+class="form-control"
+rows="5"
+placeholder="আপনার message লিখুন...">
+</textarea>
 
-<div class="modal" id="rideModal">
 
-    <div class="modal-box">
+<div class="modal-actions">
 
-        <div class="modal-header">
+<button
+class="btn btn-secondary"
+onclick="closeMessageModal()">
+Cancel
+</button>
 
-            <div>
-                <h2>🚕 Ride Request</h2>
+<button
+class="btn btn-primary"
+onclick="sendMessage()">
+Send Message
+</button>
 
-                <p class="panel-subtitle">
-                    Ride request পাঠানোর আগে তথ্য যাচাই করুন।
-                </p>
-            </div>
+</div>
 
-            <button
-                class="close-btn"
-                onclick="closeRideModal()"
-            >
-                ×
-            </button>
+</div>
 
-        </div>
+</div>
 
-        <div class="meta-box" style="margin-bottom:10px">
-            <small>Destination</small>
-            <strong id="confirmDestination">—</strong>
-        </div>
 
-        <div class="meta-box">
-            <small>Driver</small>
-            <strong id="confirmDriver">—</strong>
-        </div>
+<!-- RIDE MODAL -->
 
-        <div class="modal-actions">
+<div
+class="modal"
+id="rideModal">
 
-            <button
-                class="btn btn-secondary"
-                onclick="closeRideModal()"
-            >
-                Cancel
-            </button>
+<div class="modal-box">
 
-            <button
-                class="btn btn-primary"
-                onclick="confirmRideRequest()"
-            >
-                🚕 Request Ride
-            </button>
+<div class="modal-header">
 
-        </div>
+<div>
 
-    </div>
+<h2>🚕 Ride Request</h2>
+
+<p class="panel-subtitle">
+Ride information যাচাই করুন।
+</p>
+
+</div>
+
+<button
+class="close-btn"
+onclick="closeRideModal()">
+×
+</button>
+
+</div>
+
+
+<div
+class="meta-box"
+style="margin-bottom:10px">
+
+<small>Driver</small>
+
+<strong id="confirmDriver">
+—
+</strong>
+
+</div>
+
+
+<div class="meta-box">
+
+<small>Destination</small>
+
+<strong id="confirmDestination">
+—
+</strong>
+
+</div>
+
+
+<div class="modal-actions">
+
+<button
+class="btn btn-secondary"
+onclick="closeRideModal()">
+Cancel
+</button>
+
+<button
+class="btn btn-primary"
+onclick="confirmRideRequest()">
+🚕 Request Ride
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1643,23 +1693,17 @@ a{
 <div id="toast"></div>
 
 
-<!-- FOOTER -->
-
 <footer class="footer">
 
-    <div class="footer-inner">
+<h3>🚕 CNG RIDE</h3>
 
-        <h3>🚕 CNG RIDE</h3>
+<p>
+Smart Live CNG Ride Service
+</p>
 
-        <p>
-            সহজ, দ্রুত ও নিরাপদ CNG Ride Service
-        </p>
-
-        <p style="margin-top:8px">
-            © 2026 CNG RIDE. All rights reserved.
-        </p>
-
-    </div>
+<p style="margin-top:7px">
+© 2026 CNG RIDE. All rights reserved.
+</p>
 
 </footer>
 
@@ -1672,7 +1716,7 @@ a{
 <script>
 
 /* =========================================================
-   SUPABASE
+SUPABASE
 ========================================================= */
 
 const SUPABASE_URL =
@@ -1689,13 +1733,14 @@ supabase.createClient(
 
 
 /* =========================================================
-   GLOBAL VARIABLES
+GLOBAL
 ========================================================= */
 
 let currentUser = null;
 let currentProfile = null;
 
 let map = null;
+
 let userMarker = null;
 
 let latitude = null;
@@ -1703,12 +1748,21 @@ let longitude = null;
 
 let allDrivers = [];
 
+let driverMarkers = [];
+
+let routeLines = [];
+
 let selectedDriverId = null;
 let selectedReceiverId = null;
 
+let passengerWatchId = null;
+let driverWatchId = null;
+
+let liveRefreshTimer = null;
+
 
 /* =========================================================
-   AUTH UI
+AUTH
 ========================================================= */
 
 function switchAuth(type){
@@ -1725,22 +1779,25 @@ function switchAuth(type){
     const registerTab =
         document.getElementById("registerTab");
 
+
     if(type === "login"){
 
-        loginForm.style.display = "block";
-        registerForm.style.display = "none";
+        loginForm.style.display="block";
+        registerForm.style.display="none";
 
         loginTab.classList.add("active");
         registerTab.classList.remove("active");
 
     }else{
 
-        loginForm.style.display = "none";
-        registerForm.style.display = "block";
+        loginForm.style.display="none";
+        registerForm.style.display="block";
 
         loginTab.classList.remove("active");
         registerTab.classList.add("active");
+
     }
+
 }
 
 
@@ -1749,47 +1806,32 @@ function toggleVehicleField(){
     const type =
         document.getElementById("regType").value;
 
-    const field =
-        document.getElementById("vehicleField");
-
-    field.style.display =
+    document.getElementById("vehicleField").style.display =
         type === "driver"
         ? "block"
         : "none";
+
 }
 
 
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-function showMessage(elementId,text,type="error"){
+function showMessage(id,text,type){
 
     const el =
-        document.getElementById(elementId);
+        document.getElementById(id);
 
     el.className =
         "message " + type;
 
     el.textContent = text;
-}
 
-
-function clearMessage(elementId){
-
-    const el =
-        document.getElementById(elementId);
-
-    el.className = "message";
-    el.textContent = "";
 }
 
 
 /* =========================================================
-   TOAST
+TOAST
 ========================================================= */
 
-let toastTimer = null;
+let toastTimer;
 
 function toast(message){
 
@@ -1803,31 +1845,35 @@ function toast(message){
     clearTimeout(toastTimer);
 
     toastTimer =
-        setTimeout(function(){
+        setTimeout(
+            () => el.classList.remove("show"),
+            3000
+        );
 
-            el.classList.remove("show");
-
-        },3000);
 }
 
 
 /* =========================================================
-   REGISTER
+REGISTER
 ========================================================= */
 
 document
 .getElementById("registerForm")
-.addEventListener("submit", async function(e){
+.addEventListener(
+"submit",
+async function(e){
 
     e.preventDefault();
 
-    clearMessage("registerMessage");
 
     const btn =
         document.getElementById("registerBtn");
 
     btn.disabled = true;
-    btn.textContent = "Register হচ্ছে...";
+
+    btn.textContent =
+        "Register হচ্ছে...";
+
 
     const name =
         document.getElementById("regName")
@@ -1845,11 +1891,11 @@ document
         document.getElementById("regPassword")
         .value;
 
-    const userType =
+    const type =
         document.getElementById("regType")
         .value;
 
-    const vehicleNumber =
+    const vehicle =
         document.getElementById("regVehicle")
         .value.trim();
 
@@ -1871,10 +1917,10 @@ document
 
                         phone:phone,
 
-                        user_type:userType,
+                        user_type:type,
 
                         vehicle_number:
-                            vehicleNumber || null
+                            vehicle || null
 
                     }
 
@@ -1883,15 +1929,9 @@ document
             });
 
 
-        if(result.error){
+        if(result.error)
             throw result.error;
-        }
 
-
-        /*
-          Email confirmation OFF থাকলে
-          session পাওয়া যাবে।
-        */
 
         if(result.data.session){
 
@@ -1902,17 +1942,20 @@ document
 
             showApp();
 
-            toast("Account সফলভাবে তৈরি হয়েছে 🎉");
+            toast(
+                "Account সফলভাবে তৈরি হয়েছে 🎉"
+            );
 
         }else{
 
             showMessage(
                 "registerMessage",
-                "Registration হয়েছে। যদি Email confirmation চালু থাকে, তাহলে Email verify করে Login করুন।",
+                "Registration হয়েছে। Login করুন।",
                 "success"
             );
 
         }
+
 
     }catch(error){
 
@@ -1920,14 +1963,16 @@ document
 
         showMessage(
             "registerMessage",
-            error.message || "Registration failed",
+            error.message,
             "error"
         );
 
     }finally{
 
         btn.disabled = false;
-        btn.textContent = "Register";
+
+        btn.textContent =
+            "Register";
 
     }
 
@@ -1935,22 +1980,25 @@ document
 
 
 /* =========================================================
-   LOGIN
+LOGIN
 ========================================================= */
 
 document
 .getElementById("loginForm")
-.addEventListener("submit", async function(e){
+.addEventListener(
+"submit",
+async function(e){
 
     e.preventDefault();
 
-    clearMessage("loginMessage");
 
     const btn =
         document.getElementById("loginBtn");
 
     btn.disabled = true;
-    btn.textContent = "Login হচ্ছে...";
+
+    btn.textContent =
+        "Login হচ্ছে...";
 
 
     const email =
@@ -1968,14 +2016,14 @@ document
             await db.auth.signInWithPassword({
 
                 email:email,
+
                 password:password
 
             });
 
 
-        if(result.error){
+        if(result.error)
             throw result.error;
-        }
 
 
         currentUser =
@@ -1987,20 +2035,23 @@ document
 
         toast("Login successful 👋");
 
+
     }catch(error){
 
         console.error(error);
 
         showMessage(
             "loginMessage",
-            error.message || "Login failed",
+            error.message,
             "error"
         );
 
     }finally{
 
         btn.disabled = false;
-        btn.textContent = "Login";
+
+        btn.textContent =
+            "Login";
 
     }
 
@@ -2008,12 +2059,14 @@ document
 
 
 /* =========================================================
-   LOAD PROFILE
+PROFILE
 ========================================================= */
 
 async function loadProfile(){
 
-    if(!currentUser) return;
+    if(!currentUser)
+        return;
+
 
     const result =
         await db
@@ -2024,13 +2077,6 @@ async function loadProfile(){
 
 
     if(result.error){
-
-        console.error(result.error);
-
-        /*
-          Trigger দিয়ে profile না থাকলে
-          fallback হিসেবে metadata ব্যবহার।
-        */
 
         currentProfile = {
 
@@ -2053,42 +2099,41 @@ async function loadProfile(){
         return;
     }
 
+
     currentProfile =
         result.data;
+
 }
 
 
 /* =========================================================
-   SHOW APP
+SHOW APP
 ========================================================= */
 
 function showApp(){
 
-    document
-    .getElementById("authSection")
-    .style.display = "none";
+    document.getElementById("authSection")
+    .style.display="none";
 
-    document
-    .getElementById("appSection")
-    .style.display = "block";
+    document.getElementById("appSection")
+    .style.display="block";
 
-    document
-    .getElementById("logoutBtn")
-    .style.display = "block";
+    document.getElementById("logoutBtn")
+    .style.display="block";
 
 
-    document
-    .getElementById("userName")
+    document.getElementById("userName")
     .textContent =
-        currentProfile?.full_name || "User";
+        currentProfile?.full_name
+        || "User";
 
 
     const type =
-        currentProfile?.user_type || "passenger";
+        currentProfile?.user_type
+        || "passenger";
 
 
-    document
-    .getElementById("userTypeBadge")
+    document.getElementById("userTypeBadge")
     .textContent =
         type === "driver"
         ? "👨‍✈️ Driver"
@@ -2100,15 +2145,13 @@ function showApp(){
 
     if(type === "driver"){
 
-        document
-        .getElementById("driverPanel")
-        .style.display = "block";
+        document.getElementById("driverPanel")
+        .style.display="block";
 
-        document
-        .getElementById("passengerPanel")
-        .style.display = "none";
+        document.getElementById("passengerPanel")
+        .style.display="none";
 
-        updateLocation();
+        startDriverLiveLocation();
 
         loadDriverStatus();
 
@@ -2116,17 +2159,16 @@ function showApp(){
 
     }else{
 
-        document
-        .getElementById("driverPanel")
-        .style.display = "none";
+        document.getElementById("driverPanel")
+        .style.display="none";
 
-        document
-        .getElementById("passengerPanel")
-        .style.display = "block";
+        document.getElementById("passengerPanel")
+        .style.display="block";
 
-        getLocation();
+        startPassengerLiveLocation();
 
     }
+
 
     loadMyRides();
 
@@ -2134,16 +2176,17 @@ function showApp(){
 
 
 /* =========================================================
-   MAP
+MAP
 ========================================================= */
 
 function initMap(){
 
     if(map){
 
-        setTimeout(function(){
-            map.invalidateSize();
-        },300);
+        setTimeout(
+            () => map.invalidateSize(),
+            300
+        );
 
         return;
     }
@@ -2166,34 +2209,49 @@ function initMap(){
     ).addTo(map);
 
 
-    setTimeout(function(){
+    setTimeout(
+        () => map.invalidateSize(),
+        500
+    );
 
-        map.invalidateSize();
-
-    },500);
 }
 
 
 /* =========================================================
-   LOCATION
+PASSENGER LIVE LOCATION
 ========================================================= */
 
-function getLocation(){
+function startPassengerLiveLocation(){
 
     if(!navigator.geolocation){
 
-        toast("আপনার browser location support করে না।");
+        toast(
+            "আপনার browser GPS support করে না।"
+        );
 
         return;
     }
 
 
+    if(passengerWatchId !== null){
+
+        navigator.geolocation.clearWatch(
+            passengerWatchId
+        );
+
+    }
+
+
     document
-    .getElementById("passengerLocationStatus")
-    .textContent = "Searching...";
+    .getElementById(
+        "passengerLocationStatus"
+    )
+    .textContent =
+        "Searching...";
 
 
-    navigator.geolocation.getCurrentPosition(
+    passengerWatchId =
+        navigator.geolocation.watchPosition(
 
         function(position){
 
@@ -2204,15 +2262,28 @@ function getLocation(){
                 position.coords.longitude;
 
 
-            updateMapUserLocation();
+            updatePassengerMarker();
 
 
             document
-            .getElementById("passengerLocationStatus")
-            .textContent = "Located ✓";
+            .getElementById(
+                "passengerLocationStatus"
+            )
+            .textContent =
+                "LIVE ✓";
 
 
-            toast("আপনার Location পাওয়া গেছে 📍");
+            /*
+              Driver search করা থাকলে
+              location পরিবর্তনের সাথে
+              distance update হবে।
+            */
+
+            if(allDrivers.length){
+
+                refreshDriverDistances();
+
+            }
 
         },
 
@@ -2221,77 +2292,111 @@ function getLocation(){
             console.error(error);
 
             document
-            .getElementById("passengerLocationStatus")
-            .textContent = "Location Off";
+            .getElementById(
+                "passengerLocationStatus"
+            )
+            .textContent =
+                "Permission Off";
 
 
             toast(
-                "Location permission দিন অথবা browser location চালু করুন।"
+                "Location permission দিন।"
             );
 
         },
 
         {
             enableHighAccuracy:true,
+
             timeout:15000,
-            maximumAge:30000
+
+            maximumAge:3000
         }
 
     );
+
 }
 
 
-function updateMapUserLocation(){
+/* =========================================================
+PASSENGER MARKER
+========================================================= */
 
-    if(!map || latitude === null || longitude === null)
+function updatePassengerMarker(){
+
+    if(!map ||
+       latitude === null ||
+       longitude === null)
         return;
 
 
     if(userMarker){
 
         userMarker
-        .setLatLng([latitude,longitude]);
+        .setLatLng(
+            [latitude,longitude]
+        );
 
     }else{
 
         userMarker =
-            L.marker([latitude,longitude])
+            L.marker(
+                [latitude,longitude]
+            )
             .addTo(map)
-            .bindPopup("📍 আপনার অবস্থান");
+            .bindPopup(
+                "<strong>📍 আপনি এখানে</strong><br>Live Location"
+            );
 
     }
+
+
+    userMarker
+    .bindTooltip(
+        "📍 আপনি",
+        {
+            permanent:true,
+            direction:"top",
+            offset:[0,-20]
+        }
+    );
 
 
     map.setView(
         [latitude,longitude],
         14
     );
+
 }
 
 
 /* =========================================================
-   DRIVER LOCATION UPDATE
+DRIVER LIVE LOCATION
 ========================================================= */
 
-async function updateLocation(){
-
-    if(!currentUser) return;
-
+function startDriverLiveLocation(){
 
     if(!navigator.geolocation){
 
-        toast("Location support নেই।");
+        toast(
+            "আপনার browser GPS support করে না।"
+        );
 
         return;
     }
 
 
-    document
-    .getElementById("locationStatus")
-    .textContent = "Updating...";
+    if(driverWatchId !== null){
+
+        navigator.geolocation.clearWatch(
+            driverWatchId
+        );
+
+    }
 
 
-    navigator.geolocation.getCurrentPosition(
+    driverWatchId =
+        navigator.geolocation.watchPosition(
 
         async function(position){
 
@@ -2308,35 +2413,40 @@ async function updateLocation(){
                 .update({
 
                     latitude:lat,
+
                     longitude:lng
 
                 })
-                .eq("id",currentUser.id);
+                .eq(
+                    "id",
+                    currentUser.id
+                );
 
 
             if(result.error){
 
-                console.error(result.error);
+                console.error(
+                    result.error
+                );
 
                 document
-                .getElementById("locationStatus")
-                .textContent = "Failed";
-
-                toast(
-                    "Location update হয়নি: " +
-                    result.error.message
-                );
+                .getElementById(
+                    "locationStatus"
+                )
+                .textContent =
+                    "Update Failed";
 
                 return;
             }
 
 
             document
-            .getElementById("locationStatus")
-            .textContent = "Updated ✓";
+            .getElementById(
+                "locationStatus"
+            )
+            .textContent =
+                "LIVE ✓";
 
-
-            toast("Driver Location update হয়েছে 📍");
 
         },
 
@@ -2345,19 +2455,25 @@ async function updateLocation(){
             console.error(error);
 
             document
-            .getElementById("locationStatus")
-            .textContent = "Permission Off";
+            .getElementById(
+                "locationStatus"
+            )
+            .textContent =
+                "Permission Off";
+
 
             toast(
-                "Location permission দিতে হবে।"
+                "Driver Location permission প্রয়োজন।"
             );
 
         },
 
         {
             enableHighAccuracy:true,
+
             timeout:15000,
-            maximumAge:10000
+
+            maximumAge:3000
         }
 
     );
@@ -2366,7 +2482,110 @@ async function updateLocation(){
 
 
 /* =========================================================
-   DRIVER STATUS
+MANUAL DRIVER LOCATION
+========================================================= */
+
+function updateLocation(){
+
+    if(!navigator.geolocation){
+
+        toast(
+            "GPS support নেই।"
+        );
+
+        return;
+    }
+
+
+    document
+    .getElementById(
+        "locationStatus"
+    )
+    .textContent =
+        "Updating...";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+    async function(position){
+
+        const lat =
+            position.coords.latitude;
+
+        const lng =
+            position.coords.longitude;
+
+
+        const result =
+            await db
+            .from("drivers")
+            .update({
+
+                latitude:lat,
+
+                longitude:lng
+
+            })
+            .eq(
+                "id",
+                currentUser.id
+            );
+
+
+        if(result.error){
+
+            toast(
+                result.error.message
+            );
+
+            return;
+        }
+
+
+        document
+        .getElementById(
+            "locationStatus"
+        )
+        .textContent =
+            "LIVE ✓";
+
+
+        toast(
+            "Location update হয়েছে 📍"
+        );
+
+    },
+
+    function(){
+
+        document
+        .getElementById(
+            "locationStatus"
+        )
+        .textContent =
+            "Permission Off";
+
+        toast(
+            "Location permission দিন।"
+        );
+
+    },
+
+    {
+        enableHighAccuracy:true,
+
+        timeout:15000,
+
+        maximumAge:3000
+    }
+
+    );
+
+}
+
+
+/* =========================================================
+DRIVER STATUS
 ========================================================= */
 
 async function loadDriverStatus(){
@@ -2375,13 +2594,18 @@ async function loadDriverStatus(){
         await db
         .from("drivers")
         .select("available")
-        .eq("id",currentUser.id)
+        .eq(
+            "id",
+            currentUser.id
+        )
         .single();
 
 
     if(result.error){
 
-        console.error(result.error);
+        console.error(
+            result.error
+        );
 
         return;
     }
@@ -2390,22 +2614,31 @@ async function loadDriverStatus(){
     updateStatusUI(
         result.data.available
     );
+
 }
 
 
 function updateStatusUI(available){
 
     const dot =
-        document.getElementById("statusDot");
+        document.getElementById(
+            "statusDot"
+        );
 
     const text =
-        document.getElementById("availabilityText");
+        document.getElementById(
+            "availabilityText"
+        );
 
     const button =
-        document.getElementById("availabilityBtn");
+        document.getElementById(
+            "availabilityBtn"
+        );
 
-    const statusText =
-        document.getElementById("driverStatusText");
+    const status =
+        document.getElementById(
+            "driverStatusText"
+        );
 
 
     if(available){
@@ -2422,7 +2655,7 @@ function updateStatusUI(available){
         button.className =
             "btn btn-danger";
 
-        statusText.textContent =
+        status.textContent =
             "Available";
 
     }else{
@@ -2439,7 +2672,7 @@ function updateStatusUI(available){
         button.className =
             "btn btn-success";
 
-        statusText.textContent =
+        status.textContent =
             "Busy";
 
     }
@@ -2447,19 +2680,28 @@ function updateStatusUI(available){
 }
 
 
+/* =========================================================
+TOGGLE AVAILABLE
+========================================================= */
+
 async function toggleAvailability(){
 
     const result =
         await db
         .from("drivers")
         .select("available")
-        .eq("id",currentUser.id)
+        .eq(
+            "id",
+            currentUser.id
+        )
         .single();
 
 
     if(result.error){
 
-        toast(result.error.message);
+        toast(
+            result.error.message
+        );
 
         return;
     }
@@ -2473,16 +2715,21 @@ async function toggleAvailability(){
         await db
         .from("drivers")
         .update({
+
             available:newStatus
+
         })
-        .eq("id",currentUser.id);
+        .eq(
+            "id",
+            currentUser.id
+        );
 
 
     if(update.error){
 
-        console.error(update.error);
-
-        toast(update.error.message);
+        toast(
+            update.error.message
+        );
 
         return;
     }
@@ -2490,15 +2737,20 @@ async function toggleAvailability(){
 
     updateStatusUI(newStatus);
 
+
     if(newStatus){
 
         updateLocation();
 
-        toast("আপনি এখন Available 🟢");
+        toast(
+            "আপনি এখন Available 🟢"
+        );
 
     }else{
 
-        toast("আপনি এখন Busy 🔴");
+        toast(
+            "আপনি এখন Busy 🔴"
+        );
 
     }
 
@@ -2506,54 +2758,66 @@ async function toggleAvailability(){
 
 
 /* =========================================================
-   SEARCH DRIVERS
+SEARCH
 ========================================================= */
 
 async function searchDrivers(){
 
     const destination =
         document
-        .getElementById("destination")
+        .getElementById(
+            "destination"
+        )
         .value.trim();
 
 
     if(!destination){
 
-        toast("আগে আপনার Destination লিখুন।");
-
-        document
-        .getElementById("destination")
-        .focus();
+        toast(
+            "Destination লিখুন।"
+        );
 
         return;
     }
 
 
-    if(latitude === null || longitude === null){
+    if(
+        latitude === null ||
+        longitude === null
+    ){
 
-        toast("আপনার Location নেওয়া হচ্ছে...");
+        toast(
+            "আপনার Live Location পাওয়া যাচ্ছে..."
+        );
 
-        getLocation();
+        startPassengerLiveLocation();
 
         return;
     }
 
 
     const btn =
-        document.getElementById("searchBtn");
+        document.getElementById(
+            "searchBtn"
+        );
 
     btn.disabled = true;
-    btn.textContent = "Searching...";
+
+    btn.textContent =
+        "Searching...";
 
 
     const container =
-        document.getElementById("driversContainer");
+        document.getElementById(
+            "driversContainer"
+        );
+
 
     container.innerHTML =
         `<div class="loading">
             <span class="spinner"></span>
-            কাছাকাছি CNG খোঁজা হচ্ছে...
-         </div>`;
+            Live CNG খোঁজা হচ্ছে...
+        </div>`;
 
 
     try{
@@ -2573,21 +2837,18 @@ async function searchDrivers(){
                     phone
                 )
             `)
-            .eq("available",true);
+            .eq(
+                "available",
+                true
+            );
 
 
-        if(result.error){
-
+        if(result.error)
             throw result.error;
-        }
-
-
-        const drivers =
-            result.data || [];
 
 
         allDrivers =
-            drivers
+            (result.data || [])
             .map(function(driver){
 
                 if(
@@ -2609,11 +2870,8 @@ async function searchDrivers(){
 
 
                 return {
-
                     ...driver,
-
                     distance:distance
-
                 };
 
             })
@@ -2625,21 +2883,27 @@ async function searchDrivers(){
             })
             .sort(function(a,b){
 
-                return a.distance - b.distance;
+                return a.distance-b.distance;
 
             });
 
 
         document
-        .getElementById("nearbyCount")
+        .getElementById(
+            "nearbyCount"
+        )
         .textContent =
             allDrivers.length;
 
 
-        renderDrivers(allDrivers);
+        renderDrivers(
+            allDrivers
+        );
 
 
-        addDriverMarkers(allDrivers);
+        drawLiveDrivers(
+            allDrivers
+        );
 
 
     }catch(error){
@@ -2650,15 +2914,16 @@ async function searchDrivers(){
             `<div class="empty">
                 <div class="empty-icon">⚠️</div>
                 <p>${escapeHtml(
-                    error.message ||
-                    "Driver খুঁজে পাওয়া যায়নি।"
+                    error.message
                 )}</p>
-             </div>`;
+            </div>`;
 
     }finally{
 
         btn.disabled = false;
-        btn.textContent = "🔎 CNG খুঁজুন";
+
+        btn.textContent =
+            "🔎 CNG খুঁজুন";
 
     }
 
@@ -2666,7 +2931,7 @@ async function searchDrivers(){
 
 
 /* =========================================================
-   DISTANCE
+DISTANCE
 ========================================================= */
 
 function calculateDistance(
@@ -2679,20 +2944,31 @@ function calculateDistance(
     const R = 6371;
 
     const dLat =
-        (lat2-lat1) *
-        Math.PI / 180;
+        (lat2-lat1)
+        * Math.PI / 180;
 
     const dLon =
-        (lon2-lon1) *
-        Math.PI / 180;
+        (lon2-lon1)
+        * Math.PI / 180;
 
 
     const a =
         Math.sin(dLat/2) *
-        Math.sin(dLat/2) +
+        Math.sin(dLat/2)
 
-        Math.cos(lat1*Math.PI/180) *
-        Math.cos(lat2*Math.PI/180) *
+        +
+
+        Math.cos(
+            lat1*Math.PI/180
+        )
+
+        *
+
+        Math.cos(
+            lat2*Math.PI/180
+        )
+
+        *
 
         Math.sin(dLon/2) *
         Math.sin(dLon/2);
@@ -2707,11 +2983,252 @@ function calculateDistance(
 
 
     return R*c;
+
 }
 
 
 /* =========================================================
-   DRIVER CARDS
+REFRESH DISTANCE
+========================================================= */
+
+function refreshDriverDistances(){
+
+    if(
+        latitude === null ||
+        longitude === null ||
+        !allDrivers.length
+    )
+        return;
+
+
+    allDrivers =
+        allDrivers
+        .map(function(driver){
+
+            if(
+                driver.latitude === null ||
+                driver.longitude === null
+            )
+                return driver;
+
+
+            return {
+
+                ...driver,
+
+                distance:
+                    calculateDistance(
+                        latitude,
+                        longitude,
+                        Number(driver.latitude),
+                        Number(driver.longitude)
+                    )
+
+            };
+
+        })
+        .filter(function(driver){
+
+            return driver.distance <= 20;
+
+        })
+        .sort(function(a,b){
+
+            return a.distance-b.distance;
+
+        });
+
+
+    document
+    .getElementById(
+        "nearbyCount"
+    )
+    .textContent =
+        allDrivers.length;
+
+
+    renderDrivers(
+        allDrivers
+    );
+
+
+    drawLiveDrivers(
+        allDrivers
+    );
+
+}
+
+
+/* =========================================================
+LIVE DRIVER MAP
+========================================================= */
+
+function drawLiveDrivers(drivers){
+
+    if(!map)
+        return;
+
+
+    driverMarkers.forEach(
+        function(marker){
+
+            map.removeLayer(
+                marker
+            );
+
+        }
+    );
+
+
+    driverMarkers = [];
+
+
+    routeLines.forEach(
+        function(line){
+
+            map.removeLayer(
+                line
+            );
+
+        }
+    );
+
+
+    routeLines = [];
+
+
+    drivers.forEach(
+    function(driver){
+
+        if(
+            driver.latitude === null ||
+            driver.longitude === null
+        )
+            return;
+
+
+        const profile =
+            driver.profiles || {};
+
+
+        const name =
+            profile.full_name
+            || "CNG Driver";
+
+
+        const vehicle =
+            driver.vehicle_number
+            || driver.vehicle_name
+            || "CNG";
+
+
+        const distance =
+            Number(driver.distance)
+            .toFixed(1);
+
+
+        const marker =
+            L.marker(
+                [
+                    Number(driver.latitude),
+                    Number(driver.longitude)
+                ]
+            )
+            .addTo(map);
+
+
+        marker.bindPopup(
+
+            `<div style="min-width:190px">
+                <strong style="font-size:17px">
+                    🚕 ${escapeHtml(name)}
+                </strong>
+
+                <br><br>
+
+                <b>🚕 CNG:</b>
+                ${escapeHtml(vehicle)}
+
+                <br>
+
+                <b>📏 Distance:</b>
+                ${distance} KM
+
+                <br>
+
+                <span style="color:#198754">
+                    ● Available
+                </span>
+            </div>`
+
+        );
+
+
+        marker.bindTooltip(
+
+            `🚕 ${distance} KM`,
+
+            {
+                permanent:true,
+                direction:"top",
+                offset:[0,-20]
+            }
+
+        );
+
+
+        driverMarkers.push(
+            marker
+        );
+
+
+        /*
+          Passenger → CNG
+          সরল visual route line।
+        */
+
+        if(
+            latitude !== null &&
+            longitude !== null
+        ){
+
+            const line =
+                L.polyline(
+
+                    [
+                        [
+                            latitude,
+                            longitude
+                        ],
+
+                        [
+                            Number(driver.latitude),
+                            Number(driver.longitude)
+                        ]
+
+                    ],
+
+                    {
+                        dashArray:"8,8",
+                        weight:3
+                    }
+
+                ).addTo(map);
+
+
+            routeLines.push(
+                line
+            );
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+DRIVER CARDS
 ========================================================= */
 
 function renderDrivers(drivers){
@@ -2727,19 +3244,21 @@ function renderDrivers(drivers){
         container.innerHTML =
             `<div class="empty">
 
-                <div class="empty-icon">🚕</div>
+                <div class="empty-icon">
+                    🚕
+                </div>
 
                 <h3>
-                    ২০ কিলোমিটারের মধ্যে
+                    ২০ KM-এর মধ্যে
                     Available CNG পাওয়া যায়নি
                 </h3>
 
-                <p style="margin-top:5px">
-                    Driver-এর Location update করা আছে কি না
-                    যাচাই করুন।
+                <p>
+                    Driver-এর Live Location
+                    update করা আছে কি না দেখুন।
                 </p>
 
-             </div>`;
+            </div>`;
 
         return;
     }
@@ -2747,8 +3266,13 @@ function renderDrivers(drivers){
 
     container.innerHTML =
         `<div class="cards-grid">
-            ${drivers.map(driverCardHtml).join("")}
-         </div>`;
+            ${
+                drivers
+                .map(driverCardHtml)
+                .join("")
+            }
+        </div>`;
+
 }
 
 
@@ -2759,251 +3283,229 @@ function driverCardHtml(driver){
 
 
     const name =
-        profile.full_name || "CNG Driver";
+        profile.full_name
+        || "CNG Driver";
 
 
     const phone =
-        profile.phone || "";
+        profile.phone
+        || "";
 
 
     const vehicle =
-        driver.vehicle_number ||
-        driver.vehicle_name ||
-        "CNG";
+        driver.vehicle_number
+        || driver.vehicle_name
+        || "CNG";
 
 
     const distance =
-        Number(driver.distance).toFixed(1);
+        Number(driver.distance)
+        .toFixed(1);
 
 
     return `
-        <div
-            class="driver-card"
-            data-driver-name="${escapeHtml(
-                name.toLowerCase()
-            )}"
-            data-driver-number="${escapeHtml(
-                vehicle.toLowerCase()
-            )}"
-        >
 
-            <div class="driver-card-top">
+    <div
+        class="driver-card"
+        data-driver-name="${escapeHtml(
+            name.toLowerCase()
+        )}"
+        data-driver-number="${escapeHtml(
+            vehicle.toLowerCase()
+        )}"
+    >
 
-                <div class="driver-avatar">
-                    👨‍✈️
-                </div>
+        <div class="driver-card-top">
 
-                <div>
-
-                    <div class="driver-name">
-                        ${escapeHtml(name)}
-                    </div>
-
-                    <div class="available-label">
-                        ● Available
-                    </div>
-
-                </div>
-
+            <div class="driver-avatar">
+                👨‍✈️
             </div>
 
+            <div>
 
-            <div class="driver-meta">
-
-                <div class="meta-box">
-                    <small>CNG Number</small>
-                    <strong>
-                        ${escapeHtml(vehicle)}
-                    </strong>
+                <div class="driver-name">
+                    ${escapeHtml(name)}
                 </div>
 
-                <div class="meta-box">
-                    <small>Distance</small>
-                    <strong>
-                        ${distance} KM
-                    </strong>
+                <div class="available-label">
+                    ● Live Available
                 </div>
-
-            </div>
-
-
-            <div class="card-actions">
-
-                <button
-                    class="btn btn-primary btn-small"
-                    onclick="openRideModal(
-                        '${driver.id}',
-                        '${escapeJs(name)}'
-                    )"
-                >
-                    🚕 Ride Request
-                </button>
-
-
-                ${
-                    phone
-                    ?
-                    `<a
-                        class="btn btn-success btn-small"
-                        href="tel:${escapeHtml(phone)}"
-                        style="text-align:center"
-                    >
-                        📞 Call
-                    </a>`
-                    :
-                    `<button
-                        class="btn btn-secondary btn-small"
-                        disabled
-                    >
-                        📞 Call
-                    </button>`
-                }
-
-
-                <button
-                    class="btn btn-secondary btn-small"
-                    onclick="openMessageModal(
-                        '${driver.id}'
-                    )"
-                >
-                    💬 Message
-                </button>
 
             </div>
 
         </div>
+
+
+        <div class="driver-meta">
+
+            <div class="meta-box">
+
+                <small>
+                    CNG Number
+                </small>
+
+                <strong>
+                    ${escapeHtml(vehicle)}
+                </strong>
+
+            </div>
+
+
+            <div class="meta-box">
+
+                <small>
+                    আপনার থেকে
+                </small>
+
+                <strong>
+                    📏 ${distance} KM
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="card-actions">
+
+            <button
+                class="btn btn-primary"
+                onclick="openRideModal(
+                    '${driver.id}',
+                    '${escapeJs(name)}'
+                )">
+                🚕 Ride Request
+            </button>
+
+
+            ${
+                phone
+                ?
+                `<a
+                    href="tel:${escapeHtml(phone)}"
+                    class="btn btn-success">
+                    📞 Call
+                </a>`
+                :
+                `<button
+                    class="btn btn-secondary"
+                    disabled>
+                    📞 Call
+                </button>`
+            }
+
+
+            <button
+                class="btn btn-secondary"
+                onclick="openMessageModal(
+                    '${driver.id}'
+                )">
+                💬 Message
+            </button>
+
+        </div>
+
+    </div>
+
     `;
+
 }
 
 
 /* =========================================================
-   FILTER
+FILTER
 ========================================================= */
 
 function filterDrivers(){
 
     const query =
         document
-        .getElementById("driverSearch")
+        .getElementById(
+            "driverSearch"
+        )
         .value
         .trim()
         .toLowerCase();
 
 
     const filtered =
-        allDrivers.filter(function(driver){
+        allDrivers.filter(
+        function(driver){
 
             const profile =
                 driver.profiles || {};
 
+
             const name =
-                (profile.full_name || "")
-                .toLowerCase();
+                (
+                    profile.full_name
+                    || ""
+                ).toLowerCase();
+
 
             const number =
                 (
-                    driver.vehicle_number || ""
-                )
-                .toLowerCase();
+                    driver.vehicle_number
+                    || ""
+                ).toLowerCase();
 
 
             return (
-                name.includes(query) ||
+                name.includes(query)
+                ||
                 number.includes(query)
             );
 
         });
 
 
-    renderDrivers(filtered);
-}
+    renderDrivers(
+        filtered
+    );
 
 
-/* =========================================================
-   MAP DRIVER MARKERS
-========================================================= */
-
-let driverMarkers = [];
-
-function addDriverMarkers(drivers){
-
-    if(!map) return;
-
-
-    driverMarkers.forEach(function(marker){
-
-        map.removeLayer(marker);
-
-    });
-
-
-    driverMarkers = [];
-
-
-    drivers.forEach(function(driver){
-
-        if(
-            driver.latitude === null ||
-            driver.longitude === null
-        )
-            return;
-
-
-        const profile =
-            driver.profiles || {};
-
-
-        const name =
-            profile.full_name || "Driver";
-
-
-        const marker =
-            L.marker([
-                Number(driver.latitude),
-                Number(driver.longitude)
-            ])
-            .addTo(map)
-            .bindPopup(
-                `<strong>🚕 ${escapeHtml(name)}</strong>
-                 <br>
-                 Available
-                 <br>
-                 ${Number(driver.distance).toFixed(1)} KM দূরে`
-            );
-
-
-        driverMarkers.push(marker);
-
-    });
+    drawLiveDrivers(
+        filtered
+    );
 
 }
 
 
 /* =========================================================
-   RIDE MODAL
+RIDE MODAL
 ========================================================= */
 
-function openRideModal(driverId,driverName){
+function openRideModal(
+    driverId,
+    driverName
+){
 
     const destination =
         document
-        .getElementById("destination")
+        .getElementById(
+            "destination"
+        )
         .value.trim();
 
 
     if(!destination){
 
-        toast("আগে Destination লিখুন।");
+        toast(
+            "আগে Destination লিখুন।"
+        );
 
         return;
     }
 
 
-    if(latitude === null || longitude === null){
+    if(
+        latitude === null ||
+        longitude === null
+    ){
 
-        toast("আপনার Location পাওয়া যায়নি।");
-
-        getLocation();
+        toast(
+            "আপনার Live Location পাওয়া যায়নি।"
+        );
 
         return;
     }
@@ -3014,19 +3516,25 @@ function openRideModal(driverId,driverName){
 
 
     document
-    .getElementById("confirmDriver")
+    .getElementById(
+        "confirmDriver"
+    )
     .textContent =
         driverName;
 
 
     document
-    .getElementById("confirmDestination")
+    .getElementById(
+        "confirmDestination"
+    )
     .textContent =
         destination;
 
 
     document
-    .getElementById("rideModal")
+    .getElementById(
+        "rideModal"
+    )
     .classList.add("show");
 
 }
@@ -3035,109 +3543,98 @@ function openRideModal(driverId,driverName){
 function closeRideModal(){
 
     document
-    .getElementById("rideModal")
+    .getElementById(
+        "rideModal"
+    )
     .classList.remove("show");
 
     selectedDriverId = null;
+
 }
 
 
 /* =========================================================
-   SEND RIDE REQUEST
+CONFIRM RIDE
 ========================================================= */
 
 async function confirmRideRequest(){
 
-    if(!selectedDriverId){
-
-        toast("Driver select করা হয়নি।");
-
+    if(!selectedDriverId)
         return;
-    }
 
 
     const destination =
         document
-        .getElementById("destination")
+        .getElementById(
+            "destination"
+        )
         .value.trim();
 
 
-    if(!destination){
+    const result =
+        await db
+        .from("ride_requests")
+        .insert({
 
-        toast("Destination লিখুন।");
+            passenger_id:
+                currentUser.id,
+
+            driver_id:
+                selectedDriverId,
+
+            pickup_lat:
+                latitude,
+
+            pickup_lng:
+                longitude,
+
+            pickup_address:
+                "Current Live Location",
+
+            destination_address:
+                destination,
+
+            status:
+                "pending"
+
+        });
+
+
+    if(result.error){
+
+        console.error(
+            result.error
+        );
+
+        toast(
+            result.error.message
+        );
 
         return;
     }
 
 
-    try{
+    closeRideModal();
 
-        const result =
-            await db
-            .from("ride_requests")
-            .insert({
-
-                passenger_id:
-                    currentUser.id,
-
-                driver_id:
-                    selectedDriverId,
-
-                pickup_lat:
-                    latitude,
-
-                pickup_lng:
-                    longitude,
-
-                pickup_address:
-                    "Current Location",
-
-                destination_address:
-                    destination,
-
-                status:
-                    "pending"
-
-            });
+    toast(
+        "Ride Request পাঠানো হয়েছে 🚕"
+    );
 
 
-        if(result.error){
-
-            throw result.error;
-        }
-
-
-        closeRideModal();
-
-        toast(
-            "Ride Request সফলভাবে পাঠানো হয়েছে 🚕"
-        );
-
-
-        loadMyRides();
-
-
-    }catch(error){
-
-        console.error(error);
-
-        toast(
-            error.message ||
-            "Ride Request পাঠানো যায়নি।"
-        );
-
-    }
+    loadMyRides();
 
 }
 
 
 /* =========================================================
-   DRIVER REQUESTS
+DRIVER REQUESTS
 ========================================================= */
 
 async function loadDriverRequests(){
 
-    if(!currentUser) return;
+    if(!currentUser)
+        return;
+
 
     const container =
         document.getElementById(
@@ -3148,15 +3645,18 @@ async function loadDriverRequests(){
     container.innerHTML =
         `<div class="loading">
             <span class="spinner"></span>
-            Requests loading...
-         </div>`;
+            Loading...
+        </div>`;
 
 
     const result =
         await db
         .from("ride_requests")
         .select("*")
-        .eq("driver_id",currentUser.id)
+        .eq(
+            "driver_id",
+            currentUser.id
+        )
         .order(
             "created_at",
             {
@@ -3167,15 +3667,12 @@ async function loadDriverRequests(){
 
     if(result.error){
 
-        console.error(result.error);
-
         container.innerHTML =
             `<div class="empty">
-                <div class="empty-icon">⚠️</div>
-                <p>${escapeHtml(
+                ⚠️ ${escapeHtml(
                     result.error.message
-                )}</p>
-             </div>`;
+                )}
+            </div>`;
 
         return;
     }
@@ -3186,13 +3683,13 @@ async function loadDriverRequests(){
 
 
     document
-    .getElementById("requestCount")
+    .getElementById(
+        "requestCount"
+    )
     .textContent =
-        rides.filter(function(r){
-
-            return r.status === "pending";
-
-        }).length;
+        rides.filter(
+            r => r.status === "pending"
+        ).length;
 
 
     if(!rides.length){
@@ -3200,129 +3697,160 @@ async function loadDriverRequests(){
         container.innerHTML =
             `<div class="empty">
 
-                <div class="empty-icon">🔔</div>
+                <div class="empty-icon">
+                    🔔
+                </div>
 
-                <h3>কোনো Ride Request নেই</h3>
+                <h3>
+                    কোনো Ride Request নেই
+                </h3>
 
                 <p>
                     Passenger Request পাঠালে এখানে দেখা যাবে।
                 </p>
 
-             </div>`;
+            </div>`;
 
         return;
     }
 
 
     container.innerHTML =
-        rides.map(driverRequestHtml).join("");
+        rides
+        .map(driverRequestHtml)
+        .join("");
+
 }
 
 
 function driverRequestHtml(ride){
 
-    const statusClass =
-        getStatusClass(ride.status);
-
-
-    const statusText =
-        getStatusText(ride.status);
-
-
     return `
-        <div
-            class="request-card ${
-                ride.status === "pending"
-                ? "new"
-                : ""
-            }"
-        >
 
-            <div class="ride-top">
+    <div class="request-card ${
+        ride.status === "pending"
+        ? "new"
+        : ""
+    }">
 
-                <strong>
-                    🚕 Ride Request
-                </strong>
+        <div class="ride-top">
 
-                <span
-                    class="ride-status ${statusClass}"
-                >
-                    ${statusText}
-                </span>
+            <strong>
+                🚕 Ride Request
+            </strong>
 
-            </div>
+            <span
+                class="ride-status ${
+                    getStatusClass(
+                        ride.status
+                    )
+                }">
 
+                ${
+                    getStatusText(
+                        ride.status
+                    )
+                }
 
-            <div class="route">
-
-                <div class="route-icon">
-                    📍
-                </div>
-
-                <div class="route-text">
-                    <strong>Pickup</strong>
-                    <br>
-                    ${escapeHtml(
-                        ride.pickup_address ||
-                        "Current Location"
-                    )}
-                </div>
-
-
-                <div>
-                    <div class="route-line"></div>
-                </div>
-
-                <div class="route-text">
-                    <strong>Destination</strong>
-                    <br>
-                    ${escapeHtml(
-                        ride.destination_address ||
-                        "—"
-                    )}
-                </div>
-
-            </div>
-
-
-            ${
-                ride.status === "pending"
-                ?
-                `<div class="request-buttons">
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="acceptRide('${ride.id}')"
-                    >
-                        ✓ Accept
-                    </button>
-
-                    <button
-                        class="btn btn-danger"
-                        onclick="rejectRide('${ride.id}')"
-                    >
-                        ✕ Reject
-                    </button>
-
-                </div>`
-                :
-                ""
-            }
+            </span>
 
         </div>
+
+
+        <div class="route">
+
+            <div class="route-icon">
+                📍
+            </div>
+
+            <div class="route-text">
+
+                <strong>
+                    Pickup
+                </strong>
+
+                <br>
+
+                ${escapeHtml(
+                    ride.pickup_address
+                    || "Current Location"
+                )}
+
+            </div>
+
+
+            <div>
+                <div class="route-line"></div>
+            </div>
+
+
+            <div class="route-text">
+
+                <strong>
+                    Destination
+                </strong>
+
+                <br>
+
+                ${escapeHtml(
+                    ride.destination_address
+                    || "—"
+                )}
+
+            </div>
+
+        </div>
+
+
+        ${
+            ride.status === "pending"
+
+            ?
+
+            `<div class="request-buttons">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="acceptRide(
+                        '${ride.id}'
+                    )">
+                    ✓ Accept
+                </button>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="rejectRide(
+                        '${ride.id}'
+                    )">
+                    ✕ Reject
+                </button>
+
+            </div>`
+
+            :
+
+            ""
+        }
+
+    </div>
+
     `;
+
 }
 
 
 /* =========================================================
-   ACCEPT RIDE
+ACCEPT
 ========================================================= */
 
 async function acceptRide(rideId){
 
-    if(!confirm("এই Ride Request Accept করবেন?")){
+    if(
+        !confirm(
+            "এই Ride Accept করবেন?"
+        )
+    )
         return;
-    }
 
 
     const result =
@@ -3337,13 +3865,17 @@ async function acceptRide(rideId){
                 "accepted"
 
         })
-        .eq("id",rideId)
-        .eq("status","pending");
+        .eq(
+            "id",
+            rideId
+        )
+        .eq(
+            "status",
+            "pending"
+        );
 
 
     if(result.error){
-
-        console.error(result.error);
 
         toast(
             result.error.message
@@ -3357,7 +3889,7 @@ async function acceptRide(rideId){
 
 
     toast(
-        "Ride Accept করা হয়েছে 🚕"
+        "Ride Accept হয়েছে 🚕"
     );
 
 
@@ -3369,29 +3901,38 @@ async function acceptRide(rideId){
 
 
 /* =========================================================
-   REJECT RIDE
+REJECT
 ========================================================= */
 
 async function rejectRide(rideId){
 
-    if(!confirm("এই Ride Request Reject করবেন?")){
+    if(
+        !confirm(
+            "এই Ride Reject করবেন?"
+        )
+    )
         return;
-    }
 
 
     const result =
         await db
         .from("ride_requests")
         .update({
+
             status:"rejected"
+
         })
-        .eq("id",rideId)
-        .eq("status","pending");
+        .eq(
+            "id",
+            rideId
+        )
+        .eq(
+            "status",
+            "pending"
+        );
 
 
     if(result.error){
-
-        console.error(result.error);
 
         toast(
             result.error.message
@@ -3401,7 +3942,10 @@ async function rejectRide(rideId){
     }
 
 
-    toast("Ride Request Reject করা হয়েছে।");
+    toast(
+        "Ride Reject করা হয়েছে।"
+    );
+
 
     loadDriverRequests();
 
@@ -3411,7 +3955,7 @@ async function rejectRide(rideId){
 
 
 /* =========================================================
-   SET DRIVER BUSY
+DRIVER BUSY
 ========================================================= */
 
 async function setDriverBusy(){
@@ -3420,31 +3964,35 @@ async function setDriverBusy(){
         await db
         .from("drivers")
         .update({
+
             available:false
+
         })
-        .eq("id",currentUser.id);
+        .eq(
+            "id",
+            currentUser.id
+        );
 
 
-    if(result.error){
+    if(!result.error){
 
-        console.error(result.error);
+        updateStatusUI(
+            false
+        );
 
-        return;
     }
-
-
-    updateStatusUI(false);
 
 }
 
 
 /* =========================================================
-   MY RIDES
+MY RIDES
 ========================================================= */
 
 async function loadMyRides(){
 
-    if(!currentUser) return;
+    if(!currentUser)
+        return;
 
 
     const container =
@@ -3453,11 +4001,9 @@ async function loadMyRides(){
         );
 
 
-    container.innerHTML =
-        `<div class="loading">
-            <span class="spinner"></span>
-            Ride History loading...
-         </div>`;
+    const isDriver =
+        currentProfile &&
+        currentProfile.user_type === "driver";
 
 
     let query =
@@ -3472,10 +4018,7 @@ async function loadMyRides(){
         );
 
 
-    if(
-        currentProfile &&
-        currentProfile.user_type === "driver"
-    ){
+    if(isDriver){
 
         query =
             query.eq(
@@ -3500,15 +4043,12 @@ async function loadMyRides(){
 
     if(result.error){
 
-        console.error(result.error);
-
         container.innerHTML =
             `<div class="empty">
-                <div class="empty-icon">⚠️</div>
-                <p>${escapeHtml(
+                ⚠️ ${escapeHtml(
                     result.error.message
-                )}</p>
-             </div>`;
+                )}
+            </div>`;
 
         return;
     }
@@ -3519,7 +4059,9 @@ async function loadMyRides(){
 
 
     document
-    .getElementById("myRideCount")
+    .getElementById(
+        "myRideCount"
+    )
     .textContent =
         rides.length;
 
@@ -3529,111 +4071,133 @@ async function loadMyRides(){
         container.innerHTML =
             `<div class="empty">
 
-                <div class="empty-icon">🧾</div>
+                <div class="empty-icon">
+                    🧾
+                </div>
 
-                <h3>এখনো কোনো Ride নেই</h3>
+                <h3>
+                    এখনো কোনো Ride নেই
+                </h3>
 
-                <p>
-                    আপনার Ride History এখানে দেখা যাবে।
-                </p>
-
-             </div>`;
+            </div>`;
 
         return;
     }
 
 
     container.innerHTML =
-        rides.map(rideHistoryHtml).join("");
+        rides
+        .map(rideHistoryHtml)
+        .join("");
+
 }
 
 
 function rideHistoryHtml(ride){
 
     return `
-        <div class="ride-card">
 
-            <div class="ride-top">
+    <div class="ride-card">
+
+        <div class="ride-top">
+
+            <strong>
+                🚕 Ride
+            </strong>
+
+            <span
+                class="ride-status ${
+                    getStatusClass(
+                        ride.status
+                    )
+                }">
+
+                ${
+                    getStatusText(
+                        ride.status
+                    )
+                }
+
+            </span>
+
+        </div>
+
+
+        <div class="route">
+
+            <div class="route-icon">
+                📍
+            </div>
+
+            <div class="route-text">
 
                 <strong>
-                    🚕 Ride
+                    Pickup
                 </strong>
 
-                <span
-                    class="ride-status ${
-                        getStatusClass(ride.status)
-                    }"
-                >
-                    ${getStatusText(ride.status)}
-                </span>
+                <br>
+
+                ${escapeHtml(
+                    ride.pickup_address
+                    || "Current Location"
+                )}
 
             </div>
 
 
-            <div class="route">
-
-                <div class="route-icon">
-                    📍
-                </div>
-
-                <div class="route-text">
-                    <strong>Pickup</strong>
-                    <br>
-                    ${escapeHtml(
-                        ride.pickup_address ||
-                        "Current Location"
-                    )}
-                </div>
+            <div>
+                <div class="route-line"></div>
+            </div>
 
 
-                <div>
-                    <div class="route-line"></div>
-                </div>
+            <div class="route-text">
 
+                <strong>
+                    Destination
+                </strong>
 
-                <div class="route-text">
-                    <strong>Destination</strong>
-                    <br>
-                    ${escapeHtml(
-                        ride.destination_address ||
-                        "—"
-                    )}
-                </div>
+                <br>
+
+                ${escapeHtml(
+                    ride.destination_address
+                    || "—"
+                )}
 
             </div>
 
         </div>
+
+    </div>
+
     `;
+
 }
 
 
 /* =========================================================
-   MESSAGE
+MESSAGE
 ========================================================= */
 
-function openMessageModal(receiverId){
+function openMessageModal(
+    receiverId
+){
 
     selectedReceiverId =
         receiverId;
 
 
     document
-    .getElementById("messageInput")
+    .getElementById(
+        "messageInput"
+    )
     .value = "";
 
 
     document
-    .getElementById("messageModal")
+    .getElementById(
+        "messageModal"
+    )
     .classList.add("show");
-
-
-    setTimeout(function(){
-
-        document
-        .getElementById("messageInput")
-        .focus();
-
-    },100);
 
 }
 
@@ -3641,7 +4205,9 @@ function openMessageModal(receiverId){
 function closeMessageModal(){
 
     document
-    .getElementById("messageModal")
+    .getElementById(
+        "messageModal"
+    )
     .classList.remove("show");
 
     selectedReceiverId = null;
@@ -3653,24 +4219,24 @@ async function sendMessage(){
 
     const message =
         document
-        .getElementById("messageInput")
+        .getElementById(
+            "messageInput"
+        )
         .value.trim();
-
-
-    if(!selectedReceiverId){
-
-        toast("Receiver পাওয়া যায়নি।");
-
-        return;
-    }
 
 
     if(!message){
 
-        toast("আগে message লিখুন।");
+        toast(
+            "Message লিখুন।"
+        );
 
         return;
     }
+
+
+    if(!selectedReceiverId)
+        return;
 
 
     const result =
@@ -3692,7 +4258,9 @@ async function sendMessage(){
 
     if(result.error){
 
-        console.error(result.error);
+        console.error(
+            result.error
+        );
 
         toast(
             result.error.message
@@ -3704,71 +4272,65 @@ async function sendMessage(){
 
     closeMessageModal();
 
-    toast("Message পাঠানো হয়েছে 💬");
+    toast(
+        "Message পাঠানো হয়েছে 💬"
+    );
 
 }
 
 
 /* =========================================================
-   STATUS TEXT
+STATUS
 ========================================================= */
 
 function getStatusText(status){
 
-    switch(status){
+    if(status === "pending")
+        return "Pending";
 
-        case "pending":
-            return "Pending";
+    if(status === "accepted")
+        return "Accepted";
 
-        case "accepted":
-            return "Accepted";
+    if(status === "rejected")
+        return "Rejected";
 
-        case "rejected":
-            return "Rejected";
+    if(status === "completed")
+        return "Completed";
 
-        case "completed":
-            return "Completed";
-
-        default:
-            return status || "Unknown";
-
-    }
+    return status || "Unknown";
 
 }
 
 
 function getStatusClass(status){
 
-    switch(status){
+    if(status === "pending")
+        return "status-pending";
 
-        case "pending":
-            return "status-pending";
+    if(status === "accepted")
+        return "status-accepted";
 
-        case "accepted":
-            return "status-accepted";
+    if(status === "rejected")
+        return "status-rejected";
 
-        case "rejected":
-            return "status-rejected";
+    if(status === "completed")
+        return "status-completed";
 
-        case "completed":
-            return "status-completed";
-
-        default:
-            return "status-pending";
-
-    }
+    return "status-pending";
 
 }
 
 
 /* =========================================================
-   NAVIGATION
+NAVIGATION
 ========================================================= */
 
 function goHome(){
 
     document
-    .getElementById("homeSection")
+    .getElementById(
+        "homeSection"
+    )
     .scrollIntoView({
         behavior:"smooth"
     });
@@ -3787,7 +4349,9 @@ function openFind(){
 
 
     document
-    .getElementById("passengerPanel")
+    .getElementById(
+        "passengerPanel"
+    )
     .scrollIntoView({
         behavior:"smooth"
     });
@@ -3806,7 +4370,9 @@ function openRides(){
 
 
     document
-    .getElementById("ridesPanel")
+    .getElementById(
+        "ridesPanel"
+    )
     .scrollIntoView({
         behavior:"smooth"
     });
@@ -3817,7 +4383,9 @@ function openRides(){
 function scrollToAuth(){
 
     document
-    .getElementById("authSection")
+    .getElementById(
+        "authSection"
+    )
     .scrollIntoView({
         behavior:"smooth"
     });
@@ -3826,10 +4394,38 @@ function scrollToAuth(){
 
 
 /* =========================================================
-   LOGOUT
+LOGOUT
 ========================================================= */
 
 async function logout(){
+
+    if(
+        passengerWatchId !== null
+    ){
+
+        navigator.geolocation
+        .clearWatch(
+            passengerWatchId
+        );
+
+        passengerWatchId = null;
+
+    }
+
+
+    if(
+        driverWatchId !== null
+    ){
+
+        navigator.geolocation
+        .clearWatch(
+            driverWatchId
+        );
+
+        driverWatchId = null;
+
+    }
+
 
     const result =
         await db.auth.signOut();
@@ -3846,24 +4442,41 @@ async function logout(){
 
 
     currentUser = null;
+
     currentProfile = null;
 
-    document
-    .getElementById("appSection")
-    .style.display = "none";
+    latitude = null;
+
+    longitude = null;
+
+    allDrivers = [];
 
 
     document
-    .getElementById("authSection")
-    .style.display = "block";
+    .getElementById(
+        "appSection"
+    )
+    .style.display="none";
 
 
     document
-    .getElementById("logoutBtn")
-    .style.display = "none";
+    .getElementById(
+        "authSection"
+    )
+    .style.display="block";
 
 
-    toast("Logout successful");
+    document
+    .getElementById(
+        "logoutBtn"
+    )
+    .style.display="none";
+
+
+    toast(
+        "Logout successful"
+    );
+
 
     scrollToAuth();
 
@@ -3871,7 +4484,7 @@ async function logout(){
 
 
 /* =========================================================
-   SESSION
+SESSION
 ========================================================= */
 
 async function checkSession(){
@@ -3882,24 +4495,22 @@ async function checkSession(){
 
     if(result.error){
 
-        console.error(result.error);
+        console.error(
+            result.error
+        );
 
         return;
     }
 
 
-    const session =
-        result.data.session;
-
-
-    if(!session){
-
+    if(
+        !result.data.session
+    )
         return;
-    }
 
 
     currentUser =
-        session.user;
+        result.data.session.user;
 
 
     await loadProfile();
@@ -3910,38 +4521,44 @@ async function checkSession(){
 
 
 db.auth.onAuthStateChange(
-    function(event,session){
+function(event,session){
 
-        if(
-            event === "SIGNED_OUT"
-        ){
+    if(
+        event === "SIGNED_OUT"
+    ){
 
-            currentUser = null;
-            currentProfile = null;
+        currentUser = null;
 
-            document
-            .getElementById("appSection")
-            .style.display = "none";
+        currentProfile = null;
 
-            document
-            .getElementById("authSection")
-            .style.display = "block";
+        document
+        .getElementById(
+            "appSection"
+        )
+        .style.display="none";
 
-            document
-            .getElementById("logoutBtn")
-            .style.display = "none";
+        document
+        .getElementById(
+            "authSection"
+        )
+        .style.display="block";
 
-        }
+        document
+        .getElementById(
+            "logoutBtn"
+        )
+        .style.display="none";
 
     }
-);
+
+});
 
 
 /* =========================================================
-   REALTIME RIDE REQUEST
+REALTIME RIDE
 ========================================================= */
 
-db.channel("cng-rides")
+db.channel("cng-rides-live")
 
 .on(
     "postgres_changes",
@@ -3950,7 +4567,7 @@ db.channel("cng-rides")
         schema:"public",
         table:"ride_requests"
     },
-    function(payload){
+    function(){
 
         if(!currentUser)
             return;
@@ -3975,13 +4592,145 @@ db.channel("cng-rides")
 
 
 /* =========================================================
-   SECURITY / HTML ESCAPE
+AUTO REFRESH AVAILABLE CNG
+========================================================= */
+
+liveRefreshTimer =
+    setInterval(
+    async function(){
+
+        if(
+            !currentUser ||
+            !currentProfile ||
+            currentProfile.user_type !== "passenger"
+        )
+            return;
+
+
+        if(
+            latitude === null ||
+            longitude === null
+        )
+            return;
+
+
+        /*
+          Passenger যদি আগে CNG search করে থাকে,
+          তাহলে প্রতি 10 সেকেন্ডে Driver location
+          আবার database থেকে নেওয়া হবে।
+        */
+
+        if(allDrivers.length === 0)
+            return;
+
+
+        try{
+
+            const result =
+                await db
+                .from("drivers")
+                .select(`
+                    id,
+                    vehicle_name,
+                    vehicle_number,
+                    available,
+                    latitude,
+                    longitude,
+                    profiles (
+                        full_name,
+                        phone
+                    )
+                `)
+                .eq(
+                    "available",
+                    true
+                );
+
+
+            if(result.error)
+                return;
+
+
+            allDrivers =
+                (result.data || [])
+                .map(function(driver){
+
+                    if(
+                        driver.latitude === null ||
+                        driver.longitude === null
+                    )
+                        return null;
+
+
+                    const distance =
+                        calculateDistance(
+                            latitude,
+                            longitude,
+                            Number(driver.latitude),
+                            Number(driver.longitude)
+                        );
+
+
+                    return {
+                        ...driver,
+                        distance:distance
+                    };
+
+                })
+                .filter(Boolean)
+                .filter(
+                    driver =>
+                        driver.distance <= 20
+                )
+                .sort(
+                    (a,b) =>
+                        a.distance-b.distance
+                );
+
+
+            document
+            .getElementById(
+                "nearbyCount"
+            )
+            .textContent =
+                allDrivers.length;
+
+
+            renderDrivers(
+                allDrivers
+            );
+
+
+            drawLiveDrivers(
+                allDrivers
+            );
+
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+        }
+
+    },
+    10000
+);
+
+
+/* =========================================================
+ESCAPE
 ========================================================= */
 
 function escapeHtml(value){
 
-    if(value === null || value === undefined)
+    if(
+        value === null ||
+        value === undefined
+    )
         return "";
+
 
     return String(value)
     .replace(/&/g,"&amp;")
@@ -3995,8 +4744,12 @@ function escapeHtml(value){
 
 function escapeJs(value){
 
-    if(value === null || value === undefined)
+    if(
+        value === null ||
+        value === undefined
+    )
         return "";
+
 
     return String(value)
     .replace(/\\/g,"\\\\")
@@ -4009,7 +4762,7 @@ function escapeJs(value){
 
 
 /* =========================================================
-   START
+START
 ========================================================= */
 
 checkSession();
