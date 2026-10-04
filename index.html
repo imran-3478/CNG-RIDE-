@@ -1,1 +1,1912 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>CNG — কাছের CNG খুঁজুন</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link
+ rel="stylesheet"
+ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<script
+ src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#f3f7f5;
+  color:#18352b;
+}
+
+header{
+  background:linear-gradient(135deg,#087f5b,#04543d);
+  color:white;
+  padding:18px 20px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 3px 15px #0002;
+}
+
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.logo{
+  font-size:26px;
+  font-weight:800;
+}
+
+.logo span{
+  color:#ffd43b;
+}
+
+nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+nav button{
+  border:0;
+  background:#ffffff20;
+  color:white;
+  padding:9px 13px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:25px 15px 60px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#087f5b,#0b6e51);
+  color:white;
+  padding:35px 25px;
+  border-radius:20px;
+  margin-bottom:20px;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  opacity:.92;
+  line-height:1.7;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:0 5px 25px #0000000d;
+}
+
+.card h2{
+  margin-bottom:16px;
+  color:#087f5b;
+}
+
+.mode-buttons{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.mode-buttons button{
+  flex:1;
+  padding:14px;
+  border:2px solid #087f5b;
+  background:white;
+  color:#087f5b;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.mode-buttons button.active{
+  background:#087f5b;
+  color:white;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #d4ddd8;
+  border-radius:10px;
+  margin-bottom:12px;
+  font-size:15px;
+  outline:none;
+}
+
+input:focus,textarea:focus{
+  border-color:#087f5b;
+}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:13px 18px;
+  background:#087f5b;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  margin:4px 2px;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+.btn.secondary{
+  background:#495057;
+}
+
+.btn.yellow{
+  background:#f59f00;
+}
+
+.btn.red{
+  background:#d6336c;
+}
+
+.btn.green{
+  background:#2b8a3e;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.status{
+  padding:12px;
+  background:#f1f3f5;
+  border-radius:10px;
+  margin:10px 0;
+}
+
+.success{
+  color:#087f5b;
+}
+
+.error{
+  color:#c92a2a;
+}
+
+#map{
+  width:100%;
+  height:420px;
+  border-radius:15px;
+  margin-top:15px;
+}
+
+.driver-card{
+  border:1px solid #e2e8e4;
+  border-radius:15px;
+  padding:16px;
+  margin:12px 0;
+  background:#fff;
+}
+
+.driver-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.available{
+  color:#2b8a3e;
+  font-weight:bold;
+}
+
+.busy{
+  color:#c92a2a;
+  font-weight:bold;
+}
+
+.distance{
+  font-size:14px;
+  color:#666;
+  margin:8px 0;
+}
+
+.ride-card{
+  border-left:5px solid #087f5b;
+  background:#f8faf9;
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0;
+}
+
+.small{
+  font-size:13px;
+  color:#666;
+}
+
+#appSection{
+  display:none;
+}
+
+footer{
+  text-align:center;
+  padding:30px 15px;
+  background:#063b2b;
+  color:white;
+}
+
+@media(max-width:700px){
+  .hero h1{
+    font-size:27px;
+  }
+
+  .header-inner{
+    flex-direction:column;
+  }
+
+  nav{
+    justify-content:center;
+  }
+
+  #map{
+    height:330px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">🚕 <span>CNG</span></div>
+
+    <nav>
+      <button onclick="showSection('home')">হোম</button>
+      <button onclick="showSection('find')">CNG খুঁজুন</button>
+      <button onclick="showSection('rides')">Ride</button>
+      <button onclick="logout()">Logout</button>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home">
+
+  <div class="hero">
+    <h1>আপনার কাছের CNG খুঁজুন 🚕</h1>
+    <p>
+      কাছাকাছি থাকা Available CNG Driver খুঁজে নিন,
+      Ride Request পাঠান এবং সহজে আপনার গন্তব্যে যান।
+    </p>
+  </div>
+
+  <div id="authCard" class="card">
+
+    <h2>অ্যাকাউন্ট</h2>
+
+    <div class="mode-buttons">
+      <button id="passengerMode"
+              class="active"
+              onclick="selectUserType('passenger')">
+        👤 Passenger
+      </button>
+
+      <button id="driverMode"
+              onclick="selectUserType('driver')">
+        🚕 Driver
+      </button>
+    </div>
+
+    <input
+      id="name"
+      placeholder="আপনার নাম"
+    >
+
+    <input
+      id="phone"
+      placeholder="মোবাইল নম্বর"
+    >
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+    >
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+    >
+
+    <div id="driverFields" class="hidden">
+
+      <input
+        id="vehicleNumber"
+        placeholder="CNG নম্বর"
+      >
+
+    </div>
+
+    <button class="btn" onclick="register()">
+      Register
+    </button>
+
+    <button class="btn secondary" onclick="login()">
+      Login
+    </button>
+
+    <div id="authMessage" class="status">
+      Passenger mode selected
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- APP -->
+<section id="appSection">
+
+  <div class="card">
+
+    <h2 id="welcomeText">
+      Welcome
+    </h2>
+
+    <div id="driverControls" class="hidden">
+
+      <h3>Driver Dashboard 🚕</h3>
+
+      <div class="status">
+        আপনার বর্তমান অবস্থান:
+        <b id="driverLocationText">
+          পাওয়া যায়নি
+        </b>
+      </div>
+
+      <button
+        id="availableBtn"
+        class="btn green"
+        onclick="setDriverAvailable(true)">
+        🟢 Available
+      </button>
+
+      <button
+        class="btn red"
+        onclick="setDriverAvailable(false)">
+        🔴 Busy
+      </button>
+
+      <button
+        class="btn"
+        onclick="updateDriverLocation()">
+        📍 Location Update
+      </button>
+
+      <hr style="margin:20px 0;border:0;border-top:1px solid #ddd">
+
+      <h3>Ride Requests</h3>
+
+      <div id="driverRequests">
+        কোনো নতুন request নেই।
+      </div>
+
+    </div>
+
+
+    <div id="passengerControls">
+
+      <h3>Passenger Dashboard 👤</h3>
+
+      <button
+        class="btn"
+        onclick="getMyLocation()">
+        📍 আমার Location নিন
+      </button>
+
+      <div class="status">
+        <b>Pickup:</b>
+        <span id="pickupText">
+          Location পাওয়া যায়নি
+        </span>
+      </div>
+
+      <input
+        id="destination"
+        placeholder="কোথায় যেতে চান? যেমন: Tangail New Bus Stand"
+      >
+
+      <button
+        class="btn"
+        onclick="searchDrivers()">
+        🔎 কাছের CNG খুঁজুন
+      </button>
+
+      <div id="driversList"></div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>Map 🗺️</h2>
+
+    <div id="map"></div>
+
+  </div>
+
+</section>
+
+
+<!-- RIDES -->
+<section id="rides" class="card hidden">
+
+  <h2>আমার Ride</h2>
+
+  <div id="myRides">
+    কোনো ride পাওয়া যায়নি।
+  </div>
+
+</section>
+
+</div>
+
+
+<footer>
+  <p>🚕 CNG — সহজে কাছের CNG খুঁজুন</p>
+  <p class="small">
+    আপনার নিরাপত্তা আমাদের অগ্রাধিকার।
+  </p>
+</footer>
+
+
+<script>
+
+/* ================================
+   SUPABASE
+================================ */
+
+const SUPABASE_URL =
+"https://icfzimjduanfzwpkbtdu.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_2ZmJLbota_YQZ7rDKqV6ew_ApWVxoak";
+
+const supabaseClient =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* ================================
+   VARIABLES
+================================ */
+
+let selectedType = "passenger";
+
+let currentUser = null;
+
+let currentProfile = null;
+
+let userLat = null;
+let userLng = null;
+
+let map = null;
+
+let userMarker = null;
+
+let driverMarkers = [];
+
+
+/* ================================
+   USER TYPE
+================================ */
+
+function selectUserType(type){
+
+  selectedType = type;
+
+  document
+    .getElementById("passengerMode")
+    .classList.toggle(
+      "active",
+      type === "passenger"
+    );
+
+  document
+    .getElementById("driverMode")
+    .classList.toggle(
+      "active",
+      type === "driver"
+    );
+
+  document
+    .getElementById("driverFields")
+    .classList.toggle(
+      "hidden",
+      type !== "driver"
+    );
+
+  document.getElementById("authMessage")
+    .innerText =
+    type === "driver"
+      ? "🚕 Driver mode selected"
+      : "👤 Passenger mode selected";
+}
+
+
+/* ================================
+   REGISTER
+================================ */
+
+async function register(){
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const vehicleNumber =
+    document.getElementById("vehicleNumber").value.trim();
+
+  if(!name || !email || !password){
+
+    showAuthMessage(
+      "নাম, Email এবং Password দিন।",
+      true
+    );
+
+    return;
+  }
+
+  try{
+
+    const {data,error} =
+      await supabaseClient.auth.signUp({
+        email,
+        password
+      });
+
+    if(error) throw error;
+
+    if(!data.user){
+
+      throw new Error(
+        "Account তৈরি হয়নি।"
+      );
+    }
+
+    const user = data.user;
+
+    const {error:profileError} =
+      await supabaseClient
+      .from("profiles")
+      .insert({
+        id:user.id,
+        full_name:name,
+        phone:phone,
+        user_type:selectedType
+      });
+
+    if(profileError) throw profileError;
+
+
+    if(selectedType === "driver"){
+
+      const {error:driverError} =
+        await supabaseClient
+        .from("drivers")
+        .insert({
+          id:user.id,
+          vehicle_name:"CNG",
+          vehicle_number:vehicleNumber,
+          available:false
+        });
+
+      if(driverError) throw driverError;
+    }
+
+
+    showAuthMessage(
+      "Registration সফল হয়েছে। Email verification চাইলে আপনার email verify করুন।"
+    );
+
+  }catch(error){
+
+    showAuthMessage(
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* ================================
+   LOGIN
+================================ */
+
+async function login(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  if(!email || !password){
+
+    showAuthMessage(
+      "Email এবং Password দিন।",
+      true
+    );
+
+    return;
+  }
+
+  try{
+
+    const {data,error} =
+      await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+      });
+
+    if(error) throw error;
+
+    currentUser = data.user;
+
+    await loadProfile();
+
+    showApp();
+
+  }catch(error){
+
+    showAuthMessage(
+      error.message,
+      true
+    );
+
+  }
+
+}
+
+
+/* ================================
+   LOAD PROFILE
+================================ */
+
+async function loadProfile(){
+
+  const {data,error} =
+    await supabaseClient
+    .from("profiles")
+    .select("*")
+    .eq("id",currentUser.id)
+    .single();
+
+  if(error) throw error;
+
+  currentProfile = data;
+}
+
+
+/* ================================
+   SHOW APP
+================================ */
+
+function showApp(){
+
+  document.getElementById("authCard")
+    .classList.add("hidden");
+
+  document.getElementById("appSection")
+    .style.display = "block";
+
+  document.getElementById("welcomeText")
+    .innerText =
+    "স্বাগতম, " +
+    currentProfile.full_name;
+
+  if(currentProfile.user_type === "driver"){
+
+    document.getElementById("driverControls")
+      .classList.remove("hidden");
+
+    document.getElementById("passengerControls")
+      .classList.add("hidden");
+
+    updateDriverLocation();
+
+    loadDriverRequests();
+
+  }else{
+
+    document.getElementById("driverControls")
+      .classList.add("hidden");
+
+    document.getElementById("passengerControls")
+      .classList.remove("hidden");
+
+    getMyLocation();
+
+  }
+
+  initMap();
+
+}
+
+
+/* ================================
+   MAP
+================================ */
+
+function initMap(){
+
+  if(map) return;
+
+  map =
+    L.map("map").setView(
+      [24.25,89.92],
+      10
+    );
+
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      attribution:"© OpenStreetMap"
+    }
+  ).addTo(map);
+
+}
+
+
+/* ================================
+   USER LOCATION
+================================ */
+
+function getMyLocation(){
+
+  if(!navigator.geolocation){
+
+    alert(
+      "আপনার browser location support করে না।"
+    );
+
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    position => {
+
+      userLat =
+        position.coords.latitude;
+
+      userLng =
+        position.coords.longitude;
+
+      document.getElementById("pickupText")
+        .innerText =
+        userLat.toFixed(5) +
+        ", " +
+        userLng.toFixed(5);
+
+      initMap();
+
+      map.setView(
+        [userLat,userLng],
+        14
+      );
+
+      if(userMarker){
+
+        userMarker.setLatLng([
+          userLat,
+          userLng
+        ]);
+
+      }else{
+
+        userMarker =
+          L.marker([
+            userLat,
+            userLng
+          ])
+          .addTo(map)
+          .bindPopup(
+            "📍 আপনার অবস্থান"
+          );
+
+      }
+
+    },
+
+    error => {
+
+      alert(
+        "Location permission দিন।"
+      );
+
+    },
+
+    {
+      enableHighAccuracy:true,
+      timeout:15000,
+      maximumAge:5000
+    }
+
+  );
+
+}
+
+
+/* ================================
+   DRIVER LOCATION
+================================ */
+
+async function updateDriverLocation(){
+
+  if(!currentUser) return;
+
+  navigator.geolocation.getCurrentPosition(
+
+    async position => {
+
+      const lat =
+        position.coords.latitude;
+
+      const lng =
+        position.coords.longitude;
+
+      userLat = lat;
+      userLng = lng;
+
+      const {error} =
+        await supabaseClient
+        .from("drivers")
+        .update({
+          latitude:lat,
+          longitude:lng,
+          updated_at:new Date().toISOString()
+        })
+        .eq("id",currentUser.id);
+
+      if(error){
+
+        console.error(error);
+
+        return;
+      }
+
+      document.getElementById(
+        "driverLocationText"
+      ).innerText =
+        lat.toFixed(5) +
+        ", " +
+        lng.toFixed(5);
+
+      initMap();
+
+      map.setView(
+        [lat,lng],
+        14
+      );
+
+      if(userMarker){
+
+        userMarker.setLatLng([
+          lat,lng
+        ]);
+
+      }else{
+
+        userMarker =
+          L.marker([lat,lng])
+          .addTo(map)
+          .bindPopup(
+            "🚕 আপনার CNG"
+          );
+
+      }
+
+    },
+
+    () => {
+
+      alert(
+        "Driver location permission দিন।"
+      );
+
+    },
+
+    {
+      enableHighAccuracy:true,
+      timeout:15000
+    }
+
+  );
+
+}
+
+
+/* ================================
+   DRIVER AVAILABLE
+================================ */
+
+async function setDriverAvailable(value){
+
+  if(!currentUser) return;
+
+  const {error} =
+    await supabaseClient
+    .from("drivers")
+    .update({
+      available:value,
+      updated_at:new Date().toISOString()
+    })
+    .eq("id",currentUser.id);
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+  alert(
+    value
+      ? "🟢 আপনি এখন Available"
+      : "🔴 আপনি এখন Busy"
+  );
+
+  updateDriverLocation();
+
+}
+
+
+/* ================================
+   SEARCH DRIVERS
+================================ */
+
+async function searchDrivers(){
+
+  if(userLat === null){
+
+    await new Promise(resolve => {
+
+      navigator.geolocation.getCurrentPosition(
+
+        position => {
+
+          userLat =
+            position.coords.latitude;
+
+          userLng =
+            position.coords.longitude;
+
+          resolve();
+
+        },
+
+        () => {
+
+          resolve();
+
+        }
+
+      );
+
+    });
+
+  }
+
+  if(userLat === null){
+
+    alert(
+      "প্রথমে Location permission দিন।"
+    );
+
+    return;
+  }
+
+
+  const {data,error} =
+    await supabaseClient
+    .from("drivers")
+    .select(`
+      id,
+      vehicle_name,
+      vehicle_number,
+      available,
+      latitude,
+      longitude,
+      profiles (
+        full_name,
+        phone
+      )
+    `)
+    .eq("available",true);
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+
+  const nearby =
+    data.filter(driver => {
+
+      if(
+        driver.latitude === null ||
+        driver.longitude === null
+      ){
+        return false;
+      }
+
+      const distance =
+        calculateDistance(
+          userLat,
+          userLng,
+          driver.latitude,
+          driver.longitude
+        );
+
+      return distance <= 20;
+
+    });
+
+
+  nearby.sort((a,b)=>{
+
+    const da =
+      calculateDistance(
+        userLat,
+        userLng,
+        a.latitude,
+        a.longitude
+      );
+
+    const db =
+      calculateDistance(
+        userLat,
+        userLng,
+        b.latitude,
+        b.longitude
+      );
+
+    return da-db;
+
+  });
+
+
+  displayDrivers(nearby);
+
+}
+
+
+/* ================================
+   DISTANCE
+================================ */
+
+function calculateDistance(
+  lat1,
+  lon1,
+  lat2,
+  lon2
+){
+
+  const R = 6371;
+
+  const dLat =
+    (lat2-lat1) *
+    Math.PI / 180;
+
+  const dLon =
+    (lon2-lon1) *
+    Math.PI / 180;
+
+  const a =
+    Math.sin(dLat/2) *
+    Math.sin(dLat/2) +
+
+    Math.cos(lat1*Math.PI/180) *
+    Math.cos(lat2*Math.PI/180) *
+
+    Math.sin(dLon/2) *
+    Math.sin(dLon/2);
+
+  const c =
+    2 *
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1-a)
+    );
+
+  return R*c;
+
+}
+
+
+/* ================================
+   DISPLAY DRIVERS
+================================ */
+
+function displayDrivers(drivers){
+
+  const box =
+    document.getElementById(
+      "driversList"
+    );
+
+  box.innerHTML = "";
+
+  clearDriverMarkers();
+
+
+  if(drivers.length === 0){
+
+    box.innerHTML = `
+      <div class="status">
+        😔 আপনার আশেপাশে বর্তমানে
+        কোনো Available CNG পাওয়া যায়নি।
+      </div>
+    `;
+
+    return;
+  }
+
+
+  drivers.forEach(driver => {
+
+    const distance =
+      calculateDistance(
+        userLat,
+        userLng,
+        driver.latitude,
+        driver.longitude
+      );
+
+
+    const name =
+      driver.profiles?.full_name ||
+      "CNG Driver";
+
+    const phone =
+      driver.profiles?.phone ||
+      "";
+
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "driver-card";
+
+    card.innerHTML = `
+
+      <div class="driver-top">
+
+        <h3>🚕 ${escapeHtml(name)}</h3>
+
+        <span class="available">
+          🟢 Available
+        </span>
+
+      </div>
+
+      <p>
+        CNG নম্বর:
+        <b>${escapeHtml(
+          driver.vehicle_number || "N/A"
+        )}</b>
+      </p>
+
+      <div class="distance">
+        📏 আপনার থেকে প্রায়
+        <b>${distance.toFixed(2)} km</b>
+      </div>
+
+      <button
+        class="btn"
+        onclick="requestRide('${driver.id}')">
+        🚕 Ride Request
+      </button>
+
+      ${
+        phone
+        ? `
+        <a
+          class="btn green"
+          href="tel:${escapeHtml(phone)}"
+          style="display:inline-block;text-decoration:none">
+          📞 Call
+        </a>
+        `
+        : ""
+      }
+
+      <button
+        class="btn secondary"
+        onclick="openMessage('${driver.id}')">
+        💬 Message
+      </button>
+
+    `;
+
+    box.appendChild(card);
+
+
+    const marker =
+      L.marker([
+        driver.latitude,
+        driver.longitude
+      ])
+      .addTo(map)
+      .bindPopup(
+        "🚕 " +
+        name +
+        "<br>📏 " +
+        distance.toFixed(2) +
+        " km"
+      );
+
+    driverMarkers.push(marker);
+
+  });
+
+}
+
+
+/* ================================
+   CLEAR MARKERS
+================================ */
+
+function clearDriverMarkers(){
+
+  driverMarkers.forEach(marker => {
+
+    map.removeLayer(marker);
+
+  });
+
+  driverMarkers = [];
+
+}
+
+
+/* ================================
+   RIDE REQUEST
+================================ */
+
+async function requestRide(driverId){
+
+  if(userLat === null){
+
+    alert(
+      "আপনার location পাওয়া যায়নি।"
+    );
+
+    return;
+  }
+
+  const destination =
+    document.getElementById(
+      "destination"
+    ).value.trim();
+
+  if(!destination){
+
+    alert(
+      "আপনার গন্তব্য লিখুন।"
+    );
+
+    return;
+  }
+
+
+  const {error} =
+    await supabaseClient
+    .from("ride_requests")
+    .insert({
+
+      passenger_id:
+        currentUser.id,
+
+      driver_id:
+        driverId,
+
+      pickup_lat:
+        userLat,
+
+      pickup_lng:
+        userLng,
+
+      pickup_address:
+        "Current Location",
+
+      destination_address:
+        destination,
+
+      status:
+        "pending"
+
+    });
+
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+
+  alert(
+    "🚕 Ride Request পাঠানো হয়েছে।"
+  );
+
+  loadMyRides();
+
+}
+
+
+/* ================================
+   DRIVER REQUESTS
+================================ */
+
+async function loadDriverRequests(){
+
+  const {data,error} =
+    await supabaseClient
+    .from("ride_requests")
+    .select(`
+      *,
+      profiles:passenger_id (
+        full_name,
+        phone
+      )
+    `)
+    .is("driver_id",null)
+    .eq("status","pending")
+    .order("created_at",{
+      ascending:false
+    });
+
+  if(error){
+
+    console.error(error);
+
+    return;
+  }
+
+
+  const box =
+    document.getElementById(
+      "driverRequests"
+    );
+
+  box.innerHTML = "";
+
+
+  if(!data || data.length === 0){
+
+    box.innerHTML =
+      "<p>বর্তমানে কোনো request নেই।</p>";
+
+    return;
+  }
+
+
+  data.forEach(ride => {
+
+    const name =
+      ride.profiles?.full_name ||
+      "Passenger";
+
+    const phone =
+      ride.profiles?.phone ||
+      "";
+
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "ride-card";
+
+    div.innerHTML = `
+
+      <h3>🚕 New Ride Request</h3>
+
+      <p>
+        👤 Passenger:
+        <b>${escapeHtml(name)}</b>
+      </p>
+
+      <p>
+        📍 Pickup:
+        ${ride.pickup_lat?.toFixed(5)},
+        ${ride.pickup_lng?.toFixed(5)}
+      </p>
+
+      <p>
+        🏁 Destination:
+        <b>${escapeHtml(
+          ride.destination_address || ""
+        )}</b>
+      </p>
+
+      ${
+        phone
+        ? `
+        <a
+          href="tel:${escapeHtml(phone)}"
+          class="btn green"
+          style="display:inline-block;text-decoration:none">
+          📞 Call Passenger
+        </a>
+        `
+        : ""
+      }
+
+      <button
+        class="btn"
+        onclick="acceptRide('${ride.id}')">
+        ✅ Accept
+      </button>
+
+      <button
+        class="btn red"
+        onclick="rejectRide('${ride.id}')">
+        ❌ Reject
+      </button>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+
+/* ================================
+   ACCEPT RIDE
+================================ */
+
+async function acceptRide(rideId){
+
+  const {error} =
+    await supabaseClient
+    .from("ride_requests")
+    .update({
+      driver_id:currentUser.id,
+      status:"accepted"
+    })
+    .eq("id",rideId)
+    .eq("status","pending");
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+  alert(
+    "✅ Ride accepted!"
+  );
+
+  setDriverAvailable(false);
+
+  loadDriverRequests();
+
+}
+
+
+/* ================================
+   REJECT RIDE
+================================ */
+
+async function rejectRide(rideId){
+
+  const {error} =
+    await supabaseClient
+    .from("ride_requests")
+    .update({
+      status:"rejected"
+    })
+    .eq("id",rideId)
+    .eq("status","pending");
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+  loadDriverRequests();
+
+}
+
+
+/* ================================
+   MY RIDES
+================================ */
+
+async function loadMyRides(){
+
+  if(!currentUser) return;
+
+  let query =
+    supabaseClient
+    .from("ride_requests")
+    .select("*")
+    .order("created_at",{
+      ascending:false
+    });
+
+
+  if(
+    currentProfile.user_type ===
+    "passenger"
+  ){
+
+    query =
+      query.eq(
+        "passenger_id",
+        currentUser.id
+      );
+
+  }else{
+
+    query =
+      query.eq(
+        "driver_id",
+        currentUser.id
+      );
+
+  }
+
+
+  const {data,error} =
+    await query;
+
+  if(error){
+
+    console.error(error);
+
+    return;
+  }
+
+
+  const box =
+    document.getElementById(
+      "myRides"
+    );
+
+  box.innerHTML = "";
+
+
+  if(!data || data.length===0){
+
+    box.innerHTML =
+      "<p>কোনো ride পাওয়া যায়নি।</p>";
+
+    return;
+  }
+
+
+  data.forEach(ride => {
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "ride-card";
+
+    div.innerHTML = `
+
+      <b>Ride</b>
+
+      <p>
+        🏁 ${escapeHtml(
+          ride.destination_address || ""
+        )}
+      </p>
+
+      <p>
+        Status:
+        <b>${escapeHtml(
+          ride.status
+        )}</b>
+      </p>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+
+/* ================================
+   MESSAGE
+================================ */
+
+async function openMessage(receiverId){
+
+  const message =
+    prompt(
+      "আপনার message লিখুন:"
+    );
+
+  if(!message) return;
+
+
+  const {error} =
+    await supabaseClient
+    .from("messages")
+    .insert({
+
+      sender_id:
+        currentUser.id,
+
+      receiver_id:
+        receiverId,
+
+      message:
+        message
+
+    });
+
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+
+  alert(
+    "💬 Message পাঠানো হয়েছে।"
+  );
+
+}
+
+
+/* ================================
+   LOGOUT
+================================ */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  location.reload();
+
+}
+
+
+/* ================================
+   SECTION
+================================ */
+
+function showSection(section){
+
+  if(section === "home"){
+
+    document.getElementById("authCard")
+      .classList.toggle(
+        "hidden",
+        !!currentUser
+      );
+
+  }
+
+  if(section === "find"){
+
+    if(!currentUser){
+
+      alert(
+        "প্রথমে Login করুন।"
+      );
+
+      return;
+    }
+
+    document.getElementById("appSection")
+      .style.display = "block";
+
+  }
+
+  if(section === "rides"){
+
+    if(!currentUser){
+
+      alert(
+        "প্রথমে Login করুন।"
+      );
+
+      return;
+    }
+
+    document.getElementById("rides")
+      .classList.remove("hidden");
+
+    loadMyRides();
+
+  }
+
+}
+
+
+/* ================================
+   AUTH MESSAGE
+================================ */
+
+function showAuthMessage(
+  message,
+  isError=false
+){
+
+  const box =
+    document.getElementById(
+      "authMessage"
+    );
+
+  box.innerText = message;
+
+  box.className =
+    isError
+      ? "status error"
+      : "status success";
+
+}
+
+
+/* ================================
+   ESCAPE HTML
+================================ */
+
+function escapeHtml(value){
+
+  if(value === null ||
+     value === undefined){
+
+    return "";
+
+  }
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* ================================
+   SESSION CHECK
+================================ */
+
+async function checkSession(){
+
+  const {data} =
+    await supabaseClient
+    .auth.getSession();
+
+  if(data.session){
+
+    currentUser =
+      data.session.user;
+
+    try{
+
+      await loadProfile();
+
+      showApp();
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+  }
+
+}
+
+
+/* ================================
+   REALTIME
+================================ */
+
+supabaseClient
+.channel("ride-changes")
+.on(
+  "postgres_changes",
+  {
+    event:"*",
+    schema:"public",
+    table:"ride_requests"
+  },
+  payload => {
+
+    if(
+      currentProfile?.user_type ===
+      "driver"
+    ){
+
+      loadDriverRequests();
+
+    }
+
+    if(
+      currentProfile?.user_type ===
+      "passenger"
+    ){
+
+      loadMyRides();
+
+    }
+
+  }
+)
+.subscribe();
+
+
+checkSession();
+
+</script>
+
+</body>
+</html>
+```
