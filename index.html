@@ -16,7 +16,6 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-
 <style>
 
 *{
@@ -25,152 +24,303 @@
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:
     Arial,
     "Noto Sans Bengali",
     sans-serif;
 
-    background:#f4f8f6;
+    background:
+    linear-gradient(180deg,#f4faf7,#eef5f2);
+
     color:#17352b;
+
+    min-height:100vh;
 }
 
+/* =========================
+HEADER
+========================= */
+
 header{
-    background:linear-gradient(
-        135deg,
-        #087f5b,
-        #04543d
-    );
-
-    color:white;
-
-    padding:16px;
 
     position:sticky;
+
     top:0;
 
     z-index:9999;
 
+    background:
+    rgba(4,84,61,.96);
+
+    backdrop-filter:blur(12px);
+
+    color:white;
+
     box-shadow:
-    0 3px 15px rgba(0,0,0,.15);
+    0 4px 25px rgba(0,0,0,.16);
 }
 
 .header{
-    max-width:1100px;
+
+    max-width:1150px;
+
     margin:auto;
+
+    padding:13px 16px;
 
     display:flex;
 
     align-items:center;
+
     justify-content:space-between;
 
     gap:15px;
 }
 
 .logo{
-    font-size:27px;
+
+    font-size:25px;
+
     font-weight:800;
+
+    white-space:nowrap;
 }
 
 .logo span{
     color:#ffd43b;
 }
 
+.logo small{
+
+    display:block;
+
+    font-size:10px;
+
+    color:#d8fff0;
+
+    font-weight:400;
+
+    margin-top:2px;
+}
+
 nav{
+
     display:flex;
-    gap:7px;
+
+    gap:6px;
+
     flex-wrap:wrap;
+
+    justify-content:flex-end;
 }
 
 nav button{
-    background:rgba(255,255,255,.15);
+
+    border:1px solid
+    rgba(255,255,255,.22);
+
+    background:
+    rgba(255,255,255,.10);
+
     color:white;
 
-    border:0;
+    padding:9px 12px;
 
-    padding:9px 13px;
-
-    border-radius:8px;
+    border-radius:9px;
 
     cursor:pointer;
+
+    transition:.2s;
 }
 
 nav button:hover{
-    background:rgba(255,255,255,.25);
+
+    background:
+    rgba(255,255,255,.20);
+
+    transform:translateY(-1px);
 }
+
+/* =========================
+LAYOUT
+========================= */
 
 .container{
-    max-width:1100px;
+
+    max-width:1150px;
+
     margin:auto;
 
-    padding:25px 15px 60px;
+    padding:24px 15px 55px;
 }
 
+/* =========================
+HERO
+========================= */
+
 .hero{
+
+    position:relative;
+
+    overflow:hidden;
+
     background:
     linear-gradient(
         135deg,
         #087f5b,
-        #075b43
+        #034b37
     );
 
     color:white;
 
     text-align:center;
 
-    padding:45px 20px;
+    padding:55px 20px;
 
-    border-radius:22px;
+    border-radius:25px;
 
     margin-bottom:22px;
 
     box-shadow:
-    0 8px 30px rgba(0,0,0,.12);
+    0 12px 40px rgba(0,80,55,.20);
+}
+
+.hero:before{
+
+    content:"";
+
+    position:absolute;
+
+    width:230px;
+
+    height:230px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.07);
+
+    top:-100px;
+
+    right:-50px;
+}
+
+.hero:after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,212,59,.08);
+
+    bottom:-80px;
+
+    left:-40px;
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.hero-icon{
+
+    font-size:55px;
+
+    margin-bottom:8px;
 }
 
 .hero h1{
-    font-size:36px;
-    margin-bottom:12px;
+
+    font-size:38px;
+
+    margin-bottom:13px;
 }
 
 .hero p{
-    line-height:1.8;
+
+    max-width:700px;
+
+    margin:auto;
+
+    line-height:1.9;
+
     opacity:.94;
+
+    font-size:16px;
 }
 
+.hero-actions{
+
+    margin-top:22px;
+}
+
+/* =========================
+CARD
+========================= */
+
 .card{
+
     background:white;
 
-    padding:22px;
+    padding:23px;
 
-    border-radius:18px;
+    border-radius:19px;
 
     margin-bottom:20px;
 
     box-shadow:
-    0 5px 25px rgba(0,0,0,.07);
+    0 6px 28px rgba(0,0,0,.065);
+
+    border:1px solid #e9efec;
 }
 
 .card h2{
+
     color:#087f5b;
-    margin-bottom:18px;
+
+    margin-bottom:17px;
+
+    font-size:22px;
 }
 
 .card h3{
+
     margin-bottom:10px;
 }
 
+/* =========================
+AUTH
+========================= */
+
 .mode{
+
     display:flex;
+
     gap:10px;
 
     margin-bottom:18px;
 }
 
 .mode button{
+
     flex:1;
 
-    padding:14px;
+    padding:13px;
 
     border:2px solid #087f5b;
 
@@ -178,16 +328,25 @@ nav button:hover{
 
     color:#087f5b;
 
-    border-radius:10px;
+    border-radius:11px;
 
-    font-size:16px;
+    font-size:15px;
+
+    font-weight:700;
 
     cursor:pointer;
+
+    transition:.2s;
 }
 
 .mode button.active{
+
     background:#087f5b;
+
     color:white;
+
+    box-shadow:
+    0 5px 15px rgba(8,127,91,.20);
 }
 
 input,
@@ -196,24 +355,38 @@ select{
 
     width:100%;
 
-    padding:13px;
+    padding:13px 14px;
 
     margin-bottom:12px;
 
-    border:1px solid #d5dfda;
+    border:1px solid #d6e0db;
 
-    border-radius:10px;
+    border-radius:11px;
 
     font-size:15px;
 
     outline:none;
+
+    background:#fbfdfc;
+
+    transition:.2s;
 }
 
 input:focus,
-textarea:focus{
+textarea:focus,
+select:focus{
 
     border-color:#087f5b;
+
+    box-shadow:
+    0 0 0 3px rgba(8,127,91,.08);
+
+    background:white;
 }
+
+/* =========================
+BUTTONS
+========================= */
 
 .btn{
 
@@ -231,12 +404,25 @@ textarea:focus{
 
     font-size:15px;
 
+    font-weight:600;
+
     margin:4px 2px;
 
+    transition:.2s;
+
+    box-shadow:
+    0 3px 8px rgba(0,0,0,.08);
 }
 
 .btn:hover{
-    opacity:.88;
+
+    transform:translateY(-1px);
+
+    opacity:.91;
+}
+
+.btn:active{
+    transform:scale(.98);
 }
 
 .btn.dark{
@@ -259,60 +445,257 @@ textarea:focus{
     background:#1971c2;
 }
 
-.hidden{
-    display:none!important;
-}
+.btn.light{
 
-.message{
+    background:#eef6f2;
 
-    padding:12px;
-
-    background:#f1f3f5;
-
-    border-radius:10px;
-
-    margin-top:12px;
-
-    line-height:1.6;
-}
-
-.success{
     color:#087f5b;
+
+    box-shadow:none;
 }
 
-.error{
-    color:#c92a2a;
-}
-
-.info{
-    color:#1864ab;
-}
-
-#map{
+.btn.full{
 
     width:100%;
 
-    height:420px;
-
-    border-radius:15px;
-
-    margin-top:15px;
+    margin:5px 0;
 }
 
-.driver-card{
+/* =========================
+MESSAGES
+========================= */
 
-    border:1px solid #e2e8e4;
+.message{
 
-    border-radius:15px;
+    padding:13px 15px;
+
+    background:#f2f5f4;
+
+    border-radius:11px;
+
+    margin-top:12px;
+
+    line-height:1.7;
+
+    border-left:4px solid #adb5bd;
+}
+
+.message.success{
+
+    color:#087f5b;
+
+    background:#eaf8f2;
+
+    border-left-color:#087f5b;
+}
+
+.message.error{
+
+    color:#c92a2a;
+
+    background:#fff0f0;
+
+    border-left-color:#c92a2a;
+}
+
+.message.info{
+
+    color:#1864ab;
+
+    background:#edf5ff;
+
+    border-left-color:#1971c2;
+}
+
+/* =========================
+DASHBOARD TOP
+========================= */
+
+.dashboard-head{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:18px;
+}
+
+.user-badge{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.avatar{
+
+    width:45px;
+
+    height:45px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#e6f7f0;
+
+    border-radius:50%;
+
+    font-size:23px;
+}
+
+.role-badge{
+
+    display:inline-block;
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    background:#e9f7f1;
+
+    color:#087f5b;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    margin-top:4px;
+}
+
+/* =========================
+STATUS
+========================= */
+
+.status-box{
+
+    background:
+    linear-gradient(
+        135deg,
+        #f8faf9,
+        #f0f7f4
+    );
+
+    padding:15px;
+
+    border-radius:13px;
+
+    margin:12px 0;
+
+    border:1px solid #e4ece8;
+}
+
+.status-online{
+
+    color:#2b8a3e;
+
+    font-weight:800;
+}
+
+.status-offline{
+
+    color:#c92a2a;
+
+    font-weight:800;
+}
+
+/* =========================
+LOCATION
+========================= */
+
+.location-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:#f8fbfa;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    margin:12px 0;
+
+    border:1px solid #e2ebe6;
+}
+
+.location-icon{
+
+    font-size:28px;
+}
+
+/* =========================
+SEARCH
+========================= */
+
+.search-area{
+
+    background:
+    linear-gradient(
+        135deg,
+        #f7fbf9,
+        #edf7f2
+    );
 
     padding:17px;
 
-    margin:12px 0;
+    border-radius:15px;
+
+    border:1px solid #dceae3;
+
+    margin:15px 0;
+}
+
+.search-title{
+
+    font-weight:800;
+
+    color:#087f5b;
+
+    margin-bottom:10px;
+}
+
+/* =========================
+DRIVER CARD
+========================= */
+
+.driver-card{
+
+    border:1px solid #e0e9e4;
+
+    border-radius:17px;
+
+    padding:18px;
+
+    margin:13px 0;
 
     background:white;
 
     box-shadow:
-    0 3px 12px rgba(0,0,0,.04);
+    0 5px 18px rgba(0,0,0,.05);
+
+    transition:.2s;
+}
+
+.driver-card:hover{
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.09);
+
+    transform:translateY(-2px);
 }
 
 .driver-header{
@@ -321,52 +704,134 @@ textarea:focus{
 
     justify-content:space-between;
 
-    align-items:center;
+    align-items:flex-start;
 
     gap:10px;
 
-    margin-bottom:8px;
+    margin-bottom:10px;
+}
+
+.driver-name{
+
+    font-size:18px;
+
+    font-weight:800;
+
+    color:#17352b;
 }
 
 .available{
-    color:#2b8a3e;
-    font-weight:bold;
-}
 
-.busy{
-    color:#c92a2a;
-    font-weight:bold;
+    color:#2b8a3e;
+
+    background:#eaf8ed;
+
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    white-space:nowrap;
 }
 
 .distance{
 
-    color:#666;
+    color:#555;
 
-    margin:8px 0;
+    margin:9px 0;
 
     font-size:14px;
 }
+
+.driver-info{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:8px;
+
+    margin:12px 0;
+}
+
+.info-item{
+
+    background:#f7faf8;
+
+    padding:9px;
+
+    border-radius:9px;
+
+    font-size:13px;
+}
+
+.driver-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:5px;
+
+    margin-top:10px;
+}
+
+.driver-actions .btn{
+
+    flex:1;
+
+    min-width:110px;
+}
+
+/* =========================
+RIDE
+========================= */
 
 .ride{
 
     border-left:5px solid #087f5b;
 
-    background:#f7faf8;
+    background:#f8fbf9;
 
-    padding:15px;
+    padding:16px;
 
-    border-radius:10px;
+    border-radius:11px;
 
-    margin:10px 0;
+    margin:11px 0;
 
     line-height:1.8;
+}
+
+.ride.pending{
+    border-left-color:#f59f00;
+}
+
+.ride.accepted{
+    border-left-color:#2b8a3e;
+}
+
+.ride.rejected{
+    border-left-color:#d6336c;
+}
+
+.ride-title{
+
+    font-size:17px;
+
+    font-weight:800;
+
+    margin-bottom:7px;
 }
 
 .badge{
 
     display:inline-block;
 
-    padding:5px 9px;
+    padding:5px 10px;
 
     border-radius:20px;
 
@@ -374,18 +839,174 @@ textarea:focus{
 
     color:#087f5b;
 
-    font-size:13px;
+    font-size:12px;
 
+    font-weight:700;
 }
 
-.small{
+.badge.pending{
 
-    color:#666;
+    background:#fff4dc;
 
-    font-size:13px;
-
-    line-height:1.6;
+    color:#b36b00;
 }
+
+.badge.accepted{
+
+    background:#e9f8ec;
+
+    color:#2b8a3e;
+}
+
+.badge.rejected{
+
+    background:#ffecef;
+
+    color:#c92a2a;
+}
+
+/* =========================
+MAP
+========================= */
+
+#map{
+
+    width:100%;
+
+    height:440px;
+
+    border-radius:16px;
+
+    margin-top:10px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,.08);
+}
+
+/* =========================
+DIVIDER
+========================= */
+
+hr{
+
+    border:0;
+
+    border-top:1px solid #e5ebe8;
+
+    margin:22px 0;
+}
+
+/* =========================
+EMPTY
+========================= */
+
+.empty{
+
+    text-align:center;
+
+    padding:28px 15px;
+
+    color:#6c757d;
+
+    background:#f8faf9;
+
+    border-radius:13px;
+
+    line-height:1.8;
+}
+
+.empty-icon{
+
+    font-size:40px;
+
+    margin-bottom:8px;
+}
+
+/* =========================
+LOADING
+========================= */
+
+.loading{
+
+    text-align:center;
+
+    padding:25px;
+
+    color:#087f5b;
+
+    font-weight:700;
+}
+
+/* =========================
+CHAT
+========================= */
+
+.chat-box{
+
+    background:#f6f9f7;
+
+    border:1px solid #e0e9e4;
+
+    border-radius:15px;
+
+    padding:12px;
+
+    margin-top:12px;
+
+    max-height:300px;
+
+    overflow-y:auto;
+}
+
+.chat-message{
+
+    padding:9px 12px;
+
+    border-radius:12px;
+
+    margin:7px 0;
+
+    max-width:85%;
+
+    line-height:1.5;
+
+    font-size:14px;
+}
+
+.chat-me{
+
+    margin-left:auto;
+
+    background:#087f5b;
+
+    color:white;
+}
+
+.chat-other{
+
+    margin-right:auto;
+
+    background:white;
+
+    border:1px solid #e0e5e2;
+}
+
+.chat-time{
+
+    font-size:10px;
+
+    opacity:.65;
+
+    display:block;
+
+    margin-top:3px;
+}
+
+/* =========================
+FOOTER
+========================= */
 
 footer{
 
@@ -395,31 +1016,39 @@ footer{
 
     text-align:center;
 
-    padding:30px 15px;
+    padding:32px 15px;
 
     line-height:1.8;
 }
 
-.status-box{
-
-    background:#f8f9fa;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    margin:12px 0;
-
+footer strong{
+    color:#ffd43b;
 }
 
-hr{
+.small{
 
-    border:0;
+    color:#6c757d;
 
-    border-top:1px solid #e5e5e5;
+    font-size:13px;
 
-    margin:20px 0;
+    line-height:1.7;
 }
+
+footer .small{
+    color:#d8eee6;
+}
+
+/* =========================
+HIDDEN
+========================= */
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:700px){
 
@@ -427,24 +1056,61 @@ hr{
 
         flex-direction:column;
 
+        align-items:center;
     }
 
     nav{
 
         justify-content:center;
+    }
 
+    nav button{
+
+        font-size:13px;
+
+        padding:8px 10px;
+    }
+
+    .hero{
+
+        padding:42px 17px;
     }
 
     .hero h1{
 
         font-size:28px;
+    }
 
+    .hero-icon{
+
+        font-size:45px;
+    }
+
+    .card{
+
+        padding:17px;
+    }
+
+    .driver-info{
+
+        grid-template-columns:1fr;
     }
 
     #map{
 
         height:330px;
+    }
 
+    .driver-actions{
+
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+    }
+
+    .driver-actions .btn{
+
+        min-width:0;
     }
 
 }
@@ -453,9 +1119,12 @@ hr{
 
 </head>
 
-
 <body>
 
+
+<!-- =========================
+HEADER
+========================= -->
 
 <header>
 
@@ -465,28 +1134,31 @@ hr{
 
 🚕 <span>CNG</span> Ride
 
-</div>
+<small>
+Smart Local Ride Service
+</small>
 
+</div>
 
 <nav>
 
 <button onclick="goHome()">
-হোম
+🏠 হোম
 </button>
 
 <button onclick="openFind()">
-CNG খুঁজুন
+🔎 CNG খুঁজুন
 </button>
 
 <button onclick="openRides()">
-আমার Ride
+🚕 আমার Ride
 </button>
 
 <button id="logoutBtn"
         onclick="logout()"
         class="hidden">
 
-Logout
+🚪 Logout
 
 </button>
 
@@ -497,41 +1169,65 @@ Logout
 </header>
 
 
-
 <div class="container">
 
 
-<!-- HOME -->
+<!-- =========================
+HOME
+========================= -->
 
 <section id="homeSection">
 
-
 <div class="hero">
 
+<div class="hero-content">
+
+<div class="hero-icon">
+🚕
+</div>
+
 <h1>
-আপনার কাছের CNG খুঁজুন 🚕
+আপনার কাছের CNG খুঁজুন
 </h1>
 
 <p>
+
 আপনার বর্তমান অবস্থান থেকে কাছাকাছি
 Available CNG Driver খুঁজে নিন।
+
 <br>
-Ride Request পাঠান এবং সহজেই গন্তব্যে পৌঁছান।
+
+Ride Request পাঠান, Driver-এর সাথে
+যোগাযোগ করুন এবং সহজে গন্তব্যে পৌঁছান।
+
 </p>
+
+<div class="hero-actions">
+
+<button class="btn yellow"
+        onclick="openFind()">
+
+🔎 CNG খুঁজুন
+
+</button>
+
+</div>
+
+</div>
 
 </div>
 
 
-
-<!-- AUTH -->
+<!-- =========================
+AUTH
+========================= -->
 
 <div id="authCard"
      class="card">
 
 <h2>
-অ্যাকাউন্ট তৈরি / Login
+👤 অ্যাকাউন্ট তৈরি / Login
 </h2>
-
 
 <div class="mode">
 
@@ -543,7 +1239,6 @@ Ride Request পাঠান এবং সহজেই গন্তব্যে 
 
 </button>
 
-
 <button id="driverBtn"
         onclick="chooseType('driver')">
 
@@ -553,33 +1248,26 @@ Ride Request পাঠান এবং সহজেই গন্তব্যে 
 
 </div>
 
-
-
 <input
 id="name"
 placeholder="আপনার নাম">
 
-
 <input
 id="phone"
 placeholder="মোবাইল নম্বর">
-
 
 <input
 id="email"
 type="email"
 placeholder="Email">
 
-
 <input
 id="password"
 type="password"
 placeholder="Password">
 
-
 <div id="driverInput"
      class="hidden">
-
 
 <input
 id="vehicleNumber"
@@ -587,28 +1275,24 @@ placeholder="CNG নম্বর">
 
 </div>
 
-
-
 <button
 class="btn"
 onclick="register()">
 
-Register
+✨ Register
 
 </button>
-
 
 <button
 class="btn dark"
 onclick="login()">
 
-Login
+🔐 Login
 
 </button>
 
-
 <div id="authMessage"
-     class="message">
+     class="message success">
 
 Passenger account তৈরি করুন অথবা Login করুন।
 
@@ -616,66 +1300,105 @@ Passenger account তৈরি করুন অথবা Login করুন।
 
 </div>
 
-
 </section>
 
 
-
-<!-- MAIN APP -->
+<!-- =========================
+APP
+========================= -->
 
 <section id="appSection"
          class="hidden">
 
 
+<!-- DASHBOARD -->
+
 <div class="card">
 
-<h2 id="welcome">
+<div class="dashboard-head">
+
+<div class="user-badge">
+
+<div class="avatar"
+     id="userAvatar">
+
+👤
+
+</div>
+
+<div>
+
+<h2 id="welcome"
+    style="margin-bottom:2px">
 
 স্বাগতম
 
 </h2>
 
+<span id="roleBadge"
+      class="role-badge">
+
+Passenger
+
+</span>
+
+</div>
+
+</div>
+
+<button class="btn light"
+        onclick="refreshApp()">
+
+🔄 Refresh
+
+</button>
+
+</div>
 
 
-<!-- DRIVER -->
+<!-- =========================
+DRIVER PANEL
+========================= -->
 
 <div id="driverPanel"
      class="hidden">
-
 
 <h3>
 🚕 Driver Dashboard
 </h3>
 
-
 <div class="status-box">
 
-<b>Driver Status:</b>
+<b>
+বর্তমান Status:
+</b>
 
-<span id="driverStatus">
-Busy
+<span id="driverStatus"
+      class="status-offline">
+
+🔴 Offline
+
 </span>
 
 </div>
 
+<div>
 
 <button
 class="btn green"
 onclick="setAvailable(true)">
 
-🟢 Available
+🟢 Online / Available
 
 </button>
-
 
 <button
 class="btn red"
 onclick="setAvailable(false)">
 
-🔴 Busy
+🔴 Offline / Busy
 
 </button>
-
 
 <button
 class="btn blue"
@@ -685,48 +1408,90 @@ onclick="updateLocation()">
 
 </button>
 
+</div>
 
-<div class="status-box">
+<div class="location-box">
 
-<b>আমার Location:</b>
+<div class="location-icon">
+📍
+</div>
+
+<div>
+
+<b>
+আমার Location
+</b>
 
 <br>
 
-<span id="driverLocation">
+<span id="driverLocation"
+      class="small">
+
 Location পাওয়া যায়নি
+
 </span>
 
 </div>
 
+</div>
 
 <hr>
-
 
 <h3>
 🔔 Ride Requests
 </h3>
 
-
 <div id="driverRequests">
+
+<div class="empty">
+
+<div class="empty-icon">
+📭
+</div>
 
 কোনো নতুন Ride Request নেই।
 
 </div>
 
+</div>
 
 </div>
 
 
-
-<!-- PASSENGER -->
+<!-- =========================
+PASSENGER PANEL
+========================= -->
 
 <div id="passengerPanel">
-
 
 <h3>
 👤 Passenger Dashboard
 </h3>
 
+<div class="location-box">
+
+<div class="location-icon">
+📍
+</div>
+
+<div>
+
+<b>
+Pickup Location
+</b>
+
+<br>
+
+<span id="pickup"
+      class="small">
+
+Location পাওয়া যায়নি
+
+</span>
+
+</div>
+
+</div>
 
 <button
 class="btn blue"
@@ -736,48 +1501,38 @@ onclick="getLocation()">
 
 </button>
 
+<div class="search-area">
 
-<div class="status-box">
-
-<b>Pickup Location:</b>
-
-<br>
-
-<span id="pickup">
-
-Location পাওয়া যায়নি
-
-</span>
-
+<div class="search-title">
+🏁 কোথায় যেতে চান?
 </div>
-
 
 <input
 id="destination"
-placeholder="কোথায় যেতে চান?">
-
+placeholder="যেমন: টাঙ্গাইল সদর, ভূঞাপুর, বাসস্ট্যান্ড...">
 
 <button
-class="btn"
+class="btn full"
 onclick="searchDrivers()">
 
 🔎 কাছের CNG খুঁজুন
 
 </button>
 
+</div>
 
 <div id="drivers">
 
 </div>
 
-
 </div>
 
 </div>
 
 
-
-<!-- MAP -->
+<!-- =========================
+MAP
+========================= -->
 
 <div class="card">
 
@@ -785,12 +1540,21 @@ onclick="searchDrivers()">
 🗺️ CNG Map
 </h2>
 
+<p class="small">
+
+আপনার অবস্থান এবং কাছাকাছি Available CNG
+এই map-এ দেখা যাবে।
+
+</p>
+
 <div id="map"></div>
 
 </div>
 
 
-<!-- RIDES -->
+<!-- =========================
+RIDES
+========================= -->
 
 <div id="ridesPanel"
      class="card hidden">
@@ -801,49 +1565,104 @@ onclick="searchDrivers()">
 
 <div id="myRides">
 
+<div class="empty">
+
 কোনো Ride নেই।
 
 </div>
 
 </div>
 
+</div>
 
-</section>
 
+<!-- =========================
+CHAT
+========================= -->
+
+<div id="chatPanel"
+     class="card hidden">
+
+<h2>
+💬 Message
+
+<span id="chatUserName"
+      style="font-size:15px;color:#555">
+
+</span>
+
+</h2>
+
+<div id="chatMessages"
+     class="chat-box">
+
+<div class="empty">
+
+কোনো message নেই।
+
+</div>
+
+</div>
+
+<input
+id="chatInput"
+placeholder="আপনার message লিখুন...">
+
+<button
+class="btn full"
+onclick="sendChatMessage()">
+
+📤 Message পাঠান
+
+</button>
 
 </div>
 
 
+</section>
+
+</div>
+
+
+<!-- =========================
+FOOTER
+========================= -->
 
 <footer>
 
 <p>
-🚕 CNG Ride
+🚕 <strong>CNG Ride</strong>
 </p>
 
 <p class="small">
-সহজে কাছের CNG খুঁজুন এবং নিরাপদে যাতায়াত করুন।
+
+সহজে কাছের CNG খুঁজুন,
+Driver-এর সাথে যোগাযোগ করুন
+এবং নিরাপদে যাতায়াত করুন।
+
+</p>
+
+<p class="small"
+   style="margin-top:10px">
+
+© 2026 CNG Ride
+
 </p>
 
 </footer>
 
 
-
 <script>
 
-
-/* =====================================
-   SUPABASE
-===================================== */
-
+/* =====================================================
+SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
 "https://icfzimjduanfzwpkbtdu.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable_2ZmJLbota_YQZ7rDKqV6ew_ApWVxoak";
-
 
 const db =
 supabase.createClient(
@@ -852,11 +1671,9 @@ supabase.createClient(
 );
 
 
-
-/* =====================================
-   VARIABLES
-===================================== */
-
+/* =====================================================
+VARIABLES
+===================================================== */
 
 let currentUser = null;
 
@@ -874,17 +1691,16 @@ let myMarker = null;
 
 let driverMarkers = [];
 
+let currentChatUser = null;
 
 
-/* =====================================
-   CHOOSE USER TYPE
-===================================== */
-
+/* =====================================================
+USER TYPE
+===================================================== */
 
 function chooseType(type){
 
     selectedType = type;
-
 
     document
     .getElementById("passengerBtn")
@@ -893,7 +1709,6 @@ function chooseType(type){
         type === "passenger"
     );
 
-
     document
     .getElementById("driverBtn")
     .classList.toggle(
@@ -901,14 +1716,12 @@ function chooseType(type){
         type === "driver"
     );
 
-
     document
     .getElementById("driverInput")
     .classList.toggle(
         "hidden",
         type !== "driver"
     );
-
 
     document
     .getElementById("authMessage")
@@ -922,11 +1735,9 @@ function chooseType(type){
 }
 
 
-
-/* =====================================
-   REGISTER
-===================================== */
-
+/* =====================================================
+REGISTER
+===================================================== */
 
 async function register(){
 
@@ -936,13 +1747,11 @@ async function register(){
         .value
         .trim();
 
-
     const phone =
         document
         .getElementById("phone")
         .value
         .trim();
-
 
     const email =
         document
@@ -950,12 +1759,10 @@ async function register(){
         .value
         .trim();
 
-
     const password =
         document
         .getElementById("password")
         .value;
-
 
     const vehicleNumber =
         document
@@ -994,10 +1801,6 @@ async function register(){
             "⏳ Account তৈরি হচ্ছে..."
         );
 
-
-        /*
-        Auth user তৈরি
-        */
 
         const result =
             await db.auth.signUp({
@@ -1047,16 +1850,15 @@ async function register(){
 
 
         /*
-        Trigger automatically
-        profiles + drivers তৈরি করবে।
+        Email confirmation OFF থাকলে
+        session পাওয়া যাবে।
         */
-
 
         if(result.data.session){
 
             currentUser = user;
 
-            await loadProfile();
+            await waitForProfile();
 
             showApp();
 
@@ -1067,7 +1869,8 @@ async function register(){
         }else{
 
             showAuth(
-                "✅ Account তৈরি হয়েছে। আপনার Email verify করে তারপর Login করুন।"
+                "Account তৈরি হয়েছে, কিন্তু Login session পাওয়া যায়নি। Email confirmation OFF আছে কিনা পরীক্ষা করুন।",
+                true
             );
 
         }
@@ -1076,7 +1879,6 @@ async function register(){
     }catch(error){
 
         console.error(error);
-
 
         showAuth(
             error.message ||
@@ -1089,11 +1891,62 @@ async function register(){
 }
 
 
+/* =====================================================
+WAIT FOR PROFILE
+===================================================== */
 
-/* =====================================
-   LOGIN
-===================================== */
+async function waitForProfile(){
 
+    for(
+        let attempt = 0;
+        attempt < 8;
+        attempt++
+    ){
+
+        const result =
+            await db
+            .from("profiles")
+            .select("*")
+            .eq(
+                "id",
+                currentUser.id
+            )
+            .maybeSingle();
+
+
+        if(
+            result.data
+        ){
+
+            currentProfile =
+                result.data;
+
+            return;
+
+        }
+
+
+        await new Promise(
+            resolve =>
+            setTimeout(
+                resolve,
+                500
+            )
+        );
+
+    }
+
+
+    throw new Error(
+        "Profile তৈরি হয়নি। Supabase trigger পরীক্ষা করুন।"
+    );
+
+}
+
+
+/* =====================================================
+LOGIN
+===================================================== */
 
 async function login(){
 
@@ -1102,7 +1955,6 @@ async function login(){
         .getElementById("email")
         .value
         .trim();
-
 
     const password =
         document
@@ -1150,16 +2002,18 @@ async function login(){
             result.data.user;
 
 
-        await loadProfile();
-
+        await waitForProfile();
 
         showApp();
 
 
     }catch(error){
 
+        console.error(error);
+
         showAuth(
-            error.message,
+            error.message ||
+            "Login failed.",
             true
         );
 
@@ -1168,13 +2022,18 @@ async function login(){
 }
 
 
-
-/* =====================================
-   LOAD PROFILE
-===================================== */
-
+/* =====================================================
+LOAD PROFILE
+===================================================== */
 
 async function loadProfile(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
 
     const result =
         await db
@@ -1184,12 +2043,21 @@ async function loadProfile(){
             "id",
             currentUser.id
         )
-        .single();
+        .maybeSingle();
 
 
     if(result.error){
 
         throw result.error;
+
+    }
+
+
+    if(!result.data){
+
+        throw new Error(
+            "আপনার profile পাওয়া যায়নি।"
+        );
 
     }
 
@@ -1200,11 +2068,9 @@ async function loadProfile(){
 }
 
 
-
-/* =====================================
-   SHOW APP
-===================================== */
-
+/* =====================================================
+SHOW APP
+===================================================== */
 
 function showApp(){
 
@@ -1230,16 +2096,34 @@ function showApp(){
     .getElementById("welcome")
     .innerText =
         "স্বাগতম, " +
-        currentProfile.full_name;
+        (
+            currentProfile.full_name
+            ||
+            "User"
+        );
 
 
-    initMap();
+    const roleBadge =
+        document
+        .getElementById("roleBadge");
+
+
+    const avatar =
+        document
+        .getElementById("userAvatar");
 
 
     if(
         currentProfile.user_type ===
         "driver"
     ){
+
+        roleBadge.innerText =
+            "🚕 Driver";
+
+        avatar.innerText =
+            "🚕";
+
 
         document
         .getElementById("driverPanel")
@@ -1255,9 +2139,18 @@ function showApp(){
 
         updateLocation();
 
+        loadDriverStatus();
+
         loadDriverRequests();
 
     }else{
+
+        roleBadge.innerText =
+            "👤 Passenger";
+
+        avatar.innerText =
+            "👤";
+
 
         document
         .getElementById("driverPanel")
@@ -1275,21 +2168,23 @@ function showApp(){
 
     }
 
+
+    initMap();
+
 }
 
 
-
-/* =====================================
-   MAP
-===================================== */
-
+/* =====================================================
+MAP
+===================================================== */
 
 function initMap(){
 
     if(map){
 
         setTimeout(
-            () => map.invalidateSize(),
+            () =>
+            map.invalidateSize(),
             300
         );
 
@@ -1319,11 +2214,9 @@ function initMap(){
 }
 
 
-
-/* =====================================
-   LOCATION
-===================================== */
-
+/* =====================================================
+GET LOCATION
+===================================================== */
 
 function getLocation(){
 
@@ -1346,7 +2239,6 @@ function getLocation(){
 
             latitude =
                 position.coords.latitude;
-
 
             longitude =
                 position.coords.longitude;
@@ -1395,17 +2287,13 @@ function getLocation(){
 
         },
 
-
-        function(error){
-
-            console.log(error);
+        function(){
 
             alert(
                 "Location permission Allow করুন।"
             );
 
         },
-
 
         {
 
@@ -1422,15 +2310,26 @@ function getLocation(){
 }
 
 
-
-/* =====================================
-   DRIVER LOCATION
-===================================== */
-
+/* =====================================================
+DRIVER LOCATION
+===================================================== */
 
 async function updateLocation(){
 
     if(!currentUser){
+
+        return;
+
+    }
+
+
+    if(
+        !navigator.geolocation
+    ){
+
+        alert(
+            "Browser location support করে না।"
+        );
 
         return;
 
@@ -1445,7 +2344,6 @@ async function updateLocation(){
 
             latitude =
                 position.coords.latitude;
-
 
             longitude =
                 position.coords.longitude;
@@ -1473,6 +2371,7 @@ async function updateLocation(){
             if(result.error){
 
                 alert(
+                    "Location save হয়নি:\n" +
                     result.error.message
                 );
 
@@ -1481,14 +2380,18 @@ async function updateLocation(){
             }
 
 
+            const locationText =
+                latitude.toFixed(6) +
+                ", " +
+                longitude.toFixed(6);
+
+
             document
             .getElementById(
                 "driverLocation"
             )
             .innerText =
-                latitude.toFixed(6) +
-                ", " +
-                longitude.toFixed(6);
+                locationText;
 
 
             initMap();
@@ -1526,7 +2429,6 @@ async function updateLocation(){
 
         },
 
-
         function(){
 
             alert(
@@ -1539,7 +2441,9 @@ async function updateLocation(){
 
             enableHighAccuracy:true,
 
-            timeout:15000
+            timeout:15000,
+
+            maximumAge:5000
 
         }
 
@@ -1548,11 +2452,103 @@ async function updateLocation(){
 }
 
 
+/* =====================================================
+DRIVER STATUS
+===================================================== */
 
-/* =====================================
-   AVAILABLE / BUSY
-===================================== */
+async function loadDriverStatus(){
 
+    const result =
+        await db
+        .from("drivers")
+        .select(
+            "available,latitude,longitude"
+        )
+        .eq(
+            "id",
+            currentUser.id
+        )
+        .maybeSingle();
+
+
+    if(result.error){
+
+        console.error(
+            result.error
+        );
+
+        return;
+
+    }
+
+
+    if(!result.data){
+
+        document
+        .getElementById(
+            "driverStatus"
+        )
+        .innerText =
+            "⚠️ Driver profile নেই";
+
+        return;
+
+    }
+
+
+    document
+    .getElementById(
+        "driverStatus"
+    )
+    .innerText =
+        result.data.available
+        ?
+        "🟢 Available"
+        :
+        "🔴 Offline";
+
+
+    document
+    .getElementById(
+        "driverStatus"
+    )
+    .className =
+        result.data.available
+        ?
+        "status-online"
+        :
+        "status-offline";
+
+
+    if(
+        result.data.latitude !== null &&
+        result.data.longitude !== null
+    ){
+
+        latitude =
+            result.data.latitude;
+
+        longitude =
+            result.data.longitude;
+
+
+        document
+        .getElementById(
+            "driverLocation"
+        )
+        .innerText =
+            latitude.toFixed(6) +
+            ", " +
+            longitude.toFixed(6);
+
+    }
+
+}
+
+
+/* =====================================================
+AVAILABLE
+===================================================== */
 
 async function setAvailable(status){
 
@@ -1592,55 +2588,128 @@ async function setAvailable(status){
 
 
     document
-    .getElementById("driverStatus")
+    .getElementById(
+        "driverStatus"
+    )
     .innerText =
         status
         ?
         "🟢 Available"
         :
-        "🔴 Busy";
+        "🔴 Offline";
+
+
+    document
+    .getElementById(
+        "driverStatus"
+    )
+    .className =
+        status
+        ?
+        "status-online"
+        :
+        "status-offline";
 
 
     if(status){
 
+        await updateLocation();
+
         alert(
-            "🟢 আপনি এখন Available।"
+            "🟢 আপনি এখন Available। Passenger আপনাকে খুঁজে পাবে।"
         );
 
     }else{
 
         alert(
-            "🔴 আপনি এখন Busy।"
+            "🔴 আপনি এখন Offline/Busy।"
         );
 
     }
 
-
-    updateLocation();
-
 }
 
 
-
-/* =====================================
-   SEARCH DRIVERS
-===================================== */
-
+/* =====================================================
+SEARCH DRIVERS
+===================================================== */
 
 async function searchDrivers(){
 
-    if(latitude === null){
+    if(!currentUser){
 
-        getLocation();
-
-        setTimeout(
-            searchDrivers,
-            1500
+        alert(
+            "প্রথমে Login করুন।"
         );
 
         return;
 
     }
+
+
+    if(
+        currentProfile.user_type !==
+        "passenger"
+    ){
+
+        alert(
+            "CNG search করার জন্য Passenger account ব্যবহার করুন।"
+        );
+
+        return;
+
+    }
+
+
+    const destination =
+        document
+        .getElementById("destination")
+        .value
+        .trim();
+
+
+    if(!destination){
+
+        alert(
+            "আপনার গন্তব্য লিখুন।"
+        );
+
+        return;
+
+    }
+
+
+    if(latitude === null){
+
+        document
+        .getElementById("drivers")
+        .innerHTML =
+
+        `<div class="loading">
+        📍 আপনার Location নেওয়া হচ্ছে...
+        </div>`;
+
+
+        getLocation();
+
+
+        setTimeout(
+            searchDrivers,
+            2000
+        );
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("drivers")
+    .innerHTML =
+
+    `<div class="loading">
+    🔎 কাছাকাছি Available CNG খোঁজা হচ্ছে...
+    </div>`;
 
 
     const result =
@@ -1653,6 +2722,7 @@ async function searchDrivers(){
             available,
             latitude,
             longitude,
+            updated_at,
             profiles (
                 full_name,
                 phone
@@ -1666,9 +2736,20 @@ async function searchDrivers(){
 
     if(result.error){
 
-        alert(
-            result.error.message
+        console.error(
+            result.error
         );
+
+
+        document
+        .getElementById("drivers")
+        .innerHTML =
+
+        `<div class="message error">
+        ❌ CNG খুঁজতে সমস্যা হয়েছে:
+        <br><br>
+        ${escapeHtml(result.error.message)}
+        </div>`;
 
         return;
 
@@ -1737,11 +2818,9 @@ async function searchDrivers(){
 }
 
 
-
-/* =====================================
-   DISTANCE
-===================================== */
-
+/* =====================================================
+DISTANCE
+===================================================== */
 
 function calculateDistance(
     lat1,
@@ -1752,22 +2831,23 @@ function calculateDistance(
 
     const R = 6371;
 
-
     const dLat =
-        (lat2-lat1)
+        (
+            lat2-lat1
+        )
         *
         Math.PI
         /
         180;
-
 
     const dLon =
-        (lon2-lon1)
+        (
+            lon2-lon1
+        )
         *
         Math.PI
         /
         180;
-
 
     const a =
         Math.sin(dLat/2)
@@ -1792,7 +2872,6 @@ function calculateDistance(
         *
         Math.sin(dLon/2);
 
-
     const c =
         2 *
         Math.atan2(
@@ -1800,17 +2879,14 @@ function calculateDistance(
             Math.sqrt(1-a)
         );
 
-
     return R*c;
 
 }
 
 
-
-/* =====================================
-   DISPLAY DRIVERS
-===================================== */
-
+/* =====================================================
+DISPLAY DRIVERS
+===================================================== */
 
 function displayDrivers(list){
 
@@ -1829,15 +2905,28 @@ function displayDrivers(list){
 
         box.innerHTML = `
 
-        <div class="message">
+        <div class="empty">
 
-        😔 আপনার ২০ কিলোমিটারের মধ্যে
-        বর্তমানে কোনো Available CNG পাওয়া যায়নি।
+            <div class="empty-icon">
+            🚕
+            </div>
 
-        <br><br>
+            <b>
+            বর্তমানে কাছাকাছি কোনো Available CNG নেই
+            </b>
 
-        Driver-এর ফোনে Location Update এবং
-        🟢 Available চালু আছে কিনা নিশ্চিত করুন।
+            <p class="small"
+               style="margin-top:8px">
+
+            আপনার ২০ কিলোমিটারের মধ্যে
+            Available Driver পাওয়া যায়নি।
+
+            <br>
+
+            Driver-এর ফোনে Location Update
+            এবং 🟢 Available চালু আছে কিনা নিশ্চিত করুন।
+
+            </p>
 
         </div>
 
@@ -1846,6 +2935,20 @@ function displayDrivers(list){
         return;
 
     }
+
+
+    box.innerHTML = `
+
+    <div class="message success">
+
+    🟢 <b>
+    ${list.length}
+    </b>
+    টি Available CNG পাওয়া গেছে।
+
+    </div>
+
+    `;
 
 
     list.forEach(
@@ -1888,79 +2991,107 @@ function displayDrivers(list){
 
                 <div class="driver-header">
 
-                    <h3>
-                    🚕 ${escapeHtml(name)}
-                    </h3>
+                    <div>
+
+                        <div class="driver-name">
+
+                        🚕 ${escapeHtml(name)}
+
+                        </div>
+
+                        <span class="role-badge">
+
+                        Verified Driver
+
+                        </span>
+
+                    </div>
 
                     <span class="available">
+
                     🟢 Available
+
                     </span>
 
                 </div>
 
 
-                <p>
-                CNG নম্বর:
-                <b>
-                ${escapeHtml(
-                    driver.vehicle_number
-                    ||
-                    "N/A"
-                )}
-                </b>
-                </p>
+                <div class="driver-info">
+
+                    <div class="info-item">
+
+                    🚕 CNG:
+                    <b>
+                    ${escapeHtml(
+                        driver.vehicle_number
+                        ||
+                        "N/A"
+                    )}
+                    </b>
+
+                    </div>
 
 
-                <div class="distance">
+                    <div class="info-item">
 
-                📏 আপনার থেকে
-                <b>
-                ${distance.toFixed(2)} km
-                </b>
-                দূরে
+                    📏 Distance:
+                    <b>
+                    ${distance.toFixed(2)} km
+                    </b>
+
+                    </div>
 
                 </div>
 
 
-                <button
-                class="btn"
-                onclick="requestRide('${driver.id}')">
+                <div class="driver-actions">
 
-                🚕 Ride Request
+                    <button
+                    class="btn"
+                    onclick="requestRide('${driver.id}')">
 
-                </button>
+                    🚕 Ride Request
 
-
-                ${
-                    phone
-                    ?
-                    `
-
-                    <a
-                    href="tel:${escapeHtml(phone)}"
-                    class="btn green"
-                    style="
-                    display:inline-block;
-                    text-decoration:none;
-                    ">
-
-                    📞 Call
-
-                    </a>
-
-                    `
-                    :
-                    ""
-                }
+                    </button>
 
 
-                <button
-                class="btn dark"
-                onclick="sendMessage('${driver.id}')">
+                    ${
+                        phone
+                        ?
+                        `
 
-                💬 Message
+                        <a
+                        href="tel:${escapeHtml(phone)}"
+                        class="btn green"
+                        style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        text-decoration:none;
+                        ">
 
-                </button>
+                        📞 Call
+
+                        </a>
+
+                        `
+                        :
+                        ""
+                    }
+
+
+                    <button
+                    class="btn dark"
+                    onclick="openChat(
+                        '${driver.id}',
+                        '${escapeHtml(name)}'
+                    )">
+
+                    💬 Message
+
+                    </button>
+
+                </div>
 
             `;
 
@@ -1976,11 +3107,11 @@ function displayDrivers(list){
                 .addTo(map)
                 .bindPopup(
 
-                    "🚕 " +
+                    "<b>🚕 " +
                     escapeHtml(name) +
-                    "<br>" +
+                    "</b><br>" +
                     distance.toFixed(2) +
-                    " km"
+                    " km দূরে"
 
                 );
 
@@ -1993,13 +3124,18 @@ function displayDrivers(list){
 }
 
 
-
-/* =====================================
-   CLEAR MARKERS
-===================================== */
-
+/* =====================================================
+CLEAR MARKERS
+===================================================== */
 
 function clearMarkers(){
+
+    if(!map){
+
+        return;
+
+    }
+
 
     driverMarkers.forEach(
         function(marker){
@@ -2015,13 +3151,22 @@ function clearMarkers(){
 }
 
 
-
-/* =====================================
-   RIDE REQUEST
-===================================== */
-
+/* =====================================================
+REQUEST RIDE
+===================================================== */
 
 async function requestRide(driverId){
+
+    if(!currentUser){
+
+        alert(
+            "প্রথমে Login করুন।"
+        );
+
+        return;
+
+    }
+
 
     if(latitude === null){
 
@@ -2049,6 +3194,19 @@ async function requestRide(driverId){
 
         return;
 
+    }
+
+
+    const button =
+        event?.target;
+
+
+    if(button){
+
+        button.disabled = true;
+
+        button.innerText =
+            "⏳ পাঠানো হচ্ছে...";
     }
 
 
@@ -2083,6 +3241,15 @@ async function requestRide(driverId){
 
     if(result.error){
 
+        if(button){
+
+            button.disabled = false;
+
+            button.innerText =
+                "🚕 Ride Request";
+        }
+
+
         alert(
             result.error.message
         );
@@ -2092,21 +3259,28 @@ async function requestRide(driverId){
     }
 
 
+    if(button){
+
+        button.disabled = false;
+
+        button.innerText =
+            "✅ Request Sent";
+    }
+
+
     alert(
-        "✅ Ride Request পাঠানো হয়েছে।"
+        "✅ Ride Request সফলভাবে পাঠানো হয়েছে। Driver-এর response-এর জন্য অপেক্ষা করুন।"
     );
 
 
-    loadMyRides();
+    openRides();
 
 }
 
 
-
-/* =====================================
-   DRIVER REQUESTS
-===================================== */
-
+/* =====================================================
+DRIVER REQUESTS
+===================================================== */
 
 async function loadDriverRequests(){
 
@@ -2139,6 +3313,16 @@ async function loadDriverRequests(){
             result.error
         );
 
+        document
+        .getElementById(
+            "driverRequests"
+        )
+        .innerHTML =
+
+        `<div class="message error">
+        ${escapeHtml(result.error.message)}
+        </div>`;
+
         return;
 
     }
@@ -2159,8 +3343,26 @@ async function loadDriverRequests(){
         result.data.length === 0
     ){
 
-        box.innerHTML =
-            "<p>কোনো Ride Request নেই।</p>";
+        box.innerHTML = `
+
+        <div class="empty">
+
+        <div class="empty-icon">
+        📭
+        </div>
+
+        কোনো নতুন Ride Request নেই।
+
+        <p class="small">
+
+        Passenger Request পাঠালে
+        এখানে দেখা যাবে।
+
+        </p>
+
+        </div>
+
+        `;
 
         return;
 
@@ -2176,40 +3378,81 @@ async function loadDriverRequests(){
 
 
             div.className =
-                "ride";
+                "ride " +
+                (
+                    ride.status
+                    ||
+                    ""
+                );
+
+
+            const statusText =
+                getStatusText(
+                    ride.status
+                );
 
 
             div.innerHTML = `
 
-                <h3>
+                <div class="ride-title">
+
                 🚕 Ride Request
-                </h3>
+
+                </div>
+
 
                 <p>
-                📍 Pickup:
-                ${ride.pickup_lat?.toFixed(5)},
-                ${ride.pickup_lng?.toFixed(5)}
+
+                📍 <b>Pickup:</b>
+
+                ${Number(
+                    ride.pickup_lat
+                ).toFixed(5)},
+
+                ${Number(
+                    ride.pickup_lng
+                ).toFixed(5)}
+
                 </p>
 
+
                 <p>
-                🏁 Destination:
-                <b>
+
+                🏁 <b>Destination:</b>
+
                 ${escapeHtml(
                     ride.destination_address
                     ||
-                    ""
+                    "N/A"
                 )}
-                </b>
+
                 </p>
 
+
                 <p>
-                Status:
-                <span class="badge">
-                ${escapeHtml(
-                    ride.status
+
+                📅 <b>সময়:</b>
+
+                ${formatDate(
+                    ride.created_at
                 )}
-                </span>
+
                 </p>
+
+
+                <p>
+
+                Status:
+
+                <span class="badge
+                ${ride.status}">
+
+                ${statusText}
+
+                </span>
+
+                </p>
+
 
                 ${
                     ride.status === "pending"
@@ -2245,7 +3488,11 @@ async function loadDriverRequests(){
             `;
 
 
-            box.appendChild(div);
+            document
+            .getElementById(
+                "driverRequests"
+            )
+            .appendChild(div);
 
         }
     );
@@ -2253,21 +3500,23 @@ async function loadDriverRequests(){
 }
 
 
-
-/* =====================================
-   ACCEPT RIDE
-===================================== */
-
+/* =====================================================
+ACCEPT RIDE
+===================================================== */
 
 async function acceptRide(rideId){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
 
     const result =
         await db
         .from("ride_requests")
         .update({
-
-            driver_id:
-                currentUser.id,
 
             status:
                 "accepted"
@@ -2276,6 +3525,10 @@ async function acceptRide(rideId){
         .eq(
             "id",
             rideId
+        )
+        .eq(
+            "driver_id",
+            currentUser.id
         )
         .eq(
             "status",
@@ -2298,7 +3551,7 @@ async function acceptRide(rideId){
 
 
     alert(
-        "✅ Ride accepted!"
+        "✅ Ride accepted হয়েছে। Passenger-কে জানানো হয়েছে।"
     );
 
 
@@ -2309,13 +3562,18 @@ async function acceptRide(rideId){
 }
 
 
-
-/* =====================================
-   REJECT RIDE
-===================================== */
-
+/* =====================================================
+REJECT RIDE
+===================================================== */
 
 async function rejectRide(rideId){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
 
     const result =
         await db
@@ -2329,6 +3587,10 @@ async function rejectRide(rideId){
         .eq(
             "id",
             rideId
+        )
+        .eq(
+            "driver_id",
+            currentUser.id
         )
         .eq(
             "status",
@@ -2347,16 +3609,19 @@ async function rejectRide(rideId){
     }
 
 
+    alert(
+        "❌ Ride Request reject করা হয়েছে।"
+    );
+
+
     loadDriverRequests();
 
 }
 
 
-
-/* =====================================
-   MY RIDES
-===================================== */
-
+/* =====================================================
+MY RIDES
+===================================================== */
 
 async function loadMyRides(){
 
@@ -2429,8 +3694,19 @@ async function loadMyRides(){
         result.data.length === 0
     ){
 
-        box.innerHTML =
-            "<p>কোনো Ride নেই।</p>";
+        box.innerHTML = `
+
+        <div class="empty">
+
+        <div class="empty-icon">
+        🚕
+        </div>
+
+        এখনো কোনো Ride নেই।
+
+        </div>
+
+        `;
 
         return;
 
@@ -2446,31 +3722,60 @@ async function loadMyRides(){
 
 
             div.className =
-                "ride";
+                "ride " +
+                (
+                    ride.status
+                    ||
+                    ""
+                );
 
 
             div.innerHTML = `
 
-                <b>
+                <div class="ride-title">
+
                 🚕 Ride
-                </b>
+
+                </div>
+
 
                 <p>
-                🏁 Destination:
+
+                🏁 <b>Destination:</b>
+
                 ${escapeHtml(
                     ride.destination_address
                     ||
-                    ""
+                    "N/A"
                 )}
+
                 </p>
 
+
                 <p>
+
+                📅 <b>সময়:</b>
+
+                ${formatDate(
+                    ride.created_at
+                )}
+
+                </p>
+
+
+                <p>
+
                 Status:
-                <span class="badge">
-                ${escapeHtml(
+
+                <span class="badge
+                ${ride.status}">
+
+                ${getStatusText(
                     ride.status
                 )}
+
                 </span>
+
                 </p>
 
             `;
@@ -2484,18 +3789,200 @@ async function loadMyRides(){
 }
 
 
+/* =====================================================
+CHAT
+===================================================== */
 
-/* =====================================
-   MESSAGE
-===================================== */
+async function openChat(
+    userId,
+    userName
+){
+
+    currentChatUser =
+        userId;
 
 
-async function sendMessage(receiverId){
+    document
+    .getElementById(
+        "chatPanel"
+    )
+    .classList
+    .remove("hidden");
+
+
+    document
+    .getElementById(
+        "chatUserName"
+    )
+    .innerText =
+        "— " +
+        userName;
+
+
+    await loadMessages();
+
+
+    document
+    .getElementById(
+        "chatPanel"
+    )
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+LOAD MESSAGES
+===================================================== */
+
+async function loadMessages(){
+
+    if(
+        !currentUser ||
+        !currentChatUser
+    ){
+
+        return;
+
+    }
+
+
+    const result =
+        await db
+        .from("messages")
+        .select("*")
+        .or(
+            `and(sender_id.eq.${currentUser.id},receiver_id.eq.${currentChatUser}),and(sender_id.eq.${currentChatUser},receiver_id.eq.${currentUser.id})`
+        )
+        .order(
+            "created_at",
+            {
+                ascending:true
+            }
+        );
+
+
+    if(result.error){
+
+        console.error(
+            result.error
+        );
+
+        return;
+
+    }
+
+
+    const box =
+        document
+        .getElementById(
+            "chatMessages"
+        );
+
+
+    box.innerHTML = "";
+
+
+    if(
+        !result.data ||
+        result.data.length === 0
+    ){
+
+        box.innerHTML = `
+
+        <div class="empty">
+
+        💬 এখনো কোনো message নেই।
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    result.data.forEach(
+        function(message){
+
+            const div =
+                document
+                .createElement("div");
+
+
+            div.className =
+                "chat-message " +
+                (
+                    message.sender_id ===
+                    currentUser.id
+                    ?
+                    "chat-me"
+                    :
+                    "chat-other"
+                );
+
+
+            div.innerHTML = `
+
+                ${escapeHtml(
+                    message.message
+                )}
+
+                <span class="chat-time">
+
+                ${formatDate(
+                    message.created_at
+                )}
+
+                </span>
+
+            `;
+
+
+            box.appendChild(div);
+
+        }
+    );
+
+
+    box.scrollTop =
+        box.scrollHeight;
+
+}
+
+
+/* =====================================================
+SEND CHAT MESSAGE
+===================================================== */
+
+async function sendChatMessage(){
+
+    if(
+        !currentUser ||
+        !currentChatUser
+    ){
+
+        alert(
+            "যার সাথে message করতে চান তাকে নির্বাচন করুন।"
+        );
+
+        return;
+
+    }
+
+
+    const input =
+        document
+        .getElementById(
+            "chatInput"
+        );
+
 
     const message =
-        prompt(
-            "আপনার Message লিখুন:"
-        );
+        input.value.trim();
 
 
     if(!message){
@@ -2514,7 +4001,7 @@ async function sendMessage(receiverId){
                 currentUser.id,
 
             receiver_id:
-                receiverId,
+                currentChatUser,
 
             message:
                 message
@@ -2533,23 +4020,23 @@ async function sendMessage(receiverId){
     }
 
 
-    alert(
-        "💬 Message পাঠানো হয়েছে।"
-    );
+    input.value = "";
+
+    await loadMessages();
 
 }
 
 
-
-/* =====================================
-   NAVIGATION
-===================================== */
-
+/* =====================================================
+NAVIGATION
+===================================================== */
 
 function goHome(){
 
     document
-    .getElementById("homeSection")
+    .getElementById(
+        "homeSection"
+    )
     .scrollIntoView({
         behavior:"smooth"
     });
@@ -2561,6 +4048,14 @@ function openFind(){
 
     if(!currentUser){
 
+        document
+        .getElementById(
+            "authCard"
+        )
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
         alert(
             "প্রথমে Login করুন।"
         );
@@ -2571,7 +4066,9 @@ function openFind(){
 
 
     document
-    .getElementById("appSection")
+    .getElementById(
+        "appSection"
+    )
     .scrollIntoView({
         behavior:"smooth"
     });
@@ -2594,12 +4091,14 @@ function openRides(){
 
     const panel =
         document
-        .getElementById("ridesPanel");
+        .getElementById(
+            "ridesPanel"
+        );
 
 
-    panel.classList.remove(
-        "hidden"
-    );
+    panel
+    .classList
+    .remove("hidden");
 
 
     loadMyRides();
@@ -2612,26 +4111,69 @@ function openRides(){
 }
 
 
+/* =====================================================
+REFRESH
+===================================================== */
 
-/* =====================================
-   LOGOUT
-===================================== */
+async function refreshApp(){
 
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    try{
+
+        await loadProfile();
+
+        if(
+            currentProfile.user_type ===
+            "driver"
+        ){
+
+            await loadDriverStatus();
+
+            await loadDriverRequests();
+
+        }else{
+
+            await loadMyRides();
+
+        }
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+LOGOUT
+===================================================== */
 
 async function logout(){
 
     await db.auth.signOut();
+
+    currentUser = null;
+
+    currentProfile = null;
 
     location.reload();
 
 }
 
 
-
-/* =====================================
-   MESSAGE
-===================================== */
-
+/* =====================================================
+AUTH MESSAGE
+===================================================== */
 
 function showAuth(
     message,
@@ -2659,11 +4201,72 @@ function showAuth(
 }
 
 
+/* =====================================================
+STATUS TEXT
+===================================================== */
 
-/* =====================================
-   SECURITY
-===================================== */
+function getStatusText(status){
 
+    if(status === "pending"){
+        return "⏳ Pending";
+    }
+
+    if(status === "accepted"){
+        return "✅ Accepted";
+    }
+
+    if(status === "rejected"){
+        return "❌ Rejected";
+    }
+
+    if(status === "completed"){
+        return "🏁 Completed";
+    }
+
+    return status || "Unknown";
+
+}
+
+
+/* =====================================================
+DATE
+===================================================== */
+
+function formatDate(date){
+
+    if(!date){
+
+        return "";
+
+    }
+
+
+    try{
+
+        return new Date(date)
+        .toLocaleString(
+            "bn-BD",
+            {
+                day:"numeric",
+                month:"short",
+                year:"numeric",
+                hour:"numeric",
+                minute:"2-digit"
+            }
+        );
+
+    }catch(e){
+
+        return date;
+
+    }
+
+}
+
+
+/* =====================================================
+ESCAPE HTML
+===================================================== */
 
 function escapeHtml(value){
 
@@ -2707,11 +4310,9 @@ function escapeHtml(value){
 }
 
 
-
-/* =====================================
-   SESSION CHECK
-===================================== */
-
+/* =====================================================
+SESSION CHECK
+===================================================== */
 
 async function checkSession(){
 
@@ -2729,13 +4330,15 @@ async function checkSession(){
 
         try{
 
-            await loadProfile();
+            await waitForProfile();
 
             showApp();
 
         }catch(error){
 
-            console.error(error);
+            console.error(
+                error
+            );
 
         }
 
@@ -2744,15 +4347,12 @@ async function checkSession(){
 }
 
 
-
-/* =====================================
-   REALTIME RIDE UPDATE
-===================================== */
-
+/* =====================================================
+REALTIME RIDES
+===================================================== */
 
 db
 .channel("cng-rides")
-
 .on(
 
     "postgres_changes",
@@ -2787,18 +4387,47 @@ db
     }
 
 )
-
 .subscribe();
 
 
+/* =====================================================
+REALTIME MESSAGES
+===================================================== */
 
-/* =====================================
-   START
-===================================== */
+db
+.channel("cng-messages")
+.on(
 
+    "postgres_changes",
+
+    {
+        event:"*",
+        schema:"public",
+        table:"messages"
+    },
+
+    function(){
+
+        if(
+            currentUser &&
+            currentChatUser
+        ){
+
+            loadMessages();
+
+        }
+
+    }
+
+)
+.subscribe();
+
+
+/* =====================================================
+START APP
+===================================================== */
 
 checkSession();
-
 
 </script>
 
