@@ -1463,6 +1463,32 @@ class="passenger-panel"
 </div>
 
 
+<!-- ACTIVE RIDE LIVE TRACKING -->
+
+<div
+id="activeRideCard"
+class="card"
+style="display:none;margin-bottom:25px;border:2px solid var(--success)"
+>
+
+<h3>🚖 চলমান রাইড — Live Tracking</h3>
+
+<div
+id="activeRideInfo"
+style="margin-bottom:12px"
+>
+📍 ড্রাইভারের লোকেশন লোড হচ্ছে...
+</div>
+
+<div
+id="trackMap"
+style="height:300px;border-radius:14px;z-index:1"
+>
+</div>
+
+</div>
+
+
 <div class="stats-grid">
 
 <div class="stat">
@@ -2000,7 +2026,7 @@ opacity:.45;
 font-size:11px;
 "
 >
-v2.1 • wallet
+v2.2 • wallet + live tracking
 </div>
 
 </footer>
@@ -3980,6 +4006,33 @@ ${item[1]}
 
 function renderDriverRequests(rides){
 
+// নতুন ride request এলে ড্রাইভারকে sound দিয়ে জানাও
+if(firstDriverLoad){
+
+firstDriverLoad = false;
+
+}else{
+
+(rides || []).forEach(r=>{
+
+if(
+r.status === "pending" &&
+!knownRequestIds.has(r.id)
+){
+
+playRequestSound();
+
+}
+
+});
+
+}
+
+(rides || []).forEach(r=>{
+knownRequestIds.add(r.id);
+});
+
+
 const container =
 document.getElementById(
 "driverRequests"
@@ -4625,6 +4678,9 @@ showMessage(
 );
 
 
+playCompleteSound();
+
+
 await loadDriverRequests();
 
 await loadMyRides();
@@ -4823,6 +4879,54 @@ console.error(error);
 return;
 
 }
+
+
+// Ride status change → sound + live tracking
+(data || []).forEach(ride=>{
+
+const prev =
+prevRideStatus[ride.id];
+
+
+if(
+prev &&
+prev !== ride.status
+){
+
+if(
+prev === "pending" &&
+ride.status === "accepted" &&
+currentProfile?.user_type !== "driver"
+){
+
+playAcceptSound();
+
+startTracking(ride);
+
+}
+
+
+if(
+ride.status === "completed" &&
+currentProfile?.user_type !== "driver"
+){
+
+playCompleteSound();
+
+if(trackingRideId === ride.id){
+
+stopTracking();
+
+}
+
+}
+
+}
+
+prevRideStatus[ride.id] =
+ride.status;
+
+});
 
 
 if(
@@ -5266,6 +5370,15 @@ async function logout(){
 
 try{
 
+stopTracking();
+
+prevRideStatus = {};
+
+knownRequestIds = new Set();
+
+firstDriverLoad = true;
+
+
 if(passengerWatchId){
 
 navigator.geolocation.clearWatch(
@@ -5370,6 +5483,425 @@ START
 ========================= */
 
 checkSession();
+
+
+/* =========================
+SOUND — Web Audio notification tones (no files needed)
+========================= */
+
+let audioCtx = null;
+
+function ensureAudio(){
+
+try{
+
+if(!audioCtx){
+audioCtx =
+new (
+window.AudioContext ||
+window.webkitAudioContext
+)();
+}
+
+if(
+audioCtx.state === "suspended"
+){
+audioCtx.resume();
+}
+
+}catch(e){}
+
+}
+
+// প্রথম টাচ/ক্লিকেই audio unlock হবে (মোবাইল ব্রাউজারের নিয়ম)
+document.addEventListener(
+"pointerdown",
+ensureAudio
+);
+
+
+function playTone(
+freq,
+delay,
+dur,
+type,
+vol
+){
+
+try{
+
+ensureAudio();
+
+if(!audioCtx) return;
+
+const t =
+audioCtx.currentTime + delay;
+
+const o =
+audioCtx.createOscillator();
+
+const g =
+audioCtx.createGain();
+
+o.type = type || "sine";
+
+o.frequency.value = freq;
+
+g.gain.setValueAtTime(
+0.0001, t
+);
+
+g.gain.exponentialRampToValueAtTime(
+vol || 0.25, t + 0.03
+);
+
+g.gain.exponentialRampToValueAtTime(
+0.0001, t + dur
+);
+
+o.connect(g);
+
+g.connect(audioCtx.destination);
+
+o.start(t);
+
+o.stop(t + dur + 0.05);
+
+}catch(e){}
+
+}
+
+
+// Ride accept — খুশির ascending chime
+function playAcceptSound(){
+
+playTone(523.25, 0, .2, "sine", .3);
+
+playTone(659.25, .16, .2, "sine", .3);
+
+playTone(783.99, .32, .4, "sine", .3);
+
+}
+
+
+// Ride complete — সমাপ্তির jingle
+function playCompleteSound(){
+
+playTone(659.25, 0, .18, "sine", .3);
+
+playTone(783.99, .14, .18, "sine", .3);
+
+playTone(1046.5, .28, .45, "sine", .3);
+
+}
+
+
+// নতুন ride request — ড্রাইভারের জন্য alert beep
+function playRequestSound(){
+
+playTone(880, 0, .16, "square", .12);
+
+playTone(880, .22, .16, "square", .12);
+
+playTone(1174.66, .44, .28, "square", .12);
+
+}
+
+
+/* =========================
+LIVE RIDE TRACKING
+========================= */
+
+let trackingRideId = null;
+
+let trackingDriverId = null;
+
+let trackMap = null;
+
+let trackDriverMarker = null;
+
+let trackRouteLine = null;
+
+let trackTimer = null;
+
+let prevRideStatus = {};
+
+let knownRequestIds = new Set();
+
+let firstDriverLoad = true;
+
+
+function startTracking(ride){
+
+stopTracking();
+
+trackingRideId = ride.id;
+
+trackingDriverId = ride.driver_id;
+
+const card =
+document.getElementById("activeRideCard");
+
+if(card){
+
+card.style.display = "block";
+
+}
+
+
+const info =
+document.getElementById("activeRideInfo");
+
+if(info){
+
+info.innerHTML =
+`🎯 গন্তব্য: <b>${escapeHtml(ride.destination_address)}</b>` +
+`<br>📍 ড্রাইভারের লোকেশন লোড হচ্ছে...`;
+
+}
+
+
+if(!trackMap){
+
+trackMap =
+L.map("trackMap").setView(
+[
+latitude || 24.2513,
+longitude || 89.9167
+],
+14
+);
+
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+maxZoom:19,
+attribution:"© OpenStreetMap"
+}
+).addTo(trackMap);
+
+setTimeout(
+()=>trackMap.invalidateSize(),
+400
+);
+
+}
+
+
+updateTracking();
+
+trackTimer =
+setInterval(
+updateTracking,
+5000
+);
+
+
+if(card){
+
+card.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+}
+
+
+function stopTracking(){
+
+if(trackTimer){
+
+clearInterval(trackTimer);
+
+trackTimer = null;
+
+}
+
+trackingRideId = null;
+
+trackingDriverId = null;
+
+if(
+trackDriverMarker &&
+trackMap
+){
+
+trackMap.removeLayer(
+trackDriverMarker
+);
+
+trackDriverMarker = null;
+
+}
+
+if(
+trackRouteLine &&
+trackMap
+){
+
+trackMap.removeLayer(
+trackRouteLine
+);
+
+trackRouteLine = null;
+
+}
+
+const card =
+document.getElementById("activeRideCard");
+
+if(card){
+
+card.style.display = "none";
+
+}
+
+}
+
+
+async function updateTracking(){
+
+if(
+!trackingRideId ||
+!trackingDriverId
+){
+return;
+}
+
+try{
+
+const {
+data: ride
+} =
+await db
+.from("ride_requests")
+.select("status")
+.eq("id",trackingRideId)
+.maybeSingle();
+
+
+if(
+ride &&
+(
+ride.status === "completed" ||
+ride.status === "cancelled" ||
+ride.status === "rejected"
+)
+){
+
+stopTracking();
+
+return;
+
+}
+
+
+const {
+data: drv
+} =
+await db
+.from("drivers")
+.select("latitude,longitude")
+.eq("id",trackingDriverId)
+.maybeSingle();
+
+
+const info =
+document.getElementById(
+"activeRideInfo"
+);
+
+
+if(
+drv &&
+drv.latitude !== null &&
+latitude !== null &&
+trackMap
+){
+
+const dlat = drv.latitude;
+
+const dlng = drv.longitude;
+
+
+if(!trackDriverMarker){
+
+trackDriverMarker =
+L.marker([dlat,dlng])
+.addTo(trackMap)
+.bindPopup("🚕 আপনার CNG");
+
+}else{
+
+trackDriverMarker.setLatLng(
+[dlat,dlng]
+);
+
+}
+
+
+if(trackRouteLine){
+
+trackMap.removeLayer(
+trackRouteLine
+);
+
+}
+
+trackRouteLine =
+L.polyline(
+[
+[latitude,longitude],
+[dlat,dlng]
+],
+{
+color:"#087f5b",
+weight:4,
+opacity:.8
+}
+).addTo(trackMap);
+
+
+trackMap.setView(
+[dlat,dlng],
+15
+);
+
+
+const d =
+distanceKm(
+latitude,
+longitude,
+dlat,
+dlng
+);
+
+
+if(info){
+
+info.innerHTML =
+`🚕 ড্রাইভার আপনার থেকে ` +
+`<b>${d.toFixed(2)} km</b> দূরে — ` +
+`লাইভ আসছে... 🟢`;
+
+}
+
+}else if(info){
+
+info.textContent =
+"📍 ড্রাইভারের লোকেশন পাওয়া যাচ্ছে না...";
+
+}
+
+}catch(e){
+
+console.error(e);
+
+}
+
+}
 
 
 /* =========================
