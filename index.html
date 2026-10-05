@@ -1234,6 +1234,14 @@ Passenger
 
 
 <button
+class="btn btn-secondary btn-small"
+onclick="testSound()"
+style="margin-right:8px"
+>
+🔊 সাউন্ড টেস্ট
+</button>
+
+<button
 class="btn btn-danger"
 onclick="logout()"
 >
@@ -2026,7 +2034,7 @@ opacity:.45;
 font-size:11px;
 "
 >
-v2.2 • wallet + live tracking
+v2.3 • wallet + live tracking + satellite
 </div>
 
 </footer>
@@ -2514,12 +2522,33 @@ L.map("map").setView(
 12
 );
 
+const osmLayerMain =
 L.tileLayer(
 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 {
 maxZoom:19,
 attribution:"© OpenStreetMap"
 }
+).addTo(map);
+
+
+const satLayerMain =
+L.tileLayer(
+"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+{
+maxZoom:19,
+attribution:"© Esri World Imagery"
+}
+);
+
+
+L.control.layers(
+{
+"🗺️ Map": osmLayerMain,
+"🛰️ Satellite": satLayerMain
+},
+null,
+{position:"topright"}
 ).addTo(map);
 
 }
@@ -5581,6 +5610,8 @@ playTone(659.25, .16, .2, "sine", .3);
 
 playTone(783.99, .32, .4, "sine", .3);
 
+buzz([150, 80, 150]);
+
 }
 
 
@@ -5593,6 +5624,8 @@ playTone(783.99, .14, .18, "sine", .3);
 
 playTone(1046.5, .28, .45, "sine", .3);
 
+buzz([200, 100, 200, 100, 300]);
+
 }
 
 
@@ -5604,6 +5637,42 @@ playTone(880, 0, .16, "square", .12);
 playTone(880, .22, .16, "square", .12);
 
 playTone(1174.66, .44, .28, "square", .12);
+
+buzz([120, 60, 120, 60, 120]);
+
+}
+
+
+// Vibration fallback — ফোন silent থাকলেও notification টের পাওয়া যাবে
+function buzz(pattern){
+
+try{
+
+if(navigator.vibrate){
+
+navigator.vibrate(pattern);
+
+}
+
+}catch(e){}
+
+}
+
+
+// 🔊 সাউন্ড টেস্ট — audio unlock + কাজ করছে কিনা চেক
+function testSound(){
+
+ensureAudio();
+
+playAcceptSound();
+
+buzz(200);
+
+setTimeout(()=>{
+
+alert("🔊 টেস্ট: chime শুনতে পেয়েছেন?");
+
+}, 900);
 
 }
 
@@ -5672,12 +5741,31 @@ longitude || 89.9167
 14
 );
 
+const osmLayerTrack =
 L.tileLayer(
 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 {
 maxZoom:19,
 attribution:"© OpenStreetMap"
 }
+).addTo(trackMap);
+
+const satLayerTrack =
+L.tileLayer(
+"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+{
+maxZoom:19,
+attribution:"© Esri World Imagery"
+}
+);
+
+L.control.layers(
+{
+"🗺️ Map": osmLayerTrack,
+"🛰️ Satellite": satLayerTrack
+},
+null,
+{position:"topright"}
 ).addTo(trackMap);
 
 setTimeout(
@@ -5881,10 +5969,15 @@ dlng
 
 if(info){
 
+// শহরে গড় গতি ~২০ km/h ধরে ETA
+const etaMin =
+Math.max(1, Math.round(d / 20 * 60));
+
 info.innerHTML =
 `🚕 ড্রাইভার আপনার থেকে ` +
 `<b>${d.toFixed(2)} km</b> দূরে — ` +
-`লাইভ আসছে... 🟢`;
+`লাইভ আসছে... 🟢` +
+`<br>⏱️ আনুমানিক <b>${etaMin} মিনিটে</b> পৌঁছাবে`;
 
 }
 
