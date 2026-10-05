@@ -681,6 +681,30 @@ animation:pulse 1.4s ease-in-out infinite;
 50%{box-shadow:0 0 0 9px rgba(11,190,130,0)}
 }
 
+/* ============ LOCATION BAR ============ */
+
+.location-bar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+flex-wrap:wrap;
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius-sm);
+padding:12px 18px;
+margin-bottom:14px;
+box-shadow:var(--shadow);
+font-size:14.5px;
+font-weight:600;
+}
+
+.location-bar small{
+color:var(--muted);
+font-weight:500;
+}
+
+
 /* ============ SEARCH / DRIVER LIST ============ */
 
 .search-box{
@@ -2133,6 +2157,27 @@ class="message"
 </div>
 
 
+<div class="location-bar">
+<span id="locationStatus">📍 Location চালু হচ্ছে...</span>
+<span style="display:flex;gap:8px;flex-wrap:wrap">
+<button
+class="btn btn-warning btn-small"
+id="locationBtn"
+onclick="requestLocation()"
+style="display:none"
+>
+📍 Location চালু করুন
+</button>
+<button
+class="btn btn-secondary btn-small"
+onclick="retryLocation()"
+>
+🔄 আবার চেষ্টা
+</button>
+</span>
+</div>
+
+
 <div id="map"></div>
 
 
@@ -2620,7 +2665,7 @@ opacity:.45;
 font-size:11px;
 "
 >
-v3.0 • premium
+v3.1 • premium
 </div>
 
 </footer>
@@ -3144,19 +3189,88 @@ null,
 PASSENGER GPS
 ========================= */
 
-function startPassengerLocation(){
+/* =========================
+PASSENGER GPS — robust location flow
+========================= */
+
+let locationRetries = 0;
+
+const MAX_LOCATION_RETRIES = 3;
+
+
+function updateLocationStatus(msg){
+
+const el =
+document.getElementById("locationStatus");
+
+if(el){ el.innerHTML = msg; }
+
+}
+
+
+function showLocationBtn(show){
+
+const b =
+document.getElementById("locationBtn");
+
+if(b){
+b.style.display =
+show ? "inline-flex" : "none";
+}
+
+}
+
+
+// বাটনে ট্যাপ করে location চালু — মোবাইলে সবচেয়ে নির্ভরযোগ্য
+function requestLocation(){
+
+updateLocationStatus(
+"📍 Location নেওয়া হচ্ছে..."
+);
+
+showLocationBtn(false);
+
+locationRetries = 0;
+
+hideMessage("passengerMessage");
+
 
 if(!navigator.geolocation){
 
-showMessage(
-"passengerMessage",
-"আপনার browser GPS support করে না।",
-"error"
+updateLocationStatus(
+"❌ এই browser-এ GPS support নেই।"
 );
 
 return;
 
 }
+
+
+// প্রথমে একবার current position (দ্রুত),
+// তারপর live watch
+navigator.geolocation.getCurrentPosition(
+
+pos=>{
+handlePosition(pos);
+startLocationWatch();
+},
+
+err=>{
+handleLocationError(err);
+},
+
+{
+enableHighAccuracy:true,
+timeout:20000,
+maximumAge:10000
+}
+
+);
+
+}
+
+
+function startLocationWatch(){
 
 if(passengerWatchId){
 
@@ -3166,11 +3280,31 @@ passengerWatchId
 
 }
 
-
 passengerWatchId =
 navigator.geolocation.watchPosition(
 
 position=>{
+handlePosition(position);
+},
+
+error=>{
+handleLocationError(error);
+},
+
+{
+enableHighAccuracy:true,
+maximumAge:5000,
+timeout:20000
+}
+
+);
+
+}
+
+
+function handlePosition(position){
+
+locationRetries = 0;
 
 latitude =
 position.coords.latitude;
@@ -3179,16 +3313,35 @@ longitude =
 position.coords.longitude;
 
 
-document
-.getElementById("currentLat")
-.textContent =
+const latEl =
+document.getElementById("currentLat");
+
+const lngEl =
+document.getElementById("currentLng");
+
+if(latEl){
+latEl.textContent =
 latitude.toFixed(5);
+}
 
-document
-.getElementById("currentLng")
-.textContent =
+if(lngEl){
+lngEl.textContent =
 longitude.toFixed(5);
+}
 
+
+updateLocationStatus(
+`🟢 Live location চালু ` +
+`<small>(${latitude.toFixed(4)}, ` +
+`${longitude.toFixed(4)})</small>`
+);
+
+showLocationBtn(false);
+
+hideMessage("passengerMessage");
+
+
+if(map){
 
 if(!userMarker){
 
@@ -3209,36 +3362,157 @@ userMarker.setLatLng(
 
 }
 
-
 map.setView(
 [latitude,longitude],
 14
 );
 
+}
+
 
 refreshDriverDistances();
 
-},
+}
 
-error=>{
+
+function handleLocationError(error){
 
 console.error(error);
 
+const code =
+error && error.code;
+
+
+if(code === 1){
+
+// PERMISSION_DENIED
+updateLocationStatus(
+"⛔ Location permission বন্ধ আছে।<br>" +
+"<small>📱 চালু করুন: address bar-এর 🔒 → " +
+"Site settings → Location → <b>Allow</b> " +
+"করে পেজ রিলোড দিন</small>"
+);
+
+showLocationBtn(true);
+
+}else if(code === 2){
+
+// POSITION_UNAVAILABLE
+updateLocationStatus(
+"📡 GPS সিগন্যাল পাওয়া যাচ্ছে না। " +
+"খোলা জায়গায় গিয়ে আবার চেষ্টা করুন।"
+);
+
+showLocationBtn(true);
+
+}else if(code === 3){
+
+// TIMEOUT — কয়েকবার retry
+if(
+locationRetries <
+MAX_LOCATION_RETRIES
+){
+
+locationRetries++;
+
+updateLocationStatus(
+`⏳ GPS খুঁজছে... ` +
+`(চেষ্টা ${locationRetries}/` +
+`${MAX_LOCATION_RETRIES})`
+);
+
+setTimeout(()=>{
+startLocationWatch();
+}, 2000);
+
+return;
+
+}
+
+updateLocationStatus(
+"⏱️ GPS lock হচ্ছে না। " +
+"Mobile data / WiFi চালু করে আবার চেষ্টা করুন।"
+);
+
+showLocationBtn(true);
+
+}else{
+
+updateLocationStatus(
+"🔴 Location পাওয়া যায়নি। " +
+"আবার চেষ্টা করুন।"
+);
+
+showLocationBtn(true);
+
+}
+
+
 showMessage(
 "passengerMessage",
-"GPS Location পাওয়া যাচ্ছে না। Browser location permission চালু করুন।",
+"GPS Location পাওয়া যাচ্ছে না।",
 "error"
 );
 
-},
-
-{
-enableHighAccuracy:true,
-maximumAge:5000,
-timeout:15000
 }
 
+
+async function startPassengerLocation(){
+
+updateLocationStatus(
+"📍 Location চালু হচ্ছে..."
 );
+
+showLocationBtn(false);
+
+
+// আগেই permission denied থাকলে সাথে সাথে জানাও
+try{
+
+if(
+navigator.permissions &&
+navigator.permissions.query
+){
+
+const st =
+await navigator.permissions.query(
+{name:"geolocation"}
+);
+
+if(st.state === "denied"){
+
+handleLocationError({code:1});
+
+return;
+
+}
+
+if(st.state === "prompt"){
+
+updateLocationStatus(
+"📍 <b>Location চালু করুন</b> " +
+"বাটনে চাপ দিন"
+);
+
+showLocationBtn(true);
+
+return;
+
+}
+
+}
+
+}catch(e){}
+
+
+requestLocation();
+
+}
+
+
+function retryLocation(){
+
+requestLocation();
 
 }
 
