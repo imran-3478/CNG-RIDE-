@@ -2774,6 +2774,30 @@ const newStatus =
 !data.available;
 
 
+// Wallet gate: Available হতে মিনিমাম ব্যালেন্স লাগবে
+if(newStatus){
+
+const bal =
+await getWalletBalance();
+
+if(bal === null){
+alert("Wallet তথ্য পাওয়া যায়নি। আবার চেষ্টা করুন।");
+return;
+}
+
+if(bal < MIN_WALLET_BALANCE){
+alert(
+`⚠️ Wallet ব্যালেন্স ৳${MIN_WALLET_BALANCE}-এর নিচে ` +
+`(বর্তমান: ৳${bal.toFixed(2)})।\n` +
+"Available হতে আগে রিচার্জ করুন।"
+);
+openRechargeModal();
+return;
+}
+
+}
+
+
 const {
 error:updateError
 } =
