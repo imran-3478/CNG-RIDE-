@@ -749,6 +749,48 @@ padding:12px;
 border-radius:12px;
 }
 
+/* WALLET */
+
+.wallet-balance{
+font-size:34px;
+font-weight:700;
+color:var(--primary);
+}
+
+.wallet-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.tx-list{
+display:grid;
+gap:10px;
+margin-top:15px;
+}
+
+.tx-item{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:10px 12px;
+background:#f7faf9;
+border-radius:10px;
+font-size:14px;
+}
+
+.tx-credit{
+color:var(--success);
+font-weight:700;
+}
+
+.tx-debit{
+color:var(--danger);
+font-weight:700;
+}
+
 /* FOOTER */
 
 footer{
@@ -1254,6 +1296,57 @@ Available করুন
 </div>
 
 
+<!-- WALLET CARD -->
+
+<div
+class="card"
+style="margin-bottom:20px"
+>
+
+<h3>💰 Wallet</h3>
+
+<div class="wallet-row">
+
+<div>
+
+<div
+class="wallet-balance"
+id="walletBalance"
+>
+৳0.00
+</div>
+
+<div
+style="color:var(--muted);font-size:14px"
+>
+প্রতি রাইডে কমিশন:
+<strong id="commissionRateLabel">12%</strong>
+· রাইড নিতে মিনিমাম ব্যালেন্স:
+<strong>৳50</strong>
+</div>
+
+</div>
+
+<button
+class="btn btn-primary"
+onclick="openRechargeModal()"
+>
+➕ রিচার্জ
+</button>
+
+</div>
+
+<div id="walletWarning"></div>
+
+<div
+id="walletHistory"
+class="tx-list"
+>
+</div>
+
+</div>
+
+
 <div class="card">
 
 <h3>🚖 Ride Requests</h3>
@@ -1283,6 +1376,64 @@ class="history-list"
 >
 <div class="empty">
 এখনও কোনো Ride নেই
+</div>
+</div>
+
+</div>
+
+
+<!-- ADMIN PANEL (only visible to admin email) -->
+
+<div
+id="adminPanel"
+class="card"
+style="display:none;margin-top:25px;border:2px solid var(--accent)"
+>
+
+<h3>🛠️ Admin — কমিশন ড্যাশবোর্ড</h3>
+
+<div class="stats-grid" style="grid-template-columns:1fr 1fr">
+
+<div class="stat">
+
+<div
+class="stat-number"
+id="adminTotalCommission"
+>
+৳0
+</div>
+
+<div class="stat-label">
+মোট সংগৃহীত কমিশন
+</div>
+
+</div>
+
+<div class="stat">
+
+<div
+class="stat-number"
+id="adminPendingRecharge"
+>
+0
+</div>
+
+<div class="stat-label">
+Pending রিচার্জ রিকোয়েস্ট
+</div>
+
+</div>
+
+</div>
+
+<h3 style="margin-top:10px">📥 রিচার্জ রিকোয়েস্ট</h3>
+
+<div
+id="adminRechargeList"
+class="request-list"
+>
+<div class="empty">
+কোনো pending রিকোয়েস্ট নেই
 </div>
 </div>
 
@@ -1737,6 +1888,88 @@ class="message"
 </div>
 
 
+<!-- RECHARGE MODAL -->
+
+<div
+class="modal"
+id="rechargeModal"
+>
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+onclick="closeRechargeModal()"
+>
+×
+</button>
+
+<h3>💰 Wallet রিচার্জ</h3>
+
+<div
+style="
+background:#fff7d6;
+padding:14px;
+border-radius:12px;
+margin-bottom:18px;
+font-size:15px;
+"
+>
+<b>bKash / Nagad</b> নম্বর
+<strong id="paymentNumberLabel">01767462347</strong>-এ টাকা পাঠান
+(কমপক্ষে ৳100), তারপর নিচে
+<strong>TrxID</strong> দিন। Admin verify করে
+আপনার wallet-এ ব্যালেন্স যোগ করে দেবেন।
+</div>
+
+<div class="form-group">
+
+<label>
+💵 Amount (৳)
+</label>
+
+<input
+type="number"
+id="rechargeAmount"
+min="100"
+step="1"
+placeholder="যেমন: 500"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+🧾 bKash/Nagad TrxID
+</label>
+
+<input
+type="text"
+id="rechargeTrxId"
+placeholder="যেমন: 9HXK2LM4PQ"
+>
+
+</div>
+
+<button
+class="btn btn-primary btn-block"
+onclick="submitRechargeRequest()"
+id="rechargeSubmitBtn"
+>
+📤 রিচার্জ রিকোয়েস্ট পাঠান
+</button>
+
+<div
+id="rechargeMessage"
+class="message"
+></div>
+
+</div>
+
+</div>
+
+
 <!-- FOOTER -->
 
 <footer>
@@ -1817,6 +2050,16 @@ let selectedRideId = null;
 let fareRideId = null;
 
 const DEFAULT_FARE_PER_KM = 20;
+
+/* =========================
+WALLET & COMMISSION CONFIG
+========================= */
+// নিজের ইমেইল এখানে বসান — এই ইমেইল দিয়ে login করলে Admin প্যানেল দেখা যাবে
+const ADMIN_EMAILS = ["emrankhan172@gmail.com"];
+// bKash/Nagad নম্বর যেখানে ড্রাইভাররা রিচার্জের টাকা পাঠাবে
+const PAYMENT_NUMBER = "01767462347";
+const COMMISSION_RATE = 12;      // প্রতি রাইডে কমিশন %
+const MIN_WALLET_BALANCE = 50;   // এর নিচে নামলে নতুন রাইড নেওয়া যাবে না
 
 
 /* =========================
@@ -2166,6 +2409,22 @@ type === "driver"
 : "👤 Passenger";
 
 
+// Admin panel: শুধু ADMIN_EMAILS-এর ইমেইল দিয়ে login করলে দেখা যাবে
+const isAdmin =
+ADMIN_EMAILS.includes(
+(currentUser?.email || "").toLowerCase()
+);
+
+document
+.getElementById("adminPanel")
+.style.display =
+isAdmin ? "block" : "none";
+
+if(isAdmin){
+loadAdminPanel();
+}
+
+
 if(type === "driver"){
 
 document
@@ -2339,6 +2598,8 @@ DRIVER INITIALIZE
 async function initializeDriver(){
 
 await loadDriverStatus();
+
+await loadWallet();
 
 startDriverLocation();
 
@@ -2638,6 +2899,384 @@ timeout:15000
 }
 
 );
+
+}
+
+
+/* =========================
+WALLET
+========================= */
+
+async function getWalletBalance(){
+
+const {
+data,
+error
+} =
+await db
+.from("wallets")
+.select("balance")
+.eq("driver_id",currentUser.id)
+.maybeSingle();
+
+if(error){
+console.error(error);
+return null;
+}
+
+return data ? Number(data.balance) : 0;
+
+}
+
+
+async function loadWallet(){
+
+const balance =
+await getWalletBalance();
+
+const balEl =
+document.getElementById("walletBalance");
+
+if(balance === null){
+balEl.textContent = "৳--";
+return;
+}
+
+balEl.textContent =
+"৳" + balance.toFixed(2);
+
+balEl.style.color =
+balance < MIN_WALLET_BALANCE
+? "var(--danger)"
+: "var(--primary)";
+
+
+const warn =
+document.getElementById("walletWarning");
+
+if(balance < MIN_WALLET_BALANCE){
+
+warn.innerHTML = `
+<div class="message error" style="display:block">
+⚠️ ব্যালেন্স ৳${MIN_WALLET_BALANCE}-এর নিচে — নতুন রাইড নিতে
+<strong>রিচার্জ</strong> করুন।
+</div>`;
+
+}else{
+
+warn.innerHTML = "";
+
+}
+
+
+document
+.getElementById("commissionRateLabel")
+.textContent =
+COMMISSION_RATE + "%";
+
+
+loadWalletHistory();
+
+}
+
+
+async function loadWalletHistory(){
+
+const {
+data,
+error
+} =
+await db
+.from("wallet_transactions")
+.select("type,amount,balance_after,note,created_at")
+.eq("driver_id",currentUser.id)
+.order("created_at",{ascending:false})
+.limit(10);
+
+const box =
+document.getElementById("walletHistory");
+
+if(error || !data || !data.length){
+box.innerHTML = "";
+return;
+}
+
+box.innerHTML =
+data.map(tx=>{
+
+const isCredit = Number(tx.amount) > 0;
+
+const label =
+tx.type === "recharge" ? "➕ রিচার্জ" :
+tx.type === "commission" ? "➖ কমিশন" :
+"🔧 সমন্বয়";
+
+return `
+<div class="tx-item">
+<div>
+<div>${label}</div>
+<div style="color:var(--muted);font-size:12px">
+${escapeHtml(tx.note || "")}
+· ${formatDate(tx.created_at)}
+</div>
+</div>
+<div class="${isCredit ? "tx-credit" : "tx-debit"}">
+${isCredit ? "+" : ""}৳${Number(tx.amount).toFixed(2)}
+</div>
+</div>`;
+
+}).join("");
+
+}
+
+
+/* ---- Recharge ---- */
+
+function openRechargeModal(){
+
+document
+.getElementById("rechargeAmount")
+.value = "";
+
+document
+.getElementById("rechargeTrxId")
+.value = "";
+
+hideMessage("rechargeMessage");
+
+document
+.getElementById("rechargeModal")
+.classList.add("show");
+
+}
+
+
+function closeRechargeModal(){
+
+document
+.getElementById("rechargeModal")
+.classList.remove("show");
+
+}
+
+
+async function submitRechargeRequest(){
+
+const amount =
+parseFloat(
+document
+.getElementById("rechargeAmount")
+.value
+);
+
+const trxId =
+document
+.getElementById("rechargeTrxId")
+.value.trim();
+
+
+if(!amount || amount < 100){
+showMessage(
+"rechargeMessage",
+"কমপক্ষে ৳100 রিচার্জ করতে হবে।",
+"error"
+);
+return;
+}
+
+if(!trxId){
+showMessage(
+"rechargeMessage",
+"bKash/Nagad TrxID দিন।",
+"error"
+);
+return;
+}
+
+
+const btn =
+document.getElementById("rechargeSubmitBtn");
+
+btn.disabled = true;
+btn.textContent = "পাঠানো হচ্ছে...";
+
+
+const {
+error
+} =
+await db
+.from("recharge_requests")
+.insert({
+driver_id: currentUser.id,
+amount: amount,
+trx_id: trxId,
+status: "pending"
+});
+
+
+btn.disabled = false;
+btn.textContent = "📤 রিচার্জ রিকোয়েস্ট পাঠান";
+
+
+if(error){
+showMessage(
+"rechargeMessage",
+error.message,
+"error"
+);
+return;
+}
+
+
+showMessage(
+"rechargeMessage",
+"✅ রিকোয়েস্ট পাঠানো হয়েছে। Admin verify করে ব্যালেন্স যোগ করে দেবেন।",
+"success"
+);
+
+}
+
+
+/* ---- Admin ---- */
+
+async function loadAdminPanel(){
+
+try{
+
+const {
+data: total,
+error: tErr
+} =
+await db.rpc("admin_total_commission");
+
+if(!tErr){
+document
+.getElementById("adminTotalCommission")
+.textContent =
+"৳" + Number(total || 0).toFixed(0);
+}
+
+const {
+data: reqs,
+error: rErr
+} =
+await db
+.from("recharge_requests")
+.select("id,amount,trx_id,status,created_at,drivers!inner(id)")
+.eq("status","pending")
+.order("created_at",{ascending:false});
+
+if(rErr) throw rErr;
+
+document
+.getElementById("adminPendingRecharge")
+.textContent =
+(reqs || []).length;
+
+
+const box =
+document.getElementById("adminRechargeList");
+
+if(!reqs || !reqs.length){
+box.innerHTML = `
+<div class="empty">
+কোনো pending রিকোয়েস্ট নেই
+</div>`;
+return;
+}
+
+box.innerHTML =
+reqs.map(r=>`
+<div class="request-card pending">
+<div class="request-row">
+<div>
+<div class="request-label">Amount</div>
+<div class="request-value">৳${Number(r.amount).toFixed(2)}</div>
+</div>
+<div>
+<div class="request-label">TrxID</div>
+<div class="request-value">${escapeHtml(r.trx_id)}</div>
+</div>
+</div>
+<div class="request-row">
+<div>
+<div class="request-label">Driver ID</div>
+<div class="request-value" style="font-size:12px">
+${escapeHtml(r.drivers.id.slice(0,8))}…
+</div>
+</div>
+<div>
+<div class="request-label">তারিখ</div>
+<div class="request-value">${formatDate(r.created_at)}</div>
+</div>
+</div>
+<div class="driver-actions">
+<button
+class="btn btn-success btn-small"
+onclick="approveRecharge('${escapeJs(r.id)}')"
+>
+✅ Approve
+</button>
+<button
+class="btn btn-danger btn-small"
+onclick="rejectRecharge('${escapeJs(r.id)}')"
+>
+❌ Reject
+</button>
+</div>
+</div>`).join("");
+
+}catch(error){
+console.error(error);
+}
+
+}
+
+
+async function approveRecharge(requestId){
+
+if(!confirm("এই রিচার্জ approve করবেন?")){
+return;
+}
+
+const {
+error
+} =
+await db.rpc("admin_approve_recharge",{
+p_request_id: requestId
+});
+
+if(error){
+alert(error.message);
+return;
+}
+
+alert("✅ রিচার্জ approve হয়েছে।");
+loadAdminPanel();
+
+}
+
+
+async function rejectRecharge(requestId){
+
+if(!confirm("এই রিকোয়েস্ট reject করবেন?")){
+return;
+}
+
+const {
+error
+} =
+await db
+.from("recharge_requests")
+.update({status:"rejected"})
+.eq("id",requestId);
+
+if(error){
+alert(error.message);
+return;
+}
+
+loadAdminPanel();
 
 }
 
@@ -3075,7 +3714,7 @@ driverId;
 
 document
 .getElementById("rideDriverInfo")
-innerHTML = `
+.innerHTML = `
 <div
 style="
 background:#f3faf7;
@@ -3503,10 +4142,30 @@ ${actionHtml}
 
 
 /* =========================
-ACCEPT RIDE
+ACCEPT RIDE (with wallet gate)
 ========================= */
 
 async function acceptRide(rideId){
+
+// Wallet gate: মিনিমাম ব্যালেন্স না থাকলে রাইড নেওয়া যাবে না
+const balance =
+await getWalletBalance();
+
+if(balance === null){
+alert("Wallet তথ্য পাওয়া যায়নি। আবার চেষ্টা করুন।");
+return;
+}
+
+if(balance < MIN_WALLET_BALANCE){
+alert(
+`⚠️ Wallet ব্যালেন্স ৳${MIN_WALLET_BALANCE}-এর নিচে ` +
+`(বর্তমান: ৳${balance.toFixed(2)})।\n` +
+"নতুন রাইড নিতে আগে রিচার্জ করুন।"
+);
+openRechargeModal();
+return;
+}
+
 
 const {
 error
@@ -3728,7 +4387,7 @@ estimated.toFixed(2);
 
 
 /* =========================
-COMPLETE RIDE
+COMPLETE RIDE (+ commission)
 ========================= */
 
 async function confirmRideCompletion(){
@@ -3878,6 +4537,37 @@ return;
 }
 
 
+/* --- Commission: প্রতি রাইডে % কেটে নেওয়া --- */
+
+try{
+
+const {
+data: newBalance,
+error: commError
+} =
+await db.rpc("deduct_commission",{
+p_driver_id: currentUser.id,
+p_ride_id: fareRideId,
+p_fare: Number(finalFare.toFixed(2)),
+p_rate: COMMISSION_RATE
+});
+
+if(commError){
+console.error(
+"Commission deduct failed:",
+commError
+);
+}else{
+console.log(
+`Commission কাটা হয়েছে। নতুন ব্যালেন্স: ৳${Number(newBalance).toFixed(2)}`
+);
+}
+
+}catch(e){
+console.error(e);
+}
+
+
 /* Driver becomes available again */
 
 await db
@@ -3903,6 +4593,8 @@ showMessage(
 await loadDriverRequests();
 
 await loadMyRides();
+
+await loadWallet();
 
 setDriverStatusUI(true);
 
@@ -3930,7 +4622,7 @@ receiverId;
 
 document
 .getElementById("messageReceiver")
-textContent =
+.textContent =
 "To: " + receiverName;
 
 
@@ -4682,6 +5374,19 @@ document
 if(e.target === this){
 
 closeFareModal();
+
+}
+
+});
+
+
+document
+.getElementById("rechargeModal")
+.addEventListener("click",function(e){
+
+if(e.target === this){
+
+closeRechargeModal();
 
 }
 
