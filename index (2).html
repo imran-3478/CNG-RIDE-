@@ -1,0 +1,7964 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CNG Ride — টাঙ্গাইলের লাইভ CNG সার্ভিস</title>
+
+<meta name="theme-color" content="#063b2b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="CNG Ride — টাঙ্গাইলের লাইভ লোকেশন ভিত্তিক CNG রাইড সার্ভিস। কাছের CNG খুঁজুন, লাইভ ট্র্যাক করুন।">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2064%2064%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20role%3D%22img%22%20aria-label%3D%22CNG%20Ride%20logo%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22cng-badge%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230dbe82%22%2F%3E%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23046a44%22%2F%3E%20%3C%2FlinearGradient%3E%20%3ClinearGradient%20id%3D%22cng-body%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffd94d%22%2F%3E%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffb703%22%2F%3E%20%3C%2FlinearGradient%3E%20%3C%2Fdefs%3E%20%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%2260%22%20height%3D%2260%22%20rx%3D%2217%22%20fill%3D%22url%28%23cng-badge%29%22%2F%3E%20%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%2260%22%20height%3D%2260%22%20rx%3D%2217%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%22.25%22%20stroke-width%3D%221.5%22%2F%3E%20%3C%21--%20motion%20lines%20--%3E%20%3Cg%20stroke%3D%22%23ffffff%22%20stroke-opacity%3D%22.5%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%3E%20%3Cline%20x1%3D%226%22%20y1%3D%2230%22%20x2%3D%2210%22%20y2%3D%2230%22%2F%3E%20%3Cline%20x1%3D%225%22%20y1%3D%2236%22%20x2%3D%2210%22%20y2%3D%2236%22%2F%3E%20%3C%2Fg%3E%20%3C%21--%20canopy%20--%3E%20%3Cpath%20d%3D%22M15%2031%20Q16%2021%2025%2020%20L36%2020%20Q42%2020%2045%2026%20L47%2031%20Z%22%20fill%3D%22url%28%23cng-body%29%22%2F%3E%20%3C%21--%20windshield%20--%3E%20%3Cpath%20d%3D%22M37%2022.5%20L43%2030%20L37%2030%20Z%22%20fill%3D%22%23d9f5e9%22%2F%3E%20%3C%21--%20side%20window%20--%3E%20%3Crect%20x%3D%2219%22%20y%3D%2223.5%22%20width%3D%2212%22%20height%3D%225.5%22%20rx%3D%222%22%20fill%3D%22%23046a44%22%20opacity%3D%22.9%22%2F%3E%20%3C%21--%20body%20--%3E%20%3Cpath%20d%3D%22M13%2033%20L47%2033%20Q51%2033%2051%2037%20L51%2040%20Q51%2043%2048%2043%20L16%2043%20Q13%2043%2013%2040%20Z%22%20fill%3D%22url%28%23cng-body%29%22%2F%3E%20%3Crect%20x%3D%2213%22%20y%3D%2238.5%22%20width%3D%2238%22%20height%3D%222.4%22%20fill%3D%22%23046a44%22%20opacity%3D%22.28%22%2F%3E%20%3C%21--%20headlight%20--%3E%20%3Ccircle%20cx%3D%2249%22%20cy%3D%2237.5%22%20r%3D%221.8%22%20fill%3D%22%23fffbe8%22%2F%3E%20%3C%21--%20wheels%20--%3E%20%3Ccircle%20cx%3D%2222%22%20cy%3D%2246%22%20r%3D%226.4%22%20fill%3D%22%230b2e22%22%2F%3E%20%3Ccircle%20cx%3D%2222%22%20cy%3D%2246%22%20r%3D%222.5%22%20fill%3D%22%23ffd94d%22%2F%3E%20%3Ccircle%20cx%3D%2242%22%20cy%3D%2246%22%20r%3D%226.4%22%20fill%3D%22%230b2e22%22%2F%3E%20%3Ccircle%20cx%3D%2242%22%20cy%3D%2246%22%20r%3D%222.5%22%20fill%3D%22%23ffd94d%22%2F%3E%20%3C%2Fsvg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<style>
+
+/* ============ CNG RIDE v3 — PREMIUM DESIGN SYSTEM ============ */
+
+:root{
+--primary:#0bbe82;
+--primary-deep:#046a44;
+--primary-dark:#063b2b;
+--primary-ink:#0a2e21;
+--accent:#ffc53d;
+--accent-deep:#f59e0b;
+--danger:#e5484d;
+--success:#0bbe82;
+--warning:#f59e0b;
+--bg:#eef5f1;
+--card:#ffffff;
+--text:#17281f;
+--muted:#6d8478;
+--line:#e2ede7;
+--radius:20px;
+--radius-sm:14px;
+--shadow:0 10px 30px rgba(6,59,43,.09);
+--shadow-lg:0 24px 60px rgba(6,59,43,.16);
+--grad-primary:linear-gradient(135deg,#0bbe82 0%,#046a44 100%);
+--grad-accent:linear-gradient(135deg,#ffd94d 0%,#f59e0b 100%);
+--grad-dark:linear-gradient(135deg,#063b2b 0%,#0a5c3f 60%,#0bbe82 130%);
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:"Hind Siliguri",system-ui,sans-serif;
+background:
+radial-gradient(1000px 400px at 90% -5%,rgba(11,190,130,.10),transparent),
+radial-gradient(800px 380px at -10% 20%,rgba(255,197,61,.08),transparent),
+var(--bg);
+color:var(--text);
+line-height:1.65;
+min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+font-family:inherit;
+}
+
+button{
+cursor:pointer;
+border:none;
+background:none;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+img,svg{
+display:block;
+}
+
+::selection{
+background:var(--accent);
+color:var(--primary-ink);
+}
+
+/* ============ SPLASH ============ */
+
+#splash{
+position:fixed;
+inset:0;
+z-index:9999;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:14px;
+background:var(--grad-dark);
+color:#fff;
+transition:opacity .55s ease,visibility .55s;
+}
+
+#splash.hide{
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+}
+
+.splash-logo{
+width:112px;
+height:112px;
+filter:drop-shadow(0 18px 40px rgba(0,0,0,.35));
+animation:splashPop .8s cubic-bezier(.2,1.5,.35,1) both;
+}
+
+.splash-name{
+font-size:40px;
+font-weight:700;
+letter-spacing:.5px;
+animation:splashUp .7s .15s ease both;
+}
+
+.splash-name em{
+font-style:normal;
+color:var(--accent);
+}
+
+.splash-tag{
+font-size:15px;
+opacity:.85;
+letter-spacing:2px;
+animation:splashUp .7s .25s ease both;
+}
+
+.splash-bar{
+width:170px;
+height:5px;
+border-radius:99px;
+background:rgba(255,255,255,.22);
+overflow:hidden;
+margin-top:10px;
+}
+
+.splash-bar span{
+display:block;
+height:100%;
+width:40%;
+border-radius:99px;
+background:var(--accent);
+animation:splashSlide 1.1s ease-in-out infinite;
+}
+
+@keyframes splashPop{
+from{transform:scale(.4);opacity:0}
+to{transform:scale(1);opacity:1}
+}
+
+@keyframes splashUp{
+from{transform:translateY(16px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+@keyframes splashSlide{
+0%{transform:translateX(-110%)}
+100%{transform:translateX(430%)}
+}
+
+/* ============ HEADER ============ */
+
+header{
+position:sticky;
+top:0;
+z-index:1000;
+background:rgba(255,255,255,.88);
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+border-bottom:1px solid var(--line);
+box-shadow:0 4px 24px rgba(6,59,43,.06);
+}
+
+.navbar{
+max-width:1200px;
+margin:auto;
+min-height:74px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:10px 20px;
+gap:12px;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:11px;
+}
+
+.logo-icon{
+width:46px;
+height:46px;
+flex:none;
+filter:drop-shadow(0 6px 14px rgba(4,106,68,.35));
+transition:transform .25s;
+}
+
+.logo-icon svg,
+.splash-logo svg{
+width:100%;
+height:100%;
+}
+
+.logo:hover .logo-icon{
+transform:rotate(-8deg) scale(1.06);
+}
+
+.logo-text{
+font-size:24px;
+font-weight:700;
+color:var(--primary-dark);
+line-height:1.1;
+letter-spacing:.3px;
+}
+
+.logo-text em{
+font-style:normal;
+background:var(--grad-primary);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+.logo-pill{
+font-size:12px;
+font-weight:700;
+color:var(--primary-ink);
+background:var(--grad-accent);
+padding:3px 11px;
+border-radius:99px;
+box-shadow:0 4px 12px rgba(245,158,11,.35);
+}
+
+.nav-links{
+display:flex;
+gap:6px;
+align-items:center;
+}
+
+.nav-links a{
+padding:10px 16px;
+border-radius:12px;
+font-weight:600;
+font-size:15px;
+color:var(--text);
+transition:.22s;
+}
+
+.nav-links a:hover{
+background:#e4f4ec;
+color:var(--primary-deep);
+transform:translateY(-1px);
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:0 20px;
+}
+
+/* ============ HERO ============ */
+
+.hero{
+position:relative;
+overflow:hidden;
+padding:80px 20px 60px;
+background:var(--grad-dark);
+color:#fff;
+}
+
+.hero::before,
+.hero::after{
+content:"";
+position:absolute;
+border-radius:50%;
+filter:blur(2px);
+opacity:.16;
+}
+
+.hero::before{
+width:480px;
+height:480px;
+background:var(--accent);
+top:-160px;
+right:-120px;
+animation:heroFloat 9s ease-in-out infinite;
+}
+
+.hero::after{
+width:340px;
+height:340px;
+background:#fff;
+bottom:-140px;
+left:-100px;
+animation:heroFloat 11s ease-in-out infinite reverse;
+}
+
+@keyframes heroFloat{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(26px)}
+}
+
+.hero-inner{
+position:relative;
+z-index:1;
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:1.15fr .85fr;
+gap:44px;
+align-items:center;
+}
+
+.hero-badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:rgba(255,255,255,.14);
+border:1px solid rgba(255,255,255,.28);
+padding:8px 18px;
+border-radius:99px;
+font-size:14px;
+font-weight:600;
+margin-bottom:20px;
+backdrop-filter:blur(6px);
+}
+
+.hero h1{
+font-size:52px;
+line-height:1.25;
+font-weight:700;
+margin-bottom:16px;
+}
+
+.hero h1 .hl{
+color:var(--accent);
+}
+
+.hero p{
+font-size:17px;
+opacity:.88;
+max-width:520px;
+margin-bottom:28px;
+}
+
+.hero-card{
+background:rgba(255,255,255,.97);
+color:var(--text);
+border-radius:26px;
+padding:30px;
+box-shadow:var(--shadow-lg);
+animation:fadeUp .7s .2s ease both;
+}
+
+@keyframes fadeUp{
+from{transform:translateY(26px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+/* ============ SECTIONS ============ */
+
+section{
+padding:56px 0;
+}
+
+.section-title{
+margin-bottom:26px;
+}
+
+.section-title h2{
+font-size:29px;
+font-weight:700;
+color:var(--primary-dark);
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.section-title h2::after{
+content:"";
+flex:1;
+height:2px;
+border-radius:2px;
+background:linear-gradient(90deg,var(--line),transparent);
+}
+
+.section-title p{
+color:var(--muted);
+margin-top:6px;
+font-size:15px;
+}
+
+/* ============ CARDS ============ */
+
+.card{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:26px;
+box-shadow:var(--shadow);
+margin-bottom:22px;
+animation:fadeUp .5s ease both;
+}
+
+.card h3{
+font-size:20px;
+color:var(--primary-dark);
+margin-bottom:14px;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+/* ============ BUTTONS ============ */
+
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+padding:13px 26px;
+border-radius:var(--radius-sm);
+font-size:16px;
+font-weight:700;
+transition:transform .18s,box-shadow .18s,filter .18s;
+border:none;
+}
+
+.btn:active{
+transform:scale(.97);
+}
+
+.btn-primary{
+background:var(--grad-primary);
+color:#fff;
+box-shadow:0 10px 24px rgba(4,106,68,.35);
+}
+
+.btn-primary:hover{
+transform:translateY(-2px);
+box-shadow:0 16px 32px rgba(4,106,68,.42);
+filter:brightness(1.06);
+}
+
+.btn-secondary{
+background:#eaf4ee;
+color:var(--primary-deep);
+}
+
+.btn-secondary:hover{
+background:#d9ecdf;
+transform:translateY(-2px);
+}
+
+.btn-success{
+background:var(--grad-primary);
+color:#fff;
+box-shadow:0 10px 24px rgba(4,106,68,.35);
+}
+
+.btn-success:hover{
+transform:translateY(-2px);
+filter:brightness(1.06);
+}
+
+.btn-warning{
+background:var(--grad-accent);
+color:var(--primary-ink);
+box-shadow:0 10px 24px rgba(245,158,11,.35);
+}
+
+.btn-warning:hover{
+transform:translateY(-2px);
+filter:brightness(1.05);
+}
+
+.btn-danger{
+background:linear-gradient(135deg,#f0666b,#d92d33);
+color:#fff;
+box-shadow:0 10px 24px rgba(217,45,51,.3);
+}
+
+.btn-danger:hover{
+transform:translateY(-2px);
+filter:brightness(1.06);
+}
+
+.btn-block{
+width:100%;
+}
+
+.btn-small{
+padding:9px 16px;
+font-size:14px;
+border-radius:11px;
+}
+
+.btn:disabled{
+opacity:.55;
+cursor:not-allowed;
+transform:none;
+box-shadow:none;
+}
+
+/* ============ FORMS ============ */
+
+.form-group{
+margin-bottom:16px;
+}
+
+.form-group label{
+display:block;
+font-weight:600;
+font-size:14px;
+margin-bottom:7px;
+color:var(--primary-dark);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+width:100%;
+padding:13px 16px;
+border:2px solid var(--line);
+border-radius:var(--radius-sm);
+font-size:16px;
+background:#fbfdfc;
+transition:border-color .2s,box-shadow .2s;
+color:var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+outline:none;
+border-color:var(--primary);
+box-shadow:0 0 0 4px rgba(11,190,130,.14);
+background:#fff;
+}
+
+.form-group textarea{
+resize:vertical;
+min-height:90px;
+}
+
+/* ============ AUTH ============ */
+
+.auth-section{
+padding:56px 0;
+}
+
+.auth-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:26px;
+}
+
+/* ============ APP HEADER (logged in) ============ */
+
+.app-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:14px;
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:18px 22px;
+box-shadow:var(--shadow);
+margin:26px 0 22px;
+flex-wrap:wrap;
+}
+
+.app-header > div:last-child{
+display:flex;
+gap:10px;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.user-info{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.avatar{
+width:54px;
+height:54px;
+border-radius:50%;
+background:var(--grad-primary);
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+flex:none;
+box-shadow:0 8px 18px rgba(4,106,68,.35);
+border:3px solid #fff;
+}
+
+.user-name{
+font-weight:700;
+font-size:18px;
+color:var(--primary-dark);
+}
+
+.user-type{
+font-size:13px;
+color:var(--muted);
+font-weight:600;
+}
+
+/* ============ MAP ============ */
+
+#map{
+height:440px;
+border-radius:var(--radius);
+box-shadow:var(--shadow);
+z-index:1;
+border:1px solid var(--line);
+}
+
+#trackMap{
+border:1px solid var(--line);
+box-shadow:inset 0 0 0 1px rgba(255,255,255,.6);
+}
+
+#activeRideCard{
+border:2px solid var(--primary) !important;
+background:linear-gradient(180deg,#f2fbf7,#ffffff 40%);
+position:relative;
+overflow:hidden;
+}
+
+#activeRideCard::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:5px;
+background:var(--grad-primary);
+}
+
+#activeRideCard h3 .pulse,
+.pulse-dot{
+display:inline-block;
+width:11px;
+height:11px;
+border-radius:50%;
+background:var(--success);
+animation:pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse{
+0%,100%{box-shadow:0 0 0 0 rgba(11,190,130,.55)}
+50%{box-shadow:0 0 0 9px rgba(11,190,130,0)}
+}
+
+/* ============ LOCATION BAR ============ */
+
+.location-bar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+flex-wrap:wrap;
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius-sm);
+padding:12px 18px;
+margin-bottom:14px;
+box-shadow:var(--shadow);
+font-size:14.5px;
+font-weight:600;
+}
+
+.location-bar small{
+color:var(--muted);
+font-weight:500;
+}
+
+
+/* ============ SEARCH / DRIVER LIST ============ */
+
+.search-box{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:26px;
+box-shadow:var(--shadow);
+margin-bottom:26px;
+}
+
+.search-grid{
+display:grid;
+grid-template-columns:1fr 1fr auto;
+gap:14px;
+align-items:end;
+}
+
+.driver-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+gap:18px;
+}
+
+.driver-card{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:20px;
+box-shadow:var(--shadow);
+transition:transform .2s,box-shadow .2s;
+position:relative;
+overflow:hidden;
+}
+
+.driver-card:hover{
+transform:translateY(-4px);
+box-shadow:var(--shadow-lg);
+}
+
+.driver-card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:4px;
+background:var(--grad-primary);
+opacity:0;
+transition:opacity .2s;
+}
+
+.driver-card:hover::before{
+opacity:1;
+}
+
+.driver-card-head{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:12px;
+}
+
+.driver-card-head .avatar{
+width:48px;
+height:48px;
+font-size:22px;
+}
+
+.driver-name{
+font-weight:700;
+font-size:17px;
+color:var(--primary-dark);
+}
+
+.driver-meta{
+font-size:13.5px;
+color:var(--muted);
+margin-bottom:4px;
+}
+
+.driver-distance{
+display:inline-flex;
+align-items:center;
+gap:5px;
+font-size:13px;
+font-weight:700;
+color:var(--primary-deep);
+background:#e4f4ec;
+padding:4px 12px;
+border-radius:99px;
+margin:8px 0;
+}
+
+.driver-actions{
+display:flex;
+gap:10px;
+margin-top:14px;
+flex-wrap:wrap;
+}
+
+.driver-actions .btn{
+flex:1;
+white-space:nowrap;
+}
+
+.empty{
+text-align:center;
+padding:44px 20px;
+color:var(--muted);
+font-size:16px;
+background:var(--card);
+border:2px dashed var(--line);
+border-radius:var(--radius);
+}
+
+/* ============ DRIVER PANEL ============ */
+
+.driver-panel,
+.passenger-panel{
+animation:fadeUp .5s ease both;
+}
+
+.driver-status{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px;
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:20px 24px;
+box-shadow:var(--shadow);
+margin-bottom:22px;
+flex-wrap:wrap;
+}
+
+.status-pill{
+display:inline-flex;
+align-items:center;
+gap:9px;
+font-weight:700;
+font-size:15px;
+padding:9px 18px;
+border-radius:99px;
+}
+
+.status-dot{
+width:11px;
+height:11px;
+border-radius:50%;
+flex:none;
+}
+
+.status-available{
+background:#dcf7e9;
+color:#046a44;
+}
+
+.status-available .status-dot{
+background:#0bbe82;
+animation:pulse 1.6s infinite;
+}
+
+.status-busy{
+background:#fdeaea;
+color:#b4232a;
+}
+
+.status-busy .status-dot{
+background:var(--danger);
+}
+
+/* ============ REQUEST CARDS ============ */
+
+.request-list{
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+.request-card{
+background:var(--card);
+border:1px solid var(--line);
+border-left:5px solid var(--accent-deep);
+border-radius:var(--radius-sm);
+padding:20px;
+box-shadow:var(--shadow);
+animation:slideIn .4s ease both;
+}
+
+@keyframes slideIn{
+from{transform:translateX(-18px);opacity:0}
+to{transform:translateX(0);opacity:1}
+}
+
+.request-row{
+display:flex;
+justify-content:space-between;
+gap:12px;
+padding:7px 0;
+border-bottom:1px dashed var(--line);
+font-size:15px;
+}
+
+.request-row:last-child{
+border-bottom:none;
+}
+
+.request-label{
+color:var(--muted);
+font-weight:600;
+flex:none;
+}
+
+.request-value{
+font-weight:600;
+text-align:right;
+color:var(--text);
+}
+
+/* ============ BADGES ============ */
+
+.badge{
+display:inline-block;
+font-size:12.5px;
+font-weight:700;
+padding:5px 14px;
+border-radius:99px;
+letter-spacing:.3px;
+}
+
+.badge-pending{
+background:#fff3d6;
+color:#a86a00;
+}
+
+.badge-accepted{
+background:#dceaff;
+color:#1d4fd7;
+}
+
+.badge-completed{
+background:#dcf7e9;
+color:#046a44;
+}
+
+.badge-cancelled,
+.badge-rejected{
+background:#fdeaea;
+color:#b4232a;
+}
+
+/* ============ HISTORY ============ */
+
+.history-list{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.history-card{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius-sm);
+padding:18px 20px;
+box-shadow:0 6px 18px rgba(6,59,43,.06);
+}
+
+.history-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+margin-bottom:8px;
+flex-wrap:wrap;
+}
+
+.history-route{
+font-weight:600;
+font-size:15.5px;
+color:var(--primary-dark);
+}
+
+.history-fare{
+font-weight:700;
+font-size:18px;
+color:var(--primary-deep);
+}
+
+/* ============ WALLET ============ */
+
+.wallet-balance{
+font-size:38px;
+font-weight:700;
+color:#fff;
+letter-spacing:.5px;
+}
+
+.wallet-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+#walletCard{
+background:var(--grad-dark);
+color:#fff;
+border:none;
+position:relative;
+overflow:hidden;
+}
+
+#walletCard::after{
+content:"৳";
+position:absolute;
+right:18px;
+bottom:-30px;
+font-size:150px;
+font-weight:700;
+opacity:.08;
+line-height:1;
+}
+
+#walletCard h3{
+color:#fff;
+}
+
+#walletCard small{
+color:rgba(255,255,255,.75);
+}
+
+.tx-list{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:6px;
+}
+
+.tx-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:13px 16px;
+background:#f8fbfa;
+border:1px solid var(--line);
+border-radius:12px;
+font-size:14.5px;
+}
+
+.tx-credit{
+color:var(--success);
+font-weight:700;
+white-space:nowrap;
+}
+
+.tx-debit{
+color:var(--danger);
+font-weight:700;
+white-space:nowrap;
+}
+
+/* ============ FARE BOX ============ */
+
+.fare-box{
+background:#f8fbfa;
+border:1px solid var(--line);
+border-radius:var(--radius-sm);
+padding:18px;
+margin:14px 0;
+}
+
+.fare-row{
+display:flex;
+justify-content:space-between;
+padding:6px 0;
+font-size:15px;
+}
+
+.fare-total{
+display:flex;
+justify-content:space-between;
+padding:12px 0 2px;
+margin-top:8px;
+border-top:2px solid var(--line);
+font-size:19px;
+font-weight:700;
+color:var(--primary-dark);
+}
+
+/* ============ STATS ============ */
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+margin-bottom:26px;
+}
+
+.stat{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:22px;
+text-align:center;
+box-shadow:var(--shadow);
+position:relative;
+overflow:hidden;
+}
+
+.stat::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:4px;
+background:var(--grad-accent);
+}
+
+.stat-number{
+font-size:34px;
+font-weight:700;
+color:var(--primary-deep);
+}
+
+.stat-label{
+font-size:14px;
+color:var(--muted);
+font-weight:600;
+margin-top:4px;
+}
+
+/* ============ MODAL ============ */
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+z-index:2000;
+background:rgba(6,35,25,.55);
+backdrop-filter:blur(4px);
+align-items:center;
+justify-content:center;
+padding:18px;
+animation:fadeIn .25s ease;
+}
+
+.modal.show{
+display:flex;
+}
+
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+.modal-box{
+background:#fff;
+border-radius:24px;
+padding:30px;
+width:100%;
+max-width:480px;
+max-height:90vh;
+overflow-y:auto;
+box-shadow:var(--shadow-lg);
+position:relative;
+animation:modalUp .3s cubic-bezier(.2,1.2,.4,1) both;
+}
+
+@keyframes modalUp{
+from{transform:translateY(40px) scale(.96);opacity:0}
+to{transform:translateY(0) scale(1);opacity:1}
+}
+
+.modal-close{
+position:absolute;
+top:14px;
+right:16px;
+width:36px;
+height:36px;
+border-radius:50%;
+background:#f0f4f2;
+font-size:18px;
+color:var(--muted);
+display:flex;
+align-items:center;
+justify-content:center;
+transition:.2s;
+}
+
+.modal-close:hover{
+background:#fde8e8;
+color:var(--danger);
+transform:rotate(90deg);
+}
+
+.modal-box h3{
+margin-bottom:16px;
+padding-right:40px;
+}
+
+/* ============ MESSAGE ============ */
+
+.message{
+padding:13px 18px;
+border-radius:12px;
+font-size:15px;
+font-weight:600;
+margin:12px 0;
+display:none;
+}
+
+.message.success{
+display:block;
+background:#dcf7e9;
+color:#046a44;
+border:1px solid #a9e8c9;
+}
+
+.message.error{
+display:block;
+background:#fdeaea;
+color:#b4232a;
+border:1px solid #f5c1c4;
+}
+
+.message.info{
+display:block;
+background:#e3f0ff;
+color:#1d4fd7;
+border:1px solid #bcd7ff;
+}
+
+/* ============ LOADER ============ */
+
+.loader{
+width:26px;
+height:26px;
+border:3px solid rgba(255,255,255,.35);
+border-top-color:#fff;
+border-radius:50%;
+animation:spin .7s linear infinite;
+display:inline-block;
+vertical-align:-6px;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+/* ============ FOOTER ============ */
+
+footer{
+background:var(--primary-ink);
+color:#cfe3d8;
+text-align:center;
+padding:46px 20px 30px;
+margin-top:40px;
+position:relative;
+overflow:hidden;
+}
+
+footer::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:4px;
+background:var(--grad-accent);
+}
+
+.footer-logo{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+font-size:24px;
+font-weight:700;
+color:#fff;
+margin-bottom:8px;
+}
+
+.footer-logo .logo-icon{
+width:40px;
+height:40px;
+}
+
+.footer-text{
+font-size:14px;
+opacity:.75;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media(max-width:850px){
+
+.hero-inner{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+.auth-grid{
+grid-template-columns:1fr;
+}
+
+.driver-grid{
+grid-template-columns:1fr;
+}
+
+.nav-links{
+display:none;
+}
+
+.stats-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.search-grid{
+grid-template-columns:1fr;
+}
+
+.app-header{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.driver-status{
+flex-direction:column;
+align-items:flex-start;
+}
+
+#map{
+height:380px;
+}
+
+.logo-text{
+font-size:20px;
+}
+
+}
+
+@media(max-width:500px){
+
+.container{
+padding:0 14px;
+}
+
+.hero{
+padding:52px 14px 40px;
+}
+
+.hero h1{
+font-size:33px;
+}
+
+section{
+padding:40px 0;
+}
+
+.card{
+padding:20px;
+}
+
+.stats-grid{
+grid-template-columns:1fr;
+}
+
+.driver-actions .btn{
+flex:1 1 auto;
+}
+
+.request-row{
+flex-direction:column;
+gap:2px;
+}
+
+.request-value{
+text-align:left;
+}
+
+.navbar{
+padding:8px 14px;
+}
+
+.logo-pill{
+display:none;
+}
+
+.modal-box{
+padding:22px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+<div class="splash-logo"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CNG Ride logo">
+  <defs>
+    <linearGradient id="cng-badge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0dbe82"/>
+      <stop offset="1" stop-color="#046a44"/>
+    </linearGradient>
+    <linearGradient id="cng-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd94d"/>
+      <stop offset="1" stop-color="#ffb703"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="url(#cng-badge)"/>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="none" stroke="#ffffff" stroke-opacity=".25" stroke-width="1.5"/>
+  <!-- motion lines -->
+  <g stroke="#ffffff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round">
+    <line x1="6" y1="30" x2="10" y2="30"/>
+    <line x1="5" y1="36" x2="10" y2="36"/>
+  </g>
+  <!-- canopy -->
+  <path d="M15 31 Q16 21 25 20 L36 20 Q42 20 45 26 L47 31 Z" fill="url(#cng-body)"/>
+  <!-- windshield -->
+  <path d="M37 22.5 L43 30 L37 30 Z" fill="#d9f5e9"/>
+  <!-- side window -->
+  <rect x="19" y="23.5" width="12" height="5.5" rx="2" fill="#046a44" opacity=".9"/>
+  <!-- body -->
+  <path d="M13 33 L47 33 Q51 33 51 37 L51 40 Q51 43 48 43 L16 43 Q13 43 13 40 Z" fill="url(#cng-body)"/>
+  <rect x="13" y="38.5" width="38" height="2.4" fill="#046a44" opacity=".28"/>
+  <!-- headlight -->
+  <circle cx="49" cy="37.5" r="1.8" fill="#fffbe8"/>
+  <!-- wheels -->
+  <circle cx="22" cy="46" r="6.4" fill="#0b2e22"/>
+  <circle cx="22" cy="46" r="2.5" fill="#ffd94d"/>
+  <circle cx="42" cy="46" r="6.4" fill="#0b2e22"/>
+  <circle cx="42" cy="46" r="2.5" fill="#ffd94d"/>
+</svg></div>
+<div class="splash-name">CNG <em>Ride</em></div>
+<div class="splash-tag">টাঙ্গাইল • যাত্রা হোক সহজ</div>
+<div class="splash-bar"><span></span></div>
+</div>
+
+
+<!-- invisible reCAPTCHA for Firebase phone auth -->
+<div id="recaptcha-container"></div>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="navbar">
+
+<a href="#" class="logo">
+<span class="logo-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CNG Ride logo">
+  <defs>
+    <linearGradient id="cng-badge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0dbe82"/>
+      <stop offset="1" stop-color="#046a44"/>
+    </linearGradient>
+    <linearGradient id="cng-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd94d"/>
+      <stop offset="1" stop-color="#ffb703"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="url(#cng-badge)"/>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="none" stroke="#ffffff" stroke-opacity=".25" stroke-width="1.5"/>
+  <!-- motion lines -->
+  <g stroke="#ffffff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round">
+    <line x1="6" y1="30" x2="10" y2="30"/>
+    <line x1="5" y1="36" x2="10" y2="36"/>
+  </g>
+  <!-- canopy -->
+  <path d="M15 31 Q16 21 25 20 L36 20 Q42 20 45 26 L47 31 Z" fill="url(#cng-body)"/>
+  <!-- windshield -->
+  <path d="M37 22.5 L43 30 L37 30 Z" fill="#d9f5e9"/>
+  <!-- side window -->
+  <rect x="19" y="23.5" width="12" height="5.5" rx="2" fill="#046a44" opacity=".9"/>
+  <!-- body -->
+  <path d="M13 33 L47 33 Q51 33 51 37 L51 40 Q51 43 48 43 L16 43 Q13 43 13 40 Z" fill="url(#cng-body)"/>
+  <rect x="13" y="38.5" width="38" height="2.4" fill="#046a44" opacity=".28"/>
+  <!-- headlight -->
+  <circle cx="49" cy="37.5" r="1.8" fill="#fffbe8"/>
+  <!-- wheels -->
+  <circle cx="22" cy="46" r="6.4" fill="#0b2e22"/>
+  <circle cx="22" cy="46" r="2.5" fill="#ffd94d"/>
+  <circle cx="42" cy="46" r="6.4" fill="#0b2e22"/>
+  <circle cx="42" cy="46" r="2.5" fill="#ffd94d"/>
+</svg></span>
+<span class="logo-text">CNG <em>Ride</em></span>
+<span class="logo-pill">টাঙ্গাইল</span>
+</a>
+
+<nav class="nav-links">
+
+<a href="#home">হোম</a>
+<a href="#search">CNG খুঁজুন</a>
+<a href="#myRides">আমার Ride</a>
+
+<a
+href="#"
+id="logoutNav"
+style="display:none"
+onclick="logout();return false;"
+>
+Logout
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div class="hero-inner">
+
+<div>
+
+<div class="hero-badge">
+📍 Live Location Based CNG Service
+</div>
+
+<h1>
+আপনার কাছের CNG,<br>
+আপনার যাত্রার সঙ্গী
+</h1>
+
+<p>
+CNG RIDE-এর মাধ্যমে আপনার বর্তমান অবস্থানের কাছাকাছি
+available CNG খুঁজুন, ride request পাঠান এবং নিরাপদে
+আপনার গন্তব্যে পৌঁছান।
+</p>
+
+</div>
+
+<div class="hero-card">
+
+<h3>🚕 CNG RIDE সুবিধা</h3>
+
+<ul>
+
+<li>📍 Live GPS Location</li>
+
+<li>🚕 Nearby CNG Search</li>
+
+<li>📞 Driver Call & Message</li>
+
+<li>🚖 Online Ride Request</li>
+
+<li>💰 Transparent Fare</li>
+
+<li>🔄 Live Ride Status</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- AUTH -->
+
+<section class="auth-section" id="authSection">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>শুরু করুন</h2>
+
+<p>
+মোবাইল নম্বরে OTP যাবে — OTP দিয়েই Register/Login করুন 📩
+</p>
+
+</div>
+
+
+<div class="auth-grid">
+
+<!-- LOGIN -->
+
+<div class="card">
+
+<h3>🔐 Login</h3>
+
+<div id="loginStep1">
+
+<div class="form-group">
+
+<label>📱 Phone Number</label>
+
+<input
+type="tel"
+id="loginPhone"
+placeholder="01XXXXXXXXX"
+inputmode="numeric"
+>
+
+</div>
+
+<button
+class="btn btn-primary btn-block"
+id="loginOtpBtn"
+onclick="sendLoginOtp()"
+>
+📩 OTP পাঠান
+</button>
+
+<!-- admin login: hidden — header logo-তে 5 বার tap করলে খুলবে -->
+
+<div
+id="adminLoginBox"
+style="display:none;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)"
+>
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+type="email"
+id="adminEmail"
+placeholder="Admin email"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Password"
+>
+
+</div>
+
+<button
+class="btn btn-secondary btn-block"
+id="adminLoginBtn"
+onclick="adminLogin()"
+>
+Login
+</button>
+
+</div>
+
+<div
+id="loginMessage"
+class="message"
+></div>
+
+</div>
+
+
+<div id="loginStep2" style="display:none">
+
+<p style="margin-bottom:14px">
+📩 <b id="loginOtpPhone"></b> নম্বরে 6 সংখ্যার OTP পাঠানো হয়েছে
+</p>
+
+<div class="form-group">
+
+<label>🔑 OTP</label>
+
+<input
+type="text"
+id="loginOtp"
+placeholder="------"
+inputmode="numeric"
+maxlength="6"
+style="text-align:center;font-size:26px;letter-spacing:10px;font-weight:700"
+>
+
+</div>
+
+<button
+class="btn btn-success btn-block"
+id="loginVerifyBtn"
+onclick="verifyLoginOtp()"
+>
+✅ Verify ও Login
+</button>
+
+<div
+style="display:flex;justify-content:space-between;gap:10px;margin-top:12px"
+>
+
+<button
+class="btn btn-secondary btn-small"
+onclick="backToLoginStep1()"
+>
+← নম্বর বদলান
+</button>
+
+<button
+class="btn btn-secondary btn-small"
+id="loginResendBtn"
+onclick="resendLoginOtp()"
+>
+🔄 পুনরায় পাঠান
+</button>
+
+</div>
+
+<div
+id="loginResendTimer"
+style="text-align:center;margin-top:8px;color:var(--muted);font-size:14px"
+></div>
+
+<div
+id="loginOtpMessage"
+class="message"
+></div>
+
+</div>
+
+</div>
+
+
+
+<!-- REGISTER -->
+
+<div class="card">
+
+<h3>📝 Register</h3>
+
+<div id="registerStep1">
+
+<div class="form-group">
+
+<label>আপনার নাম</label>
+
+<input
+type="text"
+id="registerName"
+placeholder="পূর্ণ নাম"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>📱 Phone Number</label>
+
+<input
+type="tel"
+id="registerPhone"
+placeholder="01XXXXXXXXX"
+inputmode="numeric"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>আপনি কী?</label>
+
+<select id="registerType">
+
+<option value="">
+নির্বাচন করুন
+</option>
+
+<option value="passenger">
+Passenger
+</option>
+
+<option value="driver">
+CNG Driver
+</option>
+
+</select>
+
+</div>
+
+
+<div
+class="form-group"
+id="vehicleGroup"
+style="display:none"
+>
+
+<label>CNG Number</label>
+
+<input
+type="text"
+id="vehicleNumber"
+placeholder="যেমন: ঢাকা মেট্রো-থ-১২-৩৪৫৬"
+>
+
+</div>
+
+
+<button
+class="btn btn-primary btn-block"
+id="registerOtpBtn"
+onclick="sendRegisterOtp()"
+>
+📩 OTP পাঠান
+</button>
+
+<div
+id="registerMessage"
+class="message"
+></div>
+
+</div>
+
+
+<div id="registerStep2" style="display:none">
+
+<p style="margin-bottom:14px">
+📩 <b id="registerOtpPhone"></b> নম্বরে 6 সংখ্যার OTP পাঠানো হয়েছে
+</p>
+
+<div class="form-group">
+
+<label>🔑 OTP</label>
+
+<input
+type="text"
+id="registerOtp"
+placeholder="------"
+inputmode="numeric"
+maxlength="6"
+style="text-align:center;font-size:26px;letter-spacing:10px;font-weight:700"
+>
+
+</div>
+
+<button
+class="btn btn-success btn-block"
+id="registerVerifyBtn"
+onclick="verifyRegisterOtp()"
+>
+✅ Verify ও Register
+</button>
+
+<div
+style="display:flex;justify-content:space-between;gap:10px;margin-top:12px"
+>
+
+<button
+class="btn btn-secondary btn-small"
+onclick="backToRegisterStep1()"
+>
+← নম্বর বদলান
+</button>
+
+<button
+class="btn btn-secondary btn-small"
+id="registerResendBtn"
+onclick="resendRegisterOtp()"
+>
+🔄 পুনরায় পাঠান
+</button>
+
+</div>
+
+<div
+id="registerResendTimer"
+style="text-align:center;margin-top:8px;color:var(--muted);font-size:14px"
+></div>
+
+<div
+id="registerOtpMessage"
+class="message"
+></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- PROFILE COMPLETION MODAL -->
+
+<div
+class="modal"
+id="profileModal"
+>
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+onclick="closeProfileModal()"
+>
+×
+</button>
+
+<h3>📝 প্রোফাইল সম্পূর্ণ করুন</h3>
+
+<p
+style="color:var(--muted);margin-bottom:16px;font-size:15px"
+>
+আপনার নাম ও অ্যাকাউন্টের ধরন দিন
+</p>
+
+<div class="form-group">
+
+<label>আপনার নাম</label>
+
+<input
+type="text"
+id="profileName"
+placeholder="পূর্ণ নাম"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>আপনি কী?</label>
+
+<select id="profileType">
+
+<option value="">
+নির্বাচন করুন
+</option>
+
+<option value="passenger">
+Passenger
+</option>
+
+<option value="driver">
+CNG Driver
+</option>
+
+</select>
+
+</div>
+
+<button
+class="btn btn-primary btn-block"
+id="profileSaveBtn"
+onclick="saveProfile()"
+>
+✅ Save ও শুরু করুন
+</button>
+
+<div
+id="profileMessage"
+class="message"
+></div>
+
+</div>
+
+</div>
+
+
+
+<!-- APP -->
+
+<section id="appSection">
+
+<div class="container">
+
+
+<!-- APP HEADER -->
+
+<div class="app-header">
+
+<div class="user-info">
+
+<div class="avatar">
+👤
+</div>
+
+<div>
+
+<div
+class="user-name"
+id="userName"
+>
+User
+</div>
+
+<div
+class="user-type"
+id="userType"
+>
+Passenger
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="btn btn-secondary btn-small"
+onclick="testSound()"
+style="margin-right:8px"
+>
+🔊 সাউন্ড টেস্ট
+</button>
+
+<button
+class="btn btn-danger"
+onclick="logout()"
+>
+Logout
+</button>
+
+</div>
+
+
+<!-- DRIVER PANEL -->
+
+<div
+id="driverPanel"
+class="driver-panel"
+>
+
+<div class="section-title">
+
+<h2>🚕 Driver Dashboard</h2>
+
+<p>
+আপনার CNG এবং Ride Request পরিচালনা করুন
+</p>
+
+</div>
+
+
+<div class="driver-status">
+
+<div>
+
+<div
+id="driverStatusPill"
+class="status-pill status-busy"
+>
+<span class="status-dot"></span>
+<span id="driverStatusText">
+Offline / Busy
+</span>
+</div>
+
+<div
+style="margin-top:8px;color:var(--muted)"
+id="driverLocationStatus"
+>
+📍 GPS চালু হচ্ছে...
+</div>
+
+</div>
+
+
+<button
+id="driverStatusBtn"
+class="btn btn-success"
+onclick="toggleDriverStatus()"
+>
+Available করুন
+</button>
+
+</div>
+
+
+<!-- WALLET CARD -->
+
+<div
+class="card"
+style="margin-bottom:20px"
+>
+
+<h3>💰 Wallet</h3>
+
+<div class="wallet-row">
+
+<div>
+
+<div
+class="wallet-balance"
+id="walletBalance"
+>
+৳0.00
+</div>
+
+<div
+style="color:var(--muted);font-size:14px"
+>
+প্রতি রাইডে কমিশন:
+<strong id="commissionRateLabel">12%</strong>
+· রাইড নিতে মিনিমাম ব্যালেন্স:
+<strong>৳50</strong>
+</div>
+
+</div>
+
+<button
+class="btn btn-primary"
+onclick="openRechargeModal()"
+>
+➕ রিচার্জ
+</button>
+
+</div>
+
+<div id="walletWarning"></div>
+
+<div
+id="walletHistory"
+class="tx-list"
+>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🚖 Ride Requests</h3>
+
+<div
+id="driverRequests"
+class="request-list"
+>
+<div class="empty">
+কোনো Ride Request নেই
+</div>
+</div>
+
+</div>
+
+
+<div
+class="card"
+style="margin-top:25px"
+>
+
+<h3>📜 Ride History</h3>
+
+<div
+id="driverHistory"
+class="history-list"
+>
+<div class="empty">
+এখনও কোনো Ride নেই
+</div>
+</div>
+
+</div>
+
+
+
+</div>
+
+<!-- ADMIN PANEL (only visible to admin email) -->
+
+<div
+id="adminPanel"
+class="card"
+style="display:none;margin-top:25px;border:2px solid var(--accent)"
+>
+
+<h3>🛠️ Admin — কমিশন ড্যাশবোর্ড</h3>
+
+<div class="stats-grid" style="grid-template-columns:1fr 1fr">
+
+<div class="stat">
+
+<div
+class="stat-number"
+id="adminTotalCommission"
+>
+৳0
+</div>
+
+<div class="stat-label">
+মোট সংগৃহীত কমিশন
+</div>
+
+</div>
+
+<div class="stat">
+
+<div
+class="stat-number"
+id="adminPendingRecharge"
+>
+0
+</div>
+
+<div class="stat-label">
+Pending রিচার্জ রিকোয়েস্ট
+</div>
+
+</div>
+
+</div>
+
+<h3 style="margin-top:10px">📥 রিচার্জ রিকোয়েস্ট</h3>
+
+<div
+id="adminRechargeList"
+class="request-list"
+>
+<div class="empty">
+কোনো pending রিকোয়েস্ট নেই
+</div>
+</div>
+
+</div>
+
+
+<!-- PASSENGER PANEL -->
+
+<div
+id="passengerPanel"
+class="passenger-panel"
+>
+
+<div class="section-title">
+
+<h2 id="search">
+🚕 কাছাকাছি Available CNG
+</h2>
+
+<p>
+আপনার বর্তমান অবস্থানের কাছাকাছি CNG খুঁজুন
+</p>
+
+</div>
+
+
+<!-- ACTIVE RIDE LIVE TRACKING -->
+
+<div
+id="activeRideCard"
+class="card"
+style="display:none;margin-bottom:25px;border:2px solid var(--success)"
+>
+
+<h3>🚖 চলমান রাইড — Live Tracking</h3>
+
+<div
+id="activeRideInfo"
+style="margin-bottom:12px"
+>
+📍 ড্রাইভারের লোকেশন লোড হচ্ছে...
+</div>
+
+<div
+id="trackMap"
+style="height:300px;border-radius:14px;z-index:1"
+>
+</div>
+
+</div>
+
+
+<div class="stats-grid">
+
+<div class="stat">
+
+<div
+class="stat-number"
+id="nearbyCount"
+>
+0
+</div>
+
+<div class="stat-label">
+Available CNG
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div
+class="stat-number"
+id="currentLat"
+>
+--
+</div>
+
+<div class="stat-label">
+Live Latitude
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div
+class="stat-number"
+id="currentLng"
+>
+--
+</div>
+
+<div class="stat-label">
+Live Longitude
+</div>
+
+</div>
+
+</div>
+
+
+<div class="search-box">
+
+<div class="form-group">
+
+<label>
+📍 আপনার Destination
+</label>
+
+<input
+type="text"
+id="destinationInput"
+placeholder="যেখানে যেতে চান..."
+>
+
+</div>
+
+
+<button
+class="btn btn-primary btn-block"
+onclick="searchNearbyDrivers()"
+>
+🔎 কাছাকাছি CNG খুঁজুন
+</button>
+
+
+<div
+id="passengerMessage"
+class="message"
+></div>
+
+</div>
+
+
+<div class="location-bar">
+<span id="locationStatus">📍 Location চালু হচ্ছে...</span>
+<span style="display:flex;gap:8px;flex-wrap:wrap">
+<button
+class="btn btn-warning btn-small"
+id="locationBtn"
+onclick="requestLocation()"
+style="display:none"
+>
+📍 Location চালু করুন
+</button>
+<button
+class="btn btn-secondary btn-small"
+onclick="retryLocation()"
+>
+🔄 আবার চেষ্টা
+</button>
+</span>
+</div>
+
+
+<div id="map"></div>
+
+
+<div
+id="driverList"
+class="driver-grid"
+>
+
+<div class="empty">
+Live Location পাওয়া গেলে কাছাকাছি CNG দেখা যাবে।
+</div>
+
+</div>
+
+
+<div
+class="card"
+style="margin-top:30px"
+id="myRides"
+>
+
+<h3>📜 আমার Ride History</h3>
+
+<div
+id="passengerHistory"
+class="history-list"
+>
+
+<div class="empty">
+এখনও কোনো Ride নেই
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- MESSAGE MODAL -->
+
+<div
+class="modal"
+id="messageModal"
+>
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+onclick="closeMessageModal()"
+>
+×
+</button>
+
+<h3>💬 Driver-কে Message</h3>
+
+<div
+id="messageReceiver"
+style="margin-bottom:15px;color:var(--muted)"
+>
+</div>
+
+<textarea
+id="messageText"
+placeholder="আপনার message লিখুন..."
+></textarea>
+
+<button
+class="btn btn-primary btn-block"
+style="margin-top:12px"
+onclick="sendMessage()"
+>
+Send Message
+</button>
+
+<div
+id="messageStatus"
+class="message"
+></div>
+
+</div>
+
+</div>
+
+
+<!-- RIDE REQUEST MODAL -->
+
+<div
+class="modal"
+id="rideModal"
+>
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+onclick="closeRideModal()"
+>
+×
+</button>
+
+<h3>🚖 Ride Request</h3>
+
+<div
+id="rideDriverInfo"
+style="margin-bottom:15px"
+>
+</div>
+
+<div class="form-group">
+
+<label>
+গন্তব্য
+</label>
+
+<input
+type="text"
+id="rideDestination"
+readonly
+>
+
+</div>
+
+<div
+style="
+background:#f3faf7;
+padding:14px;
+border-radius:12px;
+margin-bottom:15px;
+"
+>
+
+<div>
+📍 Pickup: আপনার Live Location
+</div>
+
+<div style="margin-top:5px">
+💰 Default Fare Rate: <strong>৳20/km</strong>
+</div>
+
+<div
+style="
+margin-top:5px;
+font-size:13px;
+color:var(--muted);
+"
+>
+Final fare ride শেষ করার সময় driver confirm করবেন।
+</div>
+
+</div>
+
+<button
+class="btn btn-primary btn-block"
+onclick="sendRideRequest()"
+>
+🚖 Ride Request পাঠান
+</button>
+
+<div
+id="rideStatus"
+class="message"
+></div>
+
+</div>
+
+</div>
+
+
+<!-- FARE MODAL -->
+
+<div
+class="modal"
+id="fareModal"
+>
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+onclick="closeFareModal()"
+>
+×
+</button>
+
+<h3>💰 Ride Complete & Fare Confirm</h3>
+
+<div
+style="
+background:#f3faf7;
+padding:14px;
+border-radius:12px;
+margin-bottom:18px;
+"
+>
+
+<div style="font-weight:600">
+Ride শেষ করার আগে তথ্য দিন
+</div>
+
+<div
+style="
+font-size:14px;
+color:var(--muted);
+margin-top:5px;
+"
+>
+Actual trip distance এবং final fare confirm করুন।
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+📏 Ride Distance (KM)
+</label>
+
+<input
+type="number"
+id="fareDistance"
+min="0.01"
+step="0.01"
+placeholder="যেমন: 5.50"
+oninput="updateFarePreview()"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+💵 Rate per KM
+</label>
+
+<input
+type="number"
+id="fareRate"
+value="20"
+readonly
+>
+
+</div>
+
+
+<div
+class="fare-box"
+>
+
+<div class="fare-row">
+
+<span>Distance</span>
+
+<strong>
+<span id="fareDistancePreview">
+0.00
+</span> km
+</strong>
+
+</div>
+
+<div class="fare-row">
+
+<span>Rate</span>
+
+<strong>
+৳<span id="fareRatePreview">
+20.00
+</span>/km
+</strong>
+
+</div>
+
+<div class="fare-row fare-total">
+
+<span>Estimated Fare</span>
+
+<strong>
+৳<span id="estimatedFare">
+0.00
+</span>
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="form-group" style="margin-top:18px">
+
+<label>
+💰 Final Fare
+</label>
+
+<input
+type="number"
+id="finalFare"
+min="0"
+step="0.01"
+placeholder="Final fare"
+>
+
+<div
+style="
+font-size:13px;
+color:var(--muted);
+margin-top:5px;
+"
+>
+Driver প্রয়োজন অনুযায়ী final fare পরিবর্তন করতে পারবেন।
+</div>
+
+</div>
+
+
+<button
+class="btn btn-success btn-block"
+onclick="confirmRideCompletion()"
+>
+✅ Final Fare Confirm & Ride Complete
+</button>
+
+
+<div
+id="fareMessage"
+class="message"
+></div>
+
+</div>
+
+</div>
+
+
+<!-- RECHARGE MODAL -->
+
+<div
+class="modal"
+id="rechargeModal"
+>
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+onclick="closeRechargeModal()"
+>
+×
+</button>
+
+<h3>💰 Wallet রিচার্জ</h3>
+
+<div
+style="
+background:#fff7d6;
+padding:14px;
+border-radius:12px;
+margin-bottom:18px;
+font-size:15px;
+"
+>
+<b>bKash / Nagad</b> নম্বর
+<strong id="paymentNumberLabel">01767462347</strong>-এ টাকা পাঠান
+(কমপক্ষে ৳100), তারপর নিচে
+<strong>TrxID</strong> দিন। Admin verify করে
+আপনার wallet-এ ব্যালেন্স যোগ করে দেবেন।
+</div>
+
+<div class="form-group">
+
+<label>
+💵 Amount (৳)
+</label>
+
+<input
+type="number"
+id="rechargeAmount"
+min="100"
+step="1"
+placeholder="যেমন: 500"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+🧾 bKash/Nagad TrxID
+</label>
+
+<input
+type="text"
+id="rechargeTrxId"
+placeholder="যেমন: 9HXK2LM4PQ"
+>
+
+</div>
+
+<button
+class="btn btn-primary btn-block"
+onclick="submitRechargeRequest()"
+id="rechargeSubmitBtn"
+>
+📤 রিচার্জ রিকোয়েস্ট পাঠান
+</button>
+
+<div
+id="rechargeMessage"
+class="message"
+></div>
+
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-logo">
+<span class="logo-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CNG Ride logo">
+  <defs>
+    <linearGradient id="cng-badge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0dbe82"/>
+      <stop offset="1" stop-color="#046a44"/>
+    </linearGradient>
+    <linearGradient id="cng-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd94d"/>
+      <stop offset="1" stop-color="#ffb703"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="url(#cng-badge)"/>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="none" stroke="#ffffff" stroke-opacity=".25" stroke-width="1.5"/>
+  <!-- motion lines -->
+  <g stroke="#ffffff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round">
+    <line x1="6" y1="30" x2="10" y2="30"/>
+    <line x1="5" y1="36" x2="10" y2="36"/>
+  </g>
+  <!-- canopy -->
+  <path d="M15 31 Q16 21 25 20 L36 20 Q42 20 45 26 L47 31 Z" fill="url(#cng-body)"/>
+  <!-- windshield -->
+  <path d="M37 22.5 L43 30 L37 30 Z" fill="#d9f5e9"/>
+  <!-- side window -->
+  <rect x="19" y="23.5" width="12" height="5.5" rx="2" fill="#046a44" opacity=".9"/>
+  <!-- body -->
+  <path d="M13 33 L47 33 Q51 33 51 37 L51 40 Q51 43 48 43 L16 43 Q13 43 13 40 Z" fill="url(#cng-body)"/>
+  <rect x="13" y="38.5" width="38" height="2.4" fill="#046a44" opacity=".28"/>
+  <!-- headlight -->
+  <circle cx="49" cy="37.5" r="1.8" fill="#fffbe8"/>
+  <!-- wheels -->
+  <circle cx="22" cy="46" r="6.4" fill="#0b2e22"/>
+  <circle cx="22" cy="46" r="2.5" fill="#ffd94d"/>
+  <circle cx="42" cy="46" r="6.4" fill="#0b2e22"/>
+  <circle cx="42" cy="46" r="2.5" fill="#ffd94d"/>
+</svg></span>
+<span>CNG <em style="font-style:normal;color:#ffc53d">Ride</em></span>
+</div>
+
+<div class="footer-text">
+Live CNG Ride Service
+</div>
+
+<div
+style="
+margin-top:8px;
+opacity:.7;
+font-size:14px;
+"
+>
+যাত্রা হোক সহজ, দ্রুত ও নিরাপদ।
+</div>
+
+<div
+style="
+margin-top:6px;
+opacity:.45;
+font-size:11px;
+"
+>
+v3.6 • premium
+</div>
+
+</footer>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+
+<script>
+
+/* =========================
+SUPABASE
+========================= */
+
+const SUPABASE_URL =
+"https://icfzimjduanfzwpkbtdu.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_2ZmJLbota_YQZ7rDKqV6ew_ApWVxoak";
+
+const db =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/* =========================
+GLOBAL VARIABLES
+========================= */
+
+let currentUser = null;
+let currentProfile = null;
+
+let map = null;
+let userMarker = null;
+
+let latitude = null;
+let longitude = null;
+
+let allDrivers = [];
+
+let driverMarkers = [];
+let routeLines = [];
+
+let selectedDriverId = null;
+let selectedReceiverId = null;
+
+let passengerWatchId = null;
+let driverWatchId = null;
+
+let liveRefreshTimer = null;
+
+let selectedRideId = null;
+
+let fareRideId = null;
+
+const DEFAULT_FARE_PER_KM = 20;
+
+/* =========================
+WALLET & COMMISSION CONFIG
+========================= */
+// নিজের ইমেইল এখানে বসান — এই ইমেইল দিয়ে login করলে Admin প্যানেল দেখা যাবে
+const ADMIN_EMAILS = ["emrankhan172@gmail.com"];
+// bKash/Nagad নম্বর যেখানে ড্রাইভাররা রিচার্জের টাকা পাঠাবে
+const PAYMENT_NUMBER = "01767462347";
+const COMMISSION_RATE = 12;      // প্রতি রাইডে কমিশন %
+const MIN_WALLET_BALANCE = 50;   // এর নিচে নামলে নতুন রাইড নেওয়া যাবে না
+
+
+/* =========================
+HELPERS
+========================= */
+
+function escapeHtml(value){
+
+if(value === null || value === undefined){
+return "";
+}
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(value){
+
+return String(value ?? "")
+.replace(/\\/g,"\\\\")
+.replace(/'/g,"\\'")
+.replace(/"/g,'\\"')
+.replace(/\n/g,"\\n")
+.replace(/\r/g,"");
+
+}
+
+
+function showMessage(elementId,text,type="success"){
+
+const el =
+document.getElementById(elementId);
+
+if(!el) return;
+
+el.textContent = text;
+
+el.className =
+"message " + type;
+
+}
+
+
+function hideMessage(elementId){
+
+const el =
+document.getElementById(elementId);
+
+if(el){
+
+el.textContent = "";
+
+el.className = "message";
+
+}
+
+}
+
+
+/* =========================
+REGISTER TYPE
+========================= */
+
+document
+.getElementById("registerType")
+.addEventListener("change",function(){
+
+const group =
+document.getElementById("vehicleGroup");
+
+if(this.value === "driver"){
+
+group.style.display = "block";
+
+document
+.getElementById("vehicleNumber")
+.required = true;
+
+}else{
+
+group.style.display = "none";
+
+document
+.getElementById("vehicleNumber")
+.required = false;
+
+}
+
+});
+
+
+/* =========================
+PHONE OTP AUTH
+ফোনে OTP যাবে → OTP দিয়ে Login/Register
+========================= */
+
+// 01XXXXXXXXX → +8801XXXXXXXXX (E.164)
+function normalizePhone(raw){
+
+if(!raw) return null;
+
+let p =
+String(raw).replace(/[\s\-()]/g, "");
+
+if(p.startsWith("+")){
+p = p.slice(1);
+}
+
+if(/^01[3-9]\d{8}$/.test(p)){
+p = "880" + p.slice(1);
+}
+
+if(!/^8801[3-9]\d{8}$/.test(p)){
+return null;
+}
+
+return p;
+
+}
+
+
+function toE164(raw){
+
+const p = normalizePhone(raw);
+
+return p ? "+" + p : null;
+
+}
+
+
+/* =========================
+FIREBASE — free OTP (10k/month free)
+========================= */
+
+// ⬇️⬇️⬇️ Firebase Console → Project settings → Your apps → Web app
+// থেকে config copy করে এখানে বসান
+const FIREBASE_CONFIG = {
+
+apiKey:"AIzaSyBvGnlRToc87oUycRBxueCaQDBfWOgylpM",
+
+authDomain:"cng-ride.firebaseapp.com",
+
+projectId:"cng-ride",
+
+appId:"1:408789896065:web:6a3865c1ea6e0afa37f680"
+
+};
+
+const EDGE_URL =
+SUPABASE_URL + "/functions/v1/firebase-otp";
+
+let firebaseAuth = null;
+
+let firebaseConfirmation = null;
+
+
+function initFirebase(){
+
+if(firebaseAuth) return true;
+
+try{
+
+if(!window.firebase){
+
+alert(
+"Firebase load হয়নি। " +
+"Internet connection চেক করুন।"
+);
+
+return false;
+
+}
+
+if(!firebase.apps.length){
+firebase.initializeApp(FIREBASE_CONFIG);
+}
+
+firebaseAuth = firebase.auth();
+
+firebaseAuth.languageCode = "bn";
+
+return true;
+
+}catch(e){
+
+console.error(e);
+
+return false;
+
+}
+
+}
+
+
+function getRecaptcha(){
+
+if(window.recaptchaVerifier){
+
+try{
+window.recaptchaVerifier.clear();
+}catch(e){}
+
+window.recaptchaVerifier = null;
+
+}
+
+window.recaptchaVerifier =
+new firebase.auth.RecaptchaVerifier(
+document.getElementById(
+"recaptcha-container"
+),
+{ size:"invisible" }
+);
+
+return window.recaptchaVerifier;
+
+}
+
+
+function friendlyFirebaseError(e){
+
+const code = (e && e.code) || "";
+
+if(
+code.includes("invalid-phone-number")
+){
+return "ফোন নম্বর সঠিক নয়।";
+}
+
+if(
+code.includes("too-many-requests")
+){
+return (
+"অনেকবার চেষ্টা করেছেন। " +
+"কিছুক্ষণ পর আবার চেষ্টা করুন।"
+);
+}
+
+if(
+code.includes("quota-exceeded")
+){
+return (
+"আজকের ফ্রি OTP শেষ। " +
+"আগামীকাল চেষ্টা করুন।"
+);
+}
+
+if(
+code.includes("captcha") ||
+code.includes("recaptcha")
+){
+return (
+"Verification ব্যর্থ। " +
+"পেজ রিলোড করে আবার চেষ্টা করুন।"
+);
+}
+
+if(
+code.includes("network-request-failed")
+){
+return "Internet connection চেক করুন।";
+}
+
+return (
+(e && e.message) ||
+"OTP পাঠানো যায়নি।"
+);
+
+}
+
+
+// Firebase verify → edge function → Supabase login
+async function bridgeToSupabase(
+idToken,
+extra
+){
+
+const res =
+await fetch(EDGE_URL,{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json",
+"apikey":SUPABASE_KEY
+},
+
+body:JSON.stringify({
+idToken,
+...(extra || {})
+})
+
+});
+
+const out = await res.json();
+
+if(
+!res.ok ||
+out.error ||
+!out.email
+){
+throw new Error(
+out.error || "bridge failed"
+);
+}
+
+const { data, error } =
+await db.auth.signInWithPassword({
+email:out.email,
+password:out.password
+});
+
+if(error) throw error;
+
+return data.user;
+
+}
+
+
+let pendingLoginPhone = null;
+
+let pendingRegister = null;
+
+let resendTimers = {};
+
+
+function startResendCooldown(
+btnId,
+timerId,
+seconds
+){
+
+const btn =
+document.getElementById(btnId);
+
+const timerEl =
+document.getElementById(timerId);
+
+if(resendTimers[btnId]){
+clearInterval(resendTimers[btnId]);
+}
+
+let left = seconds;
+
+const tick = ()=>{
+
+if(left <= 0){
+
+if(btn){ btn.disabled = false; }
+
+if(timerEl){ timerEl.textContent = ""; }
+
+clearInterval(resendTimers[btnId]);
+
+return;
+
+}
+
+if(btn){ btn.disabled = true; }
+
+if(timerEl){
+timerEl.textContent =
+`🔄 ${left} সেকেন্ড পর আবার পাঠাতে পারবেন`;
+}
+
+left--;
+
+};
+
+tick();
+
+resendTimers[btnId] =
+setInterval(tick, 1000);
+
+}
+
+
+/* ---------- LOGIN OTP ---------- */
+
+async function sendLoginOtp(){
+
+hideMessage("loginMessage");
+
+if(!initFirebase()) return;
+
+const phone =
+toE164(
+document.getElementById("loginPhone")
+.value
+);
+
+if(!phone){
+
+showMessage(
+"loginMessage",
+"সঠিক মোবাইল নম্বর দিন (01XXXXXXXXX)",
+"error"
+);
+
+return;
+
+}
+
+const btn =
+document.getElementById("loginOtpBtn");
+
+btn.disabled = true;
+
+btn.innerHTML =
+'<span class="loader"></span> পাঠানো হচ্ছে...';
+
+try{
+
+firebaseConfirmation =
+await firebaseAuth.signInWithPhoneNumber(
+phone,
+getRecaptcha()
+);
+
+pendingLoginPhone = phone;
+
+document.getElementById("loginOtpPhone")
+.textContent =
+document.getElementById("loginPhone")
+.value.trim();
+
+document.getElementById("loginOtp")
+.value = "";
+
+document.getElementById("loginStep1")
+.style.display = "none";
+
+document.getElementById("loginStep2")
+.style.display = "block";
+
+startResendCooldown(
+"loginResendBtn",
+"loginResendTimer",
+60
+);
+
+}catch(error){
+
+showMessage(
+"loginMessage",
+friendlyFirebaseError(error),
+"error"
+);
+
+}finally{
+
+btn.disabled = false;
+
+btn.innerHTML = "📩 OTP পাঠান";
+
+}
+
+}
+
+
+function backToLoginStep1(){
+
+document.getElementById("loginStep2")
+.style.display = "none";
+
+document.getElementById("loginStep1")
+.style.display = "block";
+
+}
+
+
+async function resendLoginOtp(){
+
+hideMessage("loginOtpMessage");
+
+if(!initFirebase()) return;
+
+try{
+
+firebaseConfirmation =
+await firebaseAuth.signInWithPhoneNumber(
+pendingLoginPhone,
+getRecaptcha()
+);
+
+showMessage(
+"loginOtpMessage",
+"📩 OTP আবার পাঠানো হয়েছে",
+"success"
+);
+
+startResendCooldown(
+"loginResendBtn",
+"loginResendTimer",
+60
+);
+
+}catch(error){
+
+showMessage(
+"loginOtpMessage",
+friendlyFirebaseError(error),
+"error"
+);
+
+}
+
+}
+
+
+async function verifyLoginOtp(){
+
+hideMessage("loginOtpMessage");
+
+const token =
+document.getElementById("loginOtp")
+.value.trim();
+
+if(!/^\d{6}$/.test(token)){
+
+showMessage(
+"loginOtpMessage",
+"6 সংখ্যার OTP দিন",
+"error"
+);
+
+return;
+
+}
+
+if(!firebaseConfirmation){
+
+showMessage(
+"loginOtpMessage",
+"আগে OTP পাঠান",
+"error"
+);
+
+return;
+
+}
+
+const btn =
+document.getElementById("loginVerifyBtn");
+
+btn.disabled = true;
+
+btn.innerHTML =
+'<span class="loader"></span> যাচাই হচ্ছে...';
+
+try{
+
+const cred =
+await firebaseConfirmation.confirm(
+token
+);
+
+const idToken =
+await cred.user.getIdToken();
+
+currentUser =
+await bridgeToSupabase(idToken);
+
+await loadProfile();
+
+if(
+!currentProfile ||
+!currentProfile.user_type
+){
+
+openProfileModal();
+
+}else{
+
+showApp();
+
+}
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"loginOtpMessage",
+"OTP ভুল বা মেয়াদ শেষ। আবার চেষ্টা করুন।",
+"error"
+);
+
+}finally{
+
+btn.disabled = false;
+
+btn.innerHTML = "✅ Verify ও Login";
+
+}
+
+}
+
+
+/* ---------- REGISTER OTP ---------- */
+
+async function sendRegisterOtp(){
+
+hideMessage("registerMessage");
+
+if(!initFirebase()) return;
+
+const name =
+document.getElementById("registerName")
+.value.trim();
+
+const phone =
+toE164(
+document.getElementById("registerPhone")
+.value
+);
+
+const type =
+document.getElementById("registerType")
+.value;
+
+const vehicle =
+document.getElementById("vehicleNumber")
+.value.trim();
+
+
+if(name.length < 3){
+
+showMessage(
+"registerMessage",
+"আপনার নাম লিখুন",
+"error"
+);
+
+return;
+
+}
+
+if(!phone){
+
+showMessage(
+"registerMessage",
+"সঠিক মোবাইল নম্বর দিন (01XXXXXXXXX)",
+"error"
+);
+
+return;
+
+}
+
+if(!type){
+
+showMessage(
+"registerMessage",
+"Passenger নাকি CNG Driver নির্বাচন করুন",
+"error"
+);
+
+return;
+
+}
+
+const btn =
+document.getElementById("registerOtpBtn");
+
+btn.disabled = true;
+
+btn.innerHTML =
+'<span class="loader"></span> পাঠানো হচ্ছে...';
+
+try{
+
+firebaseConfirmation =
+await firebaseAuth.signInWithPhoneNumber(
+phone,
+getRecaptcha()
+);
+
+pendingRegister = {
+phone,
+name,
+type,
+vehicle:vehicle || null
+};
+
+document.getElementById("registerOtpPhone")
+.textContent =
+document.getElementById("registerPhone")
+.value.trim();
+
+document.getElementById("registerOtp")
+.value = "";
+
+document.getElementById("registerStep1")
+.style.display = "none";
+
+document.getElementById("registerStep2")
+.style.display = "block";
+
+startResendCooldown(
+"registerResendBtn",
+"registerResendTimer",
+60
+);
+
+}catch(error){
+
+showMessage(
+"registerMessage",
+friendlyFirebaseError(error),
+"error"
+);
+
+}finally{
+
+btn.disabled = false;
+
+btn.innerHTML = "📩 OTP পাঠান";
+
+}
+
+}
+
+
+function backToRegisterStep1(){
+
+document.getElementById("registerStep2")
+.style.display = "none";
+
+document.getElementById("registerStep1")
+.style.display = "block";
+
+}
+
+
+async function resendRegisterOtp(){
+
+hideMessage("registerOtpMessage");
+
+if(!initFirebase()) return;
+
+try{
+
+firebaseConfirmation =
+await firebaseAuth.signInWithPhoneNumber(
+pendingRegister.phone,
+getRecaptcha()
+);
+
+showMessage(
+"registerOtpMessage",
+"📩 OTP আবার পাঠানো হয়েছে",
+"success"
+);
+
+startResendCooldown(
+"registerResendBtn",
+"registerResendTimer",
+60
+);
+
+}catch(error){
+
+showMessage(
+"registerOtpMessage",
+friendlyFirebaseError(error),
+"error"
+);
+
+}
+
+}
+
+
+async function verifyRegisterOtp(){
+
+hideMessage("registerOtpMessage");
+
+const token =
+document.getElementById("registerOtp")
+.value.trim();
+
+if(!/^\d{6}$/.test(token)){
+
+showMessage(
+"registerOtpMessage",
+"6 সংখ্যার OTP দিন",
+"error"
+);
+
+return;
+
+}
+
+if(!firebaseConfirmation){
+
+showMessage(
+"registerOtpMessage",
+"আগে OTP পাঠান",
+"error"
+);
+
+return;
+
+}
+
+const btn =
+document.getElementById("registerVerifyBtn");
+
+btn.disabled = true;
+
+btn.innerHTML =
+'<span class="loader"></span> যাচাই হচ্ছে...';
+
+try{
+
+const cred =
+await firebaseConfirmation.confirm(
+token
+);
+
+const idToken =
+await cred.user.getIdToken();
+
+currentUser =
+await bridgeToSupabase(idToken, {
+name:pendingRegister.name,
+user_type:pendingRegister.type,
+vehicle_number:pendingRegister.vehicle
+});
+
+await loadProfile();
+
+showApp();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"registerOtpMessage",
+"OTP ভুল বা মেয়াদ শেষ। আবার চেষ্টা করুন।",
+"error"
+);
+
+}finally{
+
+btn.disabled = false;
+
+btn.innerHTML = "✅ Verify ও Register";
+
+}
+
+}
+
+
+/* ---------- PROFILE COMPLETION ---------- */
+
+function openProfileModal(){
+
+hideMessage("profileMessage");
+
+document
+.getElementById("profileModal")
+.classList.add("show");
+
+}
+
+
+function closeProfileModal(){
+
+document
+.getElementById("profileModal")
+.classList.remove("show");
+
+}
+
+
+async function saveProfile(){
+
+hideMessage("profileMessage");
+
+const name =
+document.getElementById("profileName")
+.value.trim();
+
+const type =
+document.getElementById("profileType")
+.value;
+
+if(name.length < 3){
+
+showMessage(
+"profileMessage",
+"আপনার নাম লিখুন",
+"error"
+);
+
+return;
+
+}
+
+if(!type){
+
+showMessage(
+"profileMessage",
+"ধরন নির্বাচন করুন",
+"error"
+);
+
+return;
+
+}
+
+const btn =
+document.getElementById("profileSaveBtn");
+
+btn.disabled = true;
+
+btn.innerHTML =
+'<span class="loader"></span> Save হচ্ছে...';
+
+try{
+
+const { error } =
+await db.from("profiles")
+.update({
+full_name:name,
+user_type:type,
+phone:
+(pendingLoginPhone || "")
+.replace("+", "")
+})
+.eq("id", currentUser.id);
+
+if(error) throw error;
+
+await loadProfile();
+
+closeProfileModal();
+
+showApp();
+
+}catch(error){
+
+showMessage(
+"profileMessage",
+"Save হয়নি: " +
+(error.message || ""),
+"error"
+);
+
+}finally{
+
+btn.disabled = false;
+
+btn.innerHTML = "✅ Save ও শুরু করুন";
+
+}
+
+}
+
+
+/* ---------- ADMIN EMAIL LOGIN ---------- */
+
+function toggleAdminLogin(e){
+
+if(e) e.preventDefault();
+
+const box =
+document.getElementById("adminLoginBox");
+
+box.style.display =
+box.style.display === "none" ?
+"block" : "none";
+
+}
+
+
+/* HIDDEN ADMIN LOGIN: header logo-তে 1.5 সেকেন্ডের মধ্যে 5 বার tap করলে admin login box খুলবে */
+
+let logoTapCount = 0;
+let logoTapTimer = null;
+
+document.addEventListener("DOMContentLoaded", function(){
+
+const logo = document.querySelector(".logo");
+
+if(!logo) return;
+
+logo.addEventListener("click", function(e){
+
+logoTapCount++;
+
+clearTimeout(logoTapTimer);
+
+logoTapTimer = setTimeout(function(){
+logoTapCount = 0;
+}, 1500);
+
+if(logoTapCount >= 5){
+
+logoTapCount = 0;
+
+e.preventDefault();
+
+const auth =
+document.getElementById("authSection");
+
+if(auth) auth.scrollIntoView({behavior:"smooth"});
+
+const box =
+document.getElementById("adminLoginBox");
+
+if(box) box.style.display = "block";
+
+}
+
+});
+
+});
+
+
+async function adminLogin(){
+
+hideMessage("loginMessage");
+
+const email =
+document.getElementById("adminEmail")
+.value.trim();
+
+const password =
+document.getElementById("adminPassword")
+.value;
+
+if(!email || !password){
+
+showMessage(
+"loginMessage",
+"Email ও password দিন",
+"error"
+);
+
+return;
+
+}
+
+const btn =
+document.getElementById("adminLoginBtn");
+
+btn.disabled = true;
+
+btn.innerHTML =
+'<span class="loader"></span> ...';
+
+try{
+
+const { data, error } =
+await db.auth.signInWithPassword({
+email,
+password
+});
+
+if(error) throw error;
+
+currentUser = data.user;
+
+await loadProfile();
+
+showApp();
+
+}catch(error){
+
+showMessage(
+"loginMessage",
+error.message || "Login failed",
+"error"
+);
+
+}finally{
+
+btn.disabled = false;
+
+btn.innerHTML = "Login";
+
+}
+
+}
+
+
+
+/* =========================
+LOAD PROFILE
+========================= */
+
+async function loadProfile(){
+
+if(!currentUser) return;
+
+const {
+data,
+error
+} =
+await db
+.from("profiles")
+.select("*")
+.eq("id",currentUser.id)
+.maybeSingle();
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+currentProfile = data;
+
+}
+
+
+/* =========================
+SHOW APP
+========================= */
+
+async function showApp(){
+
+document
+.getElementById("authSection")
+.style.display = "none";
+
+document
+.getElementById("appSection")
+.style.display = "block";
+
+document
+.getElementById("logoutNav")
+.style.display = "block";
+
+
+document
+.getElementById("userName")
+.textContent =
+currentProfile?.full_name ||
+currentUser?.email ||
+"User";
+
+
+const type =
+currentProfile?.user_type;
+
+document
+.getElementById("userType")
+.textContent =
+type === "driver"
+? "🚕 CNG Driver"
+: "👤 Passenger";
+
+
+// Admin panel: শুধু ADMIN_EMAILS-এর ইমেইল দিয়ে login করলে দেখা যাবে
+const isAdmin =
+ADMIN_EMAILS.includes(
+(currentUser?.email || "").toLowerCase()
+);
+
+document
+.getElementById("adminPanel")
+.style.display =
+isAdmin ? "block" : "none";
+
+if(isAdmin){
+loadAdminPanel();
+}
+
+
+if(type === "driver"){
+
+document
+.getElementById("driverPanel")
+.style.display = "block";
+
+document
+.getElementById("passengerPanel")
+.style.display = "none";
+
+await initializeDriver();
+
+}else{
+
+document
+.getElementById("driverPanel")
+.style.display = "none";
+
+document
+.getElementById("passengerPanel")
+.style.display = "block";
+
+initializeMap();
+
+startPassengerLocation();
+
+await searchNearbyDrivers();
+
+await loadMyRides();
+
+}
+
+
+startRealtime();
+
+}
+
+
+/* =========================
+MAP
+========================= */
+
+function initializeMap(){
+
+if(map) return;
+
+map =
+L.map("map").setView(
+[24.2513,89.9167],
+12
+);
+
+const osmLayerMain =
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+maxZoom:19,
+attribution:"© OpenStreetMap"
+}
+).addTo(map);
+
+
+const satLayerMain =
+L.tileLayer(
+"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+{
+maxZoom:19,
+attribution:"© Esri World Imagery"
+}
+);
+
+
+L.control.layers(
+{
+"🗺️ Map": osmLayerMain,
+"🛰️ Satellite": satLayerMain
+},
+null,
+{position:"topright"}
+).addTo(map);
+
+}
+
+
+/* =========================
+PASSENGER GPS
+========================= */
+
+/* =========================
+PASSENGER GPS — robust location flow
+========================= */
+
+let locationRetries = 0;
+
+const MAX_LOCATION_RETRIES = 3;
+
+
+function updateLocationStatus(msg){
+
+const el =
+document.getElementById("locationStatus");
+
+if(el){ el.innerHTML = msg; }
+
+}
+
+
+function showLocationBtn(show){
+
+const b =
+document.getElementById("locationBtn");
+
+if(b){
+b.style.display =
+show ? "inline-flex" : "none";
+}
+
+}
+
+
+// বাটনে ট্যাপ করে location চালু — মোবাইলে সবচেয়ে নির্ভরযোগ্য
+function requestLocation(){
+
+updateLocationStatus(
+"📍 Location নেওয়া হচ্ছে..."
+);
+
+showLocationBtn(false);
+
+locationRetries = 0;
+
+hideMessage("passengerMessage");
+
+
+if(!navigator.geolocation){
+
+updateLocationStatus(
+"❌ এই browser-এ GPS support নেই।"
+);
+
+return;
+
+}
+
+
+// প্রথমে একবার current position (দ্রুত),
+// তারপর live watch
+navigator.geolocation.getCurrentPosition(
+
+pos=>{
+handlePosition(pos);
+startLocationWatch();
+},
+
+err=>{
+handleLocationError(err);
+},
+
+{
+enableHighAccuracy:true,
+timeout:20000,
+maximumAge:10000
+}
+
+);
+
+}
+
+
+function startLocationWatch(){
+
+if(passengerWatchId){
+
+navigator.geolocation.clearWatch(
+passengerWatchId
+);
+
+}
+
+passengerWatchId =
+navigator.geolocation.watchPosition(
+
+position=>{
+handlePosition(position);
+},
+
+error=>{
+handleLocationError(error);
+},
+
+{
+enableHighAccuracy:true,
+maximumAge:5000,
+timeout:20000
+}
+
+);
+
+}
+
+
+function handlePosition(position){
+
+locationRetries = 0;
+
+latitude =
+position.coords.latitude;
+
+longitude =
+position.coords.longitude;
+
+
+const latEl =
+document.getElementById("currentLat");
+
+const lngEl =
+document.getElementById("currentLng");
+
+if(latEl){
+latEl.textContent =
+latitude.toFixed(5);
+}
+
+if(lngEl){
+lngEl.textContent =
+longitude.toFixed(5);
+}
+
+
+updateLocationStatus(
+`🟢 Live location চালু ` +
+`<small>(${latitude.toFixed(4)}, ` +
+`${longitude.toFixed(4)})</small>`
+);
+
+showLocationBtn(false);
+
+hideMessage("passengerMessage");
+
+
+if(map){
+
+if(!userMarker){
+
+userMarker =
+L.marker(
+[latitude,longitude]
+)
+.addTo(map)
+.bindPopup(
+"📍 আপনার Live Location"
+);
+
+}else{
+
+userMarker.setLatLng(
+[latitude,longitude]
+);
+
+}
+
+map.setView(
+[latitude,longitude],
+14
+);
+
+}
+
+
+refreshDriverDistances();
+
+}
+
+
+function handleLocationError(error){
+
+console.error(error);
+
+const code =
+error && error.code;
+
+
+if(code === 1){
+
+// PERMISSION_DENIED
+updateLocationStatus(
+"⛔ Location permission বন্ধ আছে।<br>" +
+"<small>📱 চালু করুন: address bar-এর 🔒 → " +
+"Site settings → Location → <b>Allow</b> " +
+"করে পেজ রিলোড দিন</small>"
+);
+
+showLocationBtn(true);
+
+}else if(code === 2){
+
+// POSITION_UNAVAILABLE
+updateLocationStatus(
+"📡 GPS সিগন্যাল পাওয়া যাচ্ছে না। " +
+"খোলা জায়গায় গিয়ে আবার চেষ্টা করুন।"
+);
+
+showLocationBtn(true);
+
+}else if(code === 3){
+
+// TIMEOUT — কয়েকবার retry
+if(
+locationRetries <
+MAX_LOCATION_RETRIES
+){
+
+locationRetries++;
+
+updateLocationStatus(
+`⏳ GPS খুঁজছে... ` +
+`(চেষ্টা ${locationRetries}/` +
+`${MAX_LOCATION_RETRIES})`
+);
+
+setTimeout(()=>{
+startLocationWatch();
+}, 2000);
+
+return;
+
+}
+
+updateLocationStatus(
+"⏱️ GPS lock হচ্ছে না। " +
+"Mobile data / WiFi চালু করে আবার চেষ্টা করুন।"
+);
+
+showLocationBtn(true);
+
+}else{
+
+updateLocationStatus(
+"🔴 Location পাওয়া যায়নি। " +
+"আবার চেষ্টা করুন।"
+);
+
+showLocationBtn(true);
+
+}
+
+
+showMessage(
+"passengerMessage",
+"GPS Location পাওয়া যাচ্ছে না।",
+"error"
+);
+
+}
+
+
+async function startPassengerLocation(){
+
+updateLocationStatus(
+"📍 Location চালু হচ্ছে..."
+);
+
+showLocationBtn(false);
+
+
+// আগেই permission denied থাকলে সাথে সাথে জানাও
+try{
+
+if(
+navigator.permissions &&
+navigator.permissions.query
+){
+
+const st =
+await navigator.permissions.query(
+{name:"geolocation"}
+);
+
+if(st.state === "denied"){
+
+handleLocationError({code:1});
+
+return;
+
+}
+
+if(st.state === "prompt"){
+
+updateLocationStatus(
+"📍 <b>Location চালু করুন</b> " +
+"বাটনে চাপ দিন"
+);
+
+showLocationBtn(true);
+
+return;
+
+}
+
+}
+
+}catch(e){}
+
+
+requestLocation();
+
+}
+
+
+function retryLocation(){
+
+requestLocation();
+
+}
+
+
+/* =========================
+DRIVER INITIALIZE
+========================= */
+
+async function initializeDriver(){
+
+await loadDriverStatus();
+
+await loadWallet();
+
+startDriverLocation();
+
+await loadDriverRequests();
+
+await loadMyRides();
+
+}
+
+
+/* =========================
+DRIVER STATUS
+========================= */
+
+async function loadDriverStatus(){
+
+const {
+data,
+error
+} =
+await db
+.from("drivers")
+.select("*")
+.eq("id",currentUser.id)
+.maybeSingle();
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+if(!data){
+
+const {
+error:insertError
+} =
+await db
+.from("drivers")
+.insert({
+
+id:currentUser.id,
+
+vehicle_name:
+currentProfile?.full_name ||
+"CNG Driver",
+
+vehicle_number:
+currentProfile?.phone ||
+"",
+
+available:false,
+
+latitude:null,
+
+longitude:null
+
+});
+
+
+if(insertError){
+
+console.error(insertError);
+
+return;
+
+}
+
+setDriverStatusUI(false);
+
+return;
+
+}
+
+
+setDriverStatusUI(
+Boolean(data.available)
+);
+
+}
+
+
+function setDriverStatusUI(available){
+
+const pill =
+document.getElementById(
+"driverStatusPill"
+);
+
+const text =
+document.getElementById(
+"driverStatusText"
+);
+
+const btn =
+document.getElementById(
+"driverStatusBtn"
+);
+
+
+if(available){
+
+pill.className =
+"status-pill status-available";
+
+text.textContent =
+"Available";
+
+btn.className =
+"btn btn-danger";
+
+btn.textContent =
+"Busy করুন";
+
+}else{
+
+pill.className =
+"status-pill status-busy";
+
+text.textContent =
+"Offline / Busy";
+
+btn.className =
+"btn btn-success";
+
+btn.textContent =
+"Available করুন";
+
+}
+
+}
+
+
+async function toggleDriverStatus(){
+
+const {
+data,
+error
+} =
+await db
+.from("drivers")
+.select("available")
+.eq("id",currentUser.id)
+.single();
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+
+const newStatus =
+!data.available;
+
+
+// Wallet gate: Available হতে মিনিমাম ব্যালেন্স লাগবে
+if(newStatus){
+
+const bal =
+await getWalletBalance();
+
+if(bal === null){
+alert("Wallet তথ্য পাওয়া যায়নি। আবার চেষ্টা করুন।");
+return;
+}
+
+if(bal < MIN_WALLET_BALANCE){
+alert(
+`⚠️ Wallet ব্যালেন্স ৳${MIN_WALLET_BALANCE}-এর নিচে ` +
+`(বর্তমান: ৳${bal.toFixed(2)})।\n` +
+"Available হতে আগে রিচার্জ করুন।"
+);
+openRechargeModal();
+return;
+}
+
+}
+
+
+const {
+error:updateError
+} =
+await db
+.from("drivers")
+.update({
+
+available:newStatus,
+
+updated_at:
+new Date().toISOString()
+
+})
+.eq("id",currentUser.id);
+
+
+if(updateError){
+
+alert(updateError.message);
+
+return;
+
+}
+
+
+setDriverStatusUI(
+newStatus
+);
+
+if(newStatus){
+
+showMessage(
+"driverLocationStatus",
+""
+);
+
+}
+
+}
+
+
+/* =========================
+DRIVER GPS
+========================= */
+
+function startDriverLocation(){
+
+if(!navigator.geolocation){
+
+document
+.getElementById("driverLocationStatus")
+.textContent =
+"GPS support নেই।";
+
+return;
+
+}
+
+
+if(driverWatchId){
+
+navigator.geolocation.clearWatch(
+driverWatchId
+);
+
+}
+
+
+driverWatchId =
+navigator.geolocation.watchPosition(
+
+async position=>{
+
+const lat =
+position.coords.latitude;
+
+const lng =
+position.coords.longitude;
+
+
+const {
+error
+} =
+await db
+.from("drivers")
+.update({
+
+latitude:lat,
+
+longitude:lng,
+
+updated_at:
+new Date().toISOString()
+
+})
+.eq("id",currentUser.id);
+
+
+if(error){
+
+console.error(error);
+
+document
+.getElementById("driverLocationStatus")
+.textContent =
+"📍 GPS update failed";
+
+}else{
+
+document
+.getElementById("driverLocationStatus")
+.textContent =
+"📍 Live GPS চলছে";
+
+}
+
+},
+
+error=>{
+
+console.error(error);
+
+document
+.getElementById("driverLocationStatus")
+.textContent =
+"⚠️ GPS permission প্রয়োজন";
+
+},
+
+{
+enableHighAccuracy:true,
+maximumAge:3000,
+timeout:15000
+}
+
+);
+
+}
+
+
+/* =========================
+WALLET
+========================= */
+
+async function getWalletBalance(){
+
+const {
+data,
+error
+} =
+await db
+.from("wallets")
+.select("balance")
+.eq("driver_id",currentUser.id)
+.maybeSingle();
+
+if(error){
+console.error(error);
+return null;
+}
+
+return data ? Number(data.balance) : 0;
+
+}
+
+
+async function loadWallet(){
+
+const balance =
+await getWalletBalance();
+
+const balEl =
+document.getElementById("walletBalance");
+
+if(balance === null){
+balEl.textContent = "৳--";
+return;
+}
+
+balEl.textContent =
+"৳" + balance.toFixed(2);
+
+balEl.style.color =
+balance < MIN_WALLET_BALANCE
+? "var(--danger)"
+: "var(--primary)";
+
+
+const warn =
+document.getElementById("walletWarning");
+
+if(balance < MIN_WALLET_BALANCE){
+
+warn.innerHTML = `
+<div class="message error" style="display:block">
+⚠️ ব্যালেন্স ৳${MIN_WALLET_BALANCE}-এর নিচে — নতুন রাইড নিতে
+<strong>রিচার্জ</strong> করুন।
+</div>`;
+
+}else{
+
+warn.innerHTML = "";
+
+}
+
+
+document
+.getElementById("commissionRateLabel")
+.textContent =
+COMMISSION_RATE + "%";
+
+
+loadWalletHistory();
+
+}
+
+
+async function loadWalletHistory(){
+
+const {
+data,
+error
+} =
+await db
+.from("wallet_transactions")
+.select("type,amount,balance_after,note,created_at")
+.eq("driver_id",currentUser.id)
+.order("created_at",{ascending:false})
+.limit(10);
+
+const box =
+document.getElementById("walletHistory");
+
+if(error || !data || !data.length){
+box.innerHTML = "";
+return;
+}
+
+box.innerHTML =
+data.map(tx=>{
+
+const isCredit = Number(tx.amount) > 0;
+
+const label =
+tx.type === "recharge" ? "➕ রিচার্জ" :
+tx.type === "commission" ? "➖ কমিশন" :
+"🔧 সমন্বয়";
+
+return `
+<div class="tx-item">
+<div>
+<div>${label}</div>
+<div style="color:var(--muted);font-size:12px">
+${escapeHtml(tx.note || "")}
+· ${formatDate(tx.created_at)}
+</div>
+</div>
+<div class="${isCredit ? "tx-credit" : "tx-debit"}">
+${isCredit ? "+" : ""}৳${Number(tx.amount).toFixed(2)}
+</div>
+</div>`;
+
+}).join("");
+
+}
+
+
+/* ---- Recharge ---- */
+
+function openRechargeModal(){
+
+document
+.getElementById("rechargeAmount")
+.value = "";
+
+document
+.getElementById("rechargeTrxId")
+.value = "";
+
+hideMessage("rechargeMessage");
+
+document
+.getElementById("rechargeModal")
+.classList.add("show");
+
+}
+
+
+function closeRechargeModal(){
+
+document
+.getElementById("rechargeModal")
+.classList.remove("show");
+
+}
+
+
+async function submitRechargeRequest(){
+
+const amount =
+parseFloat(
+document
+.getElementById("rechargeAmount")
+.value
+);
+
+const trxId =
+document
+.getElementById("rechargeTrxId")
+.value.trim();
+
+
+if(!amount || amount < 100){
+showMessage(
+"rechargeMessage",
+"কমপক্ষে ৳100 রিচার্জ করতে হবে।",
+"error"
+);
+return;
+}
+
+if(!trxId){
+showMessage(
+"rechargeMessage",
+"bKash/Nagad TrxID দিন।",
+"error"
+);
+return;
+}
+
+
+const btn =
+document.getElementById("rechargeSubmitBtn");
+
+btn.disabled = true;
+btn.textContent = "পাঠানো হচ্ছে...";
+
+
+const {
+error
+} =
+await db
+.from("recharge_requests")
+.insert({
+driver_id: currentUser.id,
+amount: amount,
+trx_id: trxId,
+status: "pending"
+});
+
+
+btn.disabled = false;
+btn.textContent = "📤 রিচার্জ রিকোয়েস্ট পাঠান";
+
+
+if(error){
+showMessage(
+"rechargeMessage",
+error.message,
+"error"
+);
+return;
+}
+
+
+showMessage(
+"rechargeMessage",
+"✅ রিকোয়েস্ট পাঠানো হয়েছে। Admin verify করে ব্যালেন্স যোগ করে দেবেন।",
+"success"
+);
+
+}
+
+
+/* ---- Admin ---- */
+
+async function loadAdminPanel(){
+
+try{
+
+const {
+data: total,
+error: tErr
+} =
+await db.rpc("admin_total_commission");
+
+if(!tErr){
+document
+.getElementById("adminTotalCommission")
+.textContent =
+"৳" + Number(total || 0).toFixed(0);
+}
+
+const {
+data: reqs,
+error: rErr
+} =
+await db
+.from("recharge_requests")
+.select("id,amount,trx_id,status,created_at,drivers!inner(id)")
+.eq("status","pending")
+.order("created_at",{ascending:false});
+
+if(rErr) throw rErr;
+
+document
+.getElementById("adminPendingRecharge")
+.textContent =
+(reqs || []).length;
+
+
+const box =
+document.getElementById("adminRechargeList");
+
+if(!reqs || !reqs.length){
+box.innerHTML = `
+<div class="empty">
+কোনো pending রিকোয়েস্ট নেই
+</div>`;
+return;
+}
+
+box.innerHTML =
+reqs.map(r=>`
+<div class="request-card pending">
+<div class="request-row">
+<div>
+<div class="request-label">Amount</div>
+<div class="request-value">৳${Number(r.amount).toFixed(2)}</div>
+</div>
+<div>
+<div class="request-label">TrxID</div>
+<div class="request-value">${escapeHtml(r.trx_id)}</div>
+</div>
+</div>
+<div class="request-row">
+<div>
+<div class="request-label">Driver ID</div>
+<div class="request-value" style="font-size:12px">
+${escapeHtml(r.drivers.id.slice(0,8))}…
+</div>
+</div>
+<div>
+<div class="request-label">তারিখ</div>
+<div class="request-value">${formatDate(r.created_at)}</div>
+</div>
+</div>
+<div class="driver-actions">
+<button
+class="btn btn-success btn-small"
+onclick="approveRecharge('${escapeJs(r.id)}')"
+>
+✅ Approve
+</button>
+<button
+class="btn btn-danger btn-small"
+onclick="rejectRecharge('${escapeJs(r.id)}')"
+>
+❌ Reject
+</button>
+</div>
+</div>`).join("");
+
+}catch(error){
+console.error(error);
+}
+
+}
+
+
+async function approveRecharge(requestId){
+
+if(!confirm("এই রিচার্জ approve করবেন?")){
+return;
+}
+
+const {
+error
+} =
+await db.rpc("admin_approve_recharge",{
+p_request_id: requestId
+});
+
+if(error){
+alert(error.message);
+return;
+}
+
+alert("✅ রিচার্জ approve হয়েছে।");
+loadAdminPanel();
+
+}
+
+
+async function rejectRecharge(requestId){
+
+if(!confirm("এই রিকোয়েস্ট reject করবেন?")){
+return;
+}
+
+const {
+error
+} =
+await db
+.from("recharge_requests")
+.update({status:"rejected"})
+.eq("id",requestId);
+
+if(error){
+alert(error.message);
+return;
+}
+
+loadAdminPanel();
+
+}
+
+
+/* =========================
+HAVERSINE
+========================= */
+
+function distanceKm(
+lat1,
+lon1,
+lat2,
+lon2
+){
+
+const R = 6371;
+
+const dLat =
+(lat2-lat1)
+*
+Math.PI/180;
+
+const dLon =
+(lon2-lon1)
+*
+Math.PI/180;
+
+const a =
+Math.sin(dLat/2) *
+Math.sin(dLat/2) +
+
+Math.cos(lat1*Math.PI/180) *
+Math.cos(lat2*Math.PI/180) *
+Math.sin(dLon/2) *
+Math.sin(dLon/2);
+
+const c =
+2 *
+Math.atan2(
+Math.sqrt(a),
+Math.sqrt(1-a)
+);
+
+return R*c;
+
+}
+
+
+/* =========================
+SEARCH DRIVERS
+========================= */
+
+async function searchNearbyDrivers(){
+
+if(
+latitude === null ||
+longitude === null
+){
+
+showMessage(
+"passengerMessage",
+"আপনার Live Location পাওয়া যাচ্ছে না। কিছুক্ষণ অপেক্ষা করুন।",
+"error"
+);
+
+return;
+
+}
+
+
+const {
+data,
+error
+} =
+await db
+.from("drivers")
+.select(`
+id,
+vehicle_name,
+vehicle_number,
+available,
+latitude,
+longitude,
+profiles (
+full_name,
+phone
+)
+`)
+.eq("available",true);
+
+
+if(error){
+
+console.error(error);
+
+showMessage(
+"passengerMessage",
+error.message,
+"error"
+);
+
+return;
+
+}
+
+
+allDrivers =
+(data || [])
+.filter(driver=>
+driver.latitude !== null &&
+driver.longitude !== null
+);
+
+
+drawLiveDrivers();
+
+}
+
+
+/* =========================
+DRAW DRIVERS
+========================= */
+
+function clearDriverMap(){
+
+driverMarkers.forEach(
+marker=>map.removeLayer(marker)
+);
+
+driverMarkers=[];
+
+routeLines.forEach(
+line=>map.removeLayer(line)
+);
+
+routeLines=[];
+
+}
+
+
+function drawLiveDrivers(){
+
+if(!map) return;
+
+clearDriverMap();
+
+const nearby = [];
+
+
+allDrivers.forEach(driver=>{
+
+const distance =
+distanceKm(
+latitude,
+longitude,
+driver.latitude,
+driver.longitude
+);
+
+
+if(distance <= 20){
+
+nearby.push({
+...driver,
+distance
+});
+
+}
+
+});
+
+
+nearby.sort(
+(a,b)=>a.distance-b.distance
+);
+
+
+document
+.getElementById("nearbyCount")
+.textContent =
+nearby.length;
+
+
+nearby.forEach(driver=>{
+
+const marker =
+L.marker([
+driver.latitude,
+driver.longitude
+])
+.addTo(map);
+
+
+marker.bindTooltip(
+`🚕 ${
+escapeHtml(
+driver.profiles?.full_name ||
+"CNG Driver"
+)
+}`,
+{
+permanent:false
+}
+);
+
+
+marker.bindPopup(`
+<strong>🚕 ${
+escapeHtml(
+driver.profiles?.full_name ||
+"CNG Driver"
+)
+}</strong>
+<br>
+📏 ${driver.distance.toFixed(2)} km
+<br>
+🚕 ${
+escapeHtml(
+driver.vehicle_number || "CNG"
+)
+}
+`);
+
+
+driverMarkers.push(marker);
+
+
+const line =
+L.polyline(
+[
+[latitude,longitude],
+[driver.latitude,driver.longitude]
+],
+{
+color:"#087f5b",
+weight:2,
+opacity:.35,
+dashArray:"6 7"
+}
+).addTo(map);
+
+
+routeLines.push(line);
+
+});
+
+
+renderDriverCards(nearby);
+
+}
+
+
+/* =========================
+DRIVER CARDS
+========================= */
+
+function renderDriverCards(drivers){
+
+const container =
+document.getElementById(
+"driverList"
+);
+
+
+if(!drivers.length){
+
+container.innerHTML = `
+<div class="empty" style="grid-column:1/-1">
+
+🚕 এই মুহূর্তে ২০ কিমির মধ্যে
+কোনো Available CNG পাওয়া যায়নি।
+
+<br><br>
+
+<button
+class="btn btn-secondary btn-small"
+onclick="searchNearbyDrivers()"
+>
+🔄 আবার খুঁজুন
+</button>
+
+</div>
+`;
+
+return;
+
+}
+
+
+container.innerHTML =
+drivers.map(driver=>
+driverCardHtml(driver)
+).join("");
+
+}
+
+
+function driverCardHtml(driver){
+
+const name =
+driver.profiles?.full_name ||
+"CNG Driver";
+
+const phone =
+driver.profiles?.phone ||
+"";
+
+return `
+
+<div class="driver-card">
+
+<div class="driver-card-head">
+
+<div>
+
+<div class="driver-name">
+🚕 ${escapeHtml(name)}
+</div>
+
+<div class="driver-meta">
+CNG: ${escapeHtml(
+driver.vehicle_number || "N/A"
+)}
+</div>
+
+</div>
+
+<div class="driver-distance">
+${driver.distance.toFixed(2)} km
+</div>
+
+</div>
+
+
+<div
+style="
+color:#198754;
+font-size:14px;
+font-weight:600;
+"
+>
+● Available Now
+</div>
+
+
+<div class="driver-actions">
+
+<button
+class="btn btn-primary btn-small"
+onclick="openRideModal(
+'${escapeJs(driver.id)}',
+'${escapeJs(name)}'
+)"
+>
+🚖 Ride Request
+</button>
+
+
+${
+phone
+?
+`
+<a
+href="tel:${escapeHtml(phone)}"
+class="btn btn-secondary btn-small"
+>
+📞 Call
+</a>
+`
+:
+""
+}
+
+
+<button
+class="btn btn-secondary btn-small"
+onclick="openMessageModal(
+'${escapeJs(driver.id)}',
+'${escapeJs(name)}'
+)"
+>
+💬 Message
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+REFRESH DISTANCES
+========================= */
+
+function refreshDriverDistances(){
+
+if(allDrivers.length){
+
+drawLiveDrivers();
+
+}
+
+}
+
+
+/* =========================
+RIDE REQUEST MODAL
+========================= */
+
+function openRideModal(
+driverId,
+driverName
+){
+
+if(
+latitude === null ||
+longitude === null
+){
+
+alert(
+"আপনার Live Location পাওয়া যায়নি।"
+);
+
+return;
+
+}
+
+
+selectedDriverId =
+driverId;
+
+
+document
+.getElementById("rideDriverInfo")
+.innerHTML = `
+<div
+style="
+background:#f3faf7;
+padding:14px;
+border-radius:12px;
+"
+>
+🚕 Driver:
+<strong>
+${escapeHtml(driverName)}
+</strong>
+</div>
+`;
+
+
+document
+.getElementById("rideDestination")
+.value =
+document
+.getElementById("destinationInput")
+.value.trim();
+
+
+hideMessage("rideStatus");
+
+
+document
+.getElementById("rideModal")
+.classList.add("show");
+
+}
+
+
+function closeRideModal(){
+
+document
+.getElementById("rideModal")
+.classList.remove("show");
+
+}
+
+
+/* =========================
+SEND RIDE REQUEST
+========================= */
+
+async function sendRideRequest(){
+
+if(!selectedDriverId){
+
+return;
+
+}
+
+
+const destination =
+document
+.getElementById("destinationInput")
+.value.trim();
+
+
+if(!destination){
+
+showMessage(
+"rideStatus",
+"আগে destination লিখুন।",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+latitude === null ||
+longitude === null
+){
+
+showMessage(
+"rideStatus",
+"Live Location পাওয়া যায়নি।",
+"error"
+);
+
+return;
+
+}
+
+
+const {
+data,
+error
+} =
+await db
+.from("ride_requests")
+.insert({
+
+passenger_id:
+currentUser.id,
+
+driver_id:
+selectedDriverId,
+
+pickup_lat:
+latitude,
+
+pickup_lng:
+longitude,
+
+pickup_address:
+"Current Live Location",
+
+destination_address:
+destination,
+
+status:
+"pending",
+
+fare_per_km:
+DEFAULT_FARE_PER_KM
+
+})
+.select()
+.single();
+
+
+if(error){
+
+showMessage(
+"rideStatus",
+error.message,
+"error"
+);
+
+return;
+
+}
+
+
+showMessage(
+"rideStatus",
+"✅ Ride Request সফলভাবে পাঠানো হয়েছে। Driver response-এর অপেক্ষা করুন।",
+"success"
+);
+
+
+await loadMyRides();
+
+setTimeout(
+closeRideModal,
+1300
+);
+
+}
+
+
+/* =========================
+DRIVER REQUESTS
+========================= */
+
+async function loadDriverRequests(){
+
+const {
+data,
+error
+} =
+await db
+.from("ride_requests")
+.select("*")
+.eq("driver_id",currentUser.id)
+.order("created_at",{
+ascending:false
+});
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+renderDriverRequests(
+data || []
+);
+
+}
+
+
+function statusBadge(status){
+
+const map = {
+
+pending:
+["badge-pending","Pending"],
+
+accepted:
+["badge-accepted","Accepted"],
+
+rejected:
+["badge-rejected","Rejected"],
+
+completed:
+["badge-completed","Completed"],
+
+cancelled:
+["badge-cancelled","Cancelled"]
+
+};
+
+
+const item =
+map[status] ||
+["badge-cancelled",status];
+
+
+return `
+<span class="badge ${item[0]}">
+${item[1]}
+</span>
+`;
+
+}
+
+
+function renderDriverRequests(rides){
+
+// নতুন ride request এলে ড্রাইভারকে sound দিয়ে জানাও
+if(firstDriverLoad){
+
+firstDriverLoad = false;
+
+}else{
+
+(rides || []).forEach(r=>{
+
+if(
+r.status === "pending" &&
+!knownRequestIds.has(r.id)
+){
+
+playRequestSound();
+
+}
+
+});
+
+}
+
+(rides || []).forEach(r=>{
+knownRequestIds.add(r.id);
+});
+
+
+const container =
+document.getElementById(
+"driverRequests"
+);
+
+
+if(!rides.length){
+
+container.innerHTML = `
+<div class="empty">
+🚖 কোনো Ride Request নেই।
+</div>
+`;
+
+return;
+
+}
+
+
+container.innerHTML =
+rides.map(ride=>{
+
+let actionHtml = "";
+
+
+if(ride.status === "pending"){
+
+actionHtml = `
+
+<div class="driver-actions">
+
+<button
+class="btn btn-success btn-small"
+onclick="acceptRide('${escapeJs(ride.id)}')"
+>
+✅ Accept
+</button>
+
+<button
+class="btn btn-danger btn-small"
+onclick="rejectRide('${escapeJs(ride.id)}')"
+>
+❌ Reject
+</button>
+
+</div>
+
+`;
+
+}
+
+
+if(
+ride.status === "accepted" &&
+ride.driver_id === currentUser.id
+){
+
+actionHtml = `
+
+<div class="driver-actions">
+
+<button
+class="btn btn-warning"
+onclick="openFareModal(
+'${escapeJs(ride.id)}',
+'${escapeJs(ride.distance_km || "")}',
+'${escapeJs(ride.fare_per_km || DEFAULT_FARE_PER_KM)}',
+'${escapeJs(ride.final_fare || "")}'
+)"
+>
+💰 Ride শেষ করুন / Fare Confirm
+</button>
+
+</div>
+
+`;
+
+}
+
+
+return `
+
+<div
+class="request-card ${escapeHtml(ride.status)}"
+>
+
+<div class="request-row">
+
+<div>
+
+<div class="request-label">
+Destination
+</div>
+
+<div class="request-value">
+${escapeHtml(
+ride.destination_address
+)}
+</div>
+
+</div>
+
+<div>
+${statusBadge(ride.status)}
+</div>
+
+</div>
+
+
+<div class="request-row">
+
+<div>
+
+<div class="request-label">
+Pickup
+</div>
+
+<div class="request-value">
+📍 Current Live Location
+</div>
+
+</div>
+
+</div>
+
+
+${
+ride.distance_km
+?
+`
+<div class="fare-box">
+
+<div class="fare-row">
+
+<span>📏 Distance</span>
+
+<strong>
+${Number(
+ride.distance_km
+).toFixed(2)} km
+</strong>
+
+</div>
+
+<div class="fare-row">
+
+<span>💵 Rate</span>
+
+<strong>
+৳${Number(
+ride.fare_per_km ||
+DEFAULT_FARE_PER_KM
+).toFixed(2)}/km
+</strong>
+
+</div>
+
+${
+ride.final_fare !== null &&
+ride.final_fare !== undefined
+?
+`
+<div class="fare-row fare-total">
+
+<span>💰 Final Fare</span>
+
+<strong>
+৳${Number(
+ride.final_fare
+).toFixed(2)}
+</strong>
+
+</div>
+`
+:
+""
+}
+
+</div>
+`
+:
+""
+}
+
+
+${actionHtml}
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+ACCEPT RIDE (with wallet gate)
+========================= */
+
+async function acceptRide(rideId){
+
+// Wallet gate: মিনিমাম ব্যালেন্স না থাকলে রাইড নেওয়া যাবে না
+const balance =
+await getWalletBalance();
+
+if(balance === null){
+alert("Wallet তথ্য পাওয়া যায়নি। আবার চেষ্টা করুন।");
+return;
+}
+
+if(balance < MIN_WALLET_BALANCE){
+alert(
+`⚠️ Wallet ব্যালেন্স ৳${MIN_WALLET_BALANCE}-এর নিচে ` +
+`(বর্তমান: ৳${balance.toFixed(2)})।\n` +
+"নতুন রাইড নিতে আগে রিচার্জ করুন।"
+);
+openRechargeModal();
+return;
+}
+
+
+const {
+error
+} =
+await db
+.from("ride_requests")
+.update({
+
+driver_id:
+currentUser.id,
+
+status:
+"accepted"
+
+})
+.eq("id",rideId)
+.eq("driver_id",currentUser.id);
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+
+await setDriverBusy();
+
+await loadDriverRequests();
+
+}
+
+
+/* =========================
+SET DRIVER BUSY
+========================= */
+
+async function setDriverBusy(){
+
+const {
+error
+} =
+await db
+.from("drivers")
+.update({
+
+available:false,
+
+updated_at:
+new Date().toISOString()
+
+})
+.eq("id",currentUser.id);
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+setDriverStatusUI(false);
+
+}
+
+
+/* =========================
+REJECT RIDE
+========================= */
+
+async function rejectRide(rideId){
+
+const {
+error
+} =
+await db
+.from("ride_requests")
+.update({
+
+status:"rejected"
+
+})
+.eq("id",rideId)
+.eq("driver_id",currentUser.id);
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+
+await loadDriverRequests();
+
+}
+
+
+/* =========================
+FARE MODAL
+========================= */
+
+function openFareModal(
+rideId,
+distance,
+rate,
+currentFare
+){
+
+fareRideId =
+rideId;
+
+
+document
+.getElementById("fareDistance")
+.value =
+distance || "";
+
+
+document
+.getElementById("fareRate")
+.value =
+rate || DEFAULT_FARE_PER_KM;
+
+
+document
+.getElementById("finalFare")
+.value =
+currentFare || "";
+
+
+hideMessage("fareMessage");
+
+
+updateFarePreview();
+
+
+document
+.getElementById("fareModal")
+.classList.add("show");
+
+}
+
+
+function closeFareModal(){
+
+document
+.getElementById("fareModal")
+.classList.remove("show");
+
+fareRideId = null;
+
+}
+
+
+function updateFarePreview(){
+
+const distance =
+parseFloat(
+document
+.getElementById("fareDistance")
+.value
+) || 0;
+
+
+const rate =
+parseFloat(
+document
+.getElementById("fareRate")
+.value
+) || DEFAULT_FARE_PER_KM;
+
+
+const estimated =
+distance * rate;
+
+
+document
+.getElementById("fareDistancePreview")
+.textContent =
+distance.toFixed(2);
+
+
+document
+.getElementById("fareRatePreview")
+.textContent =
+rate.toFixed(2);
+
+
+document
+.getElementById("estimatedFare")
+.textContent =
+estimated.toFixed(2);
+
+
+const finalFare =
+document
+.getElementById("finalFare");
+
+
+if(
+!finalFare.value &&
+distance > 0
+){
+
+finalFare.value =
+estimated.toFixed(2);
+
+}
+
+}
+
+
+/* =========================
+COMPLETE RIDE (+ commission)
+========================= */
+
+async function confirmRideCompletion(){
+
+if(!fareRideId){
+
+showMessage(
+"fareMessage",
+"Ride পাওয়া যায়নি।",
+"error"
+);
+
+return;
+
+}
+
+
+const distance =
+parseFloat(
+document
+.getElementById("fareDistance")
+.value
+);
+
+
+const rate =
+parseFloat(
+document
+.getElementById("fareRate")
+.value
+);
+
+
+const estimatedFare =
+distance * rate;
+
+
+const finalFare =
+parseFloat(
+document
+.getElementById("finalFare")
+.value
+);
+
+
+if(
+!distance ||
+distance <= 0
+){
+
+showMessage(
+"fareMessage",
+"সঠিক Ride Distance দিন।",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+!rate ||
+rate <= 0
+){
+
+showMessage(
+"fareMessage",
+"সঠিক Fare Rate দিন।",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+isNaN(finalFare) ||
+finalFare < 0
+){
+
+showMessage(
+"fareMessage",
+"সঠিক Final Fare দিন।",
+"error"
+);
+
+return;
+
+}
+
+
+/* Confirmation */
+
+const confirmed =
+confirm(
+`Ride Complete করবেন?\n\nDistance: ${distance.toFixed(2)} km\nRate: ৳${rate.toFixed(2)}/km\nEstimated Fare: ৳${estimatedFare.toFixed(2)}\nFinal Fare: ৳${finalFare.toFixed(2)}`
+);
+
+
+if(!confirmed){
+
+return;
+
+}
+
+
+const {
+error
+} =
+await db
+.from("ride_requests")
+.update({
+
+distance_km:
+Number(distance.toFixed(2)),
+
+fare_per_km:
+Number(rate.toFixed(2)),
+
+final_fare:
+Number(finalFare.toFixed(2)),
+
+status:
+"completed",
+
+completed_at:
+new Date().toISOString()
+
+})
+.eq("id",fareRideId)
+.eq("driver_id",currentUser.id)
+.eq("status","accepted");
+
+
+if(error){
+
+showMessage(
+"fareMessage",
+error.message,
+"error"
+);
+
+return;
+
+}
+
+
+/* --- Commission: প্রতি রাইডে % কেটে নেওয়া --- */
+
+try{
+
+const {
+data: newBalance,
+error: commError
+} =
+await db.rpc("deduct_commission",{
+p_driver_id: currentUser.id,
+p_ride_id: fareRideId,
+p_fare: Number(finalFare.toFixed(2)),
+p_rate: COMMISSION_RATE
+});
+
+if(commError){
+console.error(
+"Commission deduct failed:",
+commError
+);
+}else{
+console.log(
+`Commission কাটা হয়েছে। নতুন ব্যালেন্স: ৳${Number(newBalance).toFixed(2)}`
+);
+}
+
+}catch(e){
+console.error(e);
+}
+
+
+/* Driver becomes available again */
+
+await db
+.from("drivers")
+.update({
+
+available:true,
+
+updated_at:
+new Date().toISOString()
+
+})
+.eq("id",currentUser.id);
+
+
+showMessage(
+"fareMessage",
+"✅ Ride Completed এবং Final Fare Confirm হয়েছে।",
+"success"
+);
+
+
+playCompleteSound();
+
+
+await loadDriverRequests();
+
+await loadMyRides();
+
+await loadWallet();
+
+setDriverStatusUI(true);
+
+
+setTimeout(
+closeFareModal,
+1300
+);
+
+}
+
+
+/* =========================
+MESSAGE MODAL
+========================= */
+
+function openMessageModal(
+receiverId,
+receiverName
+){
+
+selectedReceiverId =
+receiverId;
+
+
+document
+.getElementById("messageReceiver")
+.textContent =
+"To: " + receiverName;
+
+
+document
+.getElementById("messageText")
+.value = "";
+
+
+hideMessage("messageStatus");
+
+
+document
+.getElementById("messageModal")
+.classList.add("show");
+
+}
+
+
+function closeMessageModal(){
+
+document
+.getElementById("messageModal")
+.classList.remove("show");
+
+selectedReceiverId = null;
+
+}
+
+
+/* =========================
+SEND MESSAGE
+========================= */
+
+async function sendMessage(){
+
+if(
+!selectedReceiverId
+){
+
+return;
+
+}
+
+
+const message =
+document
+.getElementById("messageText")
+.value.trim();
+
+
+if(!message){
+
+showMessage(
+"messageStatus",
+"Message লিখুন।",
+"error"
+);
+
+return;
+
+}
+
+
+const {
+error
+} =
+await db
+.from("messages")
+.insert({
+
+sender_id:
+currentUser.id,
+
+receiver_id:
+selectedReceiverId,
+
+message:message
+
+});
+
+
+if(error){
+
+showMessage(
+"messageStatus",
+error.message,
+"error"
+);
+
+return;
+
+}
+
+
+showMessage(
+"messageStatus",
+"✅ Message পাঠানো হয়েছে।",
+"success"
+);
+
+
+document
+.getElementById("messageText")
+.value = "";
+
+}
+
+
+/* =========================
+PASSENGER HISTORY
+========================= */
+
+async function loadMyRides(){
+
+if(!currentUser){
+
+return;
+
+}
+
+
+let query =
+db
+.from("ride_requests")
+.select("*")
+.order("created_at",{
+ascending:false
+});
+
+
+if(
+currentProfile?.user_type === "driver"
+){
+
+query =
+query.eq(
+"driver_id",
+currentUser.id
+);
+
+}else{
+
+query =
+query.eq(
+"passenger_id",
+currentUser.id
+);
+
+}
+
+
+const {
+data,
+error
+} =
+await query;
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+// Ride status change → sound + live tracking
+(data || []).forEach(ride=>{
+
+const prev =
+prevRideStatus[ride.id];
+
+
+if(
+prev &&
+prev !== ride.status
+){
+
+if(
+prev === "pending" &&
+ride.status === "accepted" &&
+currentProfile?.user_type !== "driver"
+){
+
+playAcceptSound();
+
+startTracking(ride);
+
+}
+
+
+if(
+ride.status === "completed" &&
+currentProfile?.user_type !== "driver"
+){
+
+playCompleteSound();
+
+if(trackingRideId === ride.id){
+
+stopTracking();
+
+}
+
+}
+
+}
+
+prevRideStatus[ride.id] =
+ride.status;
+
+});
+
+
+if(
+currentProfile?.user_type === "driver"
+){
+
+renderDriverHistory(
+data || []
+);
+
+}else{
+
+renderPassengerHistory(
+data || []
+);
+
+}
+
+}
+
+
+/* =========================
+PASSENGER HISTORY RENDER
+========================= */
+
+function renderPassengerHistory(rides){
+
+const container =
+document.getElementById(
+"passengerHistory"
+);
+
+
+if(!rides.length){
+
+container.innerHTML = `
+<div class="empty">
+📜 এখনও কোনো Ride History নেই।
+</div>
+`;
+
+return;
+
+}
+
+
+container.innerHTML =
+rides.map(ride=>{
+
+const hasFare =
+ride.final_fare !== null &&
+ride.final_fare !== undefined;
+
+
+return `
+
+<div class="history-card">
+
+<div class="history-top">
+
+<div
+style="
+font-weight:700;
+color:var(--primary-dark)
+"
+>
+🚖 Ride
+</div>
+
+${statusBadge(ride.status)}
+
+</div>
+
+
+<div class="history-route">
+
+<div>
+<span>📍 Pickup:</span>
+Current Live Location
+</div>
+
+<div>
+<span>🎯 Destination:</span>
+${escapeHtml(
+ride.destination_address
+)}
+</div>
+
+</div>
+
+
+${
+hasFare
+?
+`
+<div class="history-fare">
+
+<div class="fare-row">
+
+<span>📏 দূরত্ব</span>
+
+<strong>
+${Number(
+ride.distance_km || 0
+).toFixed(2)} km
+</strong>
+
+</div>
+
+<div class="fare-row">
+
+<span>💵 রেট</span>
+
+<strong>
+৳${Number(
+ride.fare_per_km ||
+DEFAULT_FARE_PER_KM
+).toFixed(2)}/km
+</strong>
+
+</div>
+
+<div class="fare-row fare-total">
+
+<span>💰 Final Fare</span>
+
+<strong>
+৳${Number(
+ride.final_fare
+).toFixed(2)}
+</strong>
+
+</div>
+
+</div>
+`
+:
+`
+<div
+style="
+margin-top:12px;
+color:var(--muted);
+font-size:14px;
+"
+>
+${
+ride.status === "completed"
+?
+"Fare information unavailable."
+:
+"Ride complete হলে final fare এখানে দেখা যাবে।"
+}
+</div>
+`
+}
+
+
+<div
+style="
+margin-top:10px;
+font-size:13px;
+color:var(--muted)
+"
+>
+🕐 ${formatDate(
+ride.created_at
+)}
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+DRIVER HISTORY
+========================= */
+
+function renderDriverHistory(rides){
+
+const container =
+document.getElementById(
+"driverHistory"
+);
+
+
+if(!rides.length){
+
+container.innerHTML = `
+<div class="empty">
+📜 এখনও কোনো Ride History নেই।
+</div>
+`;
+
+return;
+
+}
+
+
+container.innerHTML =
+rides.map(ride=>{
+
+return `
+
+<div class="history-card">
+
+<div class="history-top">
+
+<div
+style="
+font-weight:700;
+color:var(--primary-dark)
+"
+>
+🚖 Ride
+</div>
+
+${statusBadge(ride.status)}
+
+</div>
+
+
+<div class="history-route">
+
+<div>
+<span>🎯 Destination:</span>
+${escapeHtml(
+ride.destination_address
+)}
+</div>
+
+</div>
+
+
+${
+ride.final_fare !== null &&
+ride.final_fare !== undefined
+?
+`
+<div class="history-fare">
+
+<div class="fare-row">
+
+<span>📏 Distance</span>
+
+<strong>
+${Number(
+ride.distance_km || 0
+).toFixed(2)} km
+</strong>
+
+</div>
+
+<div class="fare-row">
+
+<span>💵 Rate</span>
+
+<strong>
+৳${Number(
+ride.fare_per_km ||
+DEFAULT_FARE_PER_KM
+).toFixed(2)}/km
+</strong>
+
+</div>
+
+<div class="fare-row fare-total">
+
+<span>💰 Final Fare</span>
+
+<strong>
+৳${Number(
+ride.final_fare
+).toFixed(2)}
+</strong>
+
+</div>
+
+</div>
+`
+:
+""
+}
+
+
+<div
+style="
+margin-top:10px;
+font-size:13px;
+color:var(--muted)
+"
+>
+🕐 ${formatDate(
+ride.created_at
+)}
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+DATE FORMAT
+========================= */
+
+function formatDate(date){
+
+if(!date){
+
+return "";
+
+}
+
+
+try{
+
+return new Date(date)
+.toLocaleString(
+"bn-BD",
+{
+dateStyle:"medium",
+timeStyle:"short"
+}
+);
+
+}catch{
+
+return date;
+
+}
+
+}
+
+
+/* =========================
+REALTIME
+========================= */
+
+function startRealtime(){
+
+try{
+
+db
+.channel("cng-rides-live")
+
+.on(
+"postgres_changes",
+{
+event:"*",
+schema:"public",
+table:"ride_requests"
+},
+payload=>{
+
+console.log(
+"Ride realtime:",
+payload
+);
+
+
+if(
+currentProfile?.user_type === "driver"
+){
+
+loadDriverRequests();
+
+loadMyRides();
+
+}else{
+
+loadMyRides();
+
+}
+
+}
+)
+
+.subscribe();
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =========================
+AUTO REFRESH
+========================= */
+
+if(liveRefreshTimer){
+
+clearInterval(
+liveRefreshTimer
+);
+
+}
+
+
+liveRefreshTimer =
+setInterval(async()=>{
+
+if(!currentUser){
+
+return;
+
+}
+
+
+if(
+currentProfile?.user_type === "passenger"
+){
+
+await searchNearbyDrivers();
+
+}else{
+
+await loadDriverRequests();
+
+}
+
+},10000);
+
+
+/* =========================
+LOGOUT
+========================= */
+
+async function logout(){
+
+try{
+
+stopTracking();
+
+prevRideStatus = {};
+
+knownRequestIds = new Set();
+
+firstDriverLoad = true;
+
+
+if(passengerWatchId){
+
+navigator.geolocation.clearWatch(
+passengerWatchId
+);
+
+passengerWatchId = null;
+
+}
+
+
+if(driverWatchId){
+
+navigator.geolocation.clearWatch(
+driverWatchId
+);
+
+driverWatchId = null;
+
+}
+
+
+await db.auth.signOut();
+
+
+currentUser = null;
+
+currentProfile = null;
+
+
+location.reload();
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =========================
+SESSION CHECK
+========================= */
+
+async function checkSession(){
+
+const {
+data
+} =
+await db.auth.getSession();
+
+
+if(
+data &&
+data.session &&
+data.session.user
+){
+
+currentUser =
+data.session.user;
+
+await loadProfile();
+
+if(currentProfile){
+
+showApp();
+
+}
+
+}
+
+}
+
+
+/* =========================
+AUTH STATE CHANGE
+========================= */
+
+db.auth.onAuthStateChange(
+async(event,session)=>{
+
+if(
+event === "SIGNED_IN" &&
+session?.user
+){
+
+currentUser =
+session.user;
+
+await loadProfile();
+
+showApp();
+
+}
+
+});
+
+
+/* =========================
+START
+========================= */
+
+// Splash screen hide
+window.addEventListener("load", ()=>{
+setTimeout(()=>{
+const s = document.getElementById("splash");
+if(s){ s.classList.add("hide"); }
+}, 900);
+});
+setTimeout(()=>{
+const s = document.getElementById("splash");
+if(s){ s.classList.add("hide"); }
+}, 3500);
+
+
+checkSession();
+
+
+/* =========================
+SOUND — Web Audio notification tones (no files needed)
+========================= */
+
+let audioCtx = null;
+
+function ensureAudio(){
+
+try{
+
+if(!audioCtx){
+audioCtx =
+new (
+window.AudioContext ||
+window.webkitAudioContext
+)();
+}
+
+if(
+audioCtx.state === "suspended"
+){
+audioCtx.resume();
+}
+
+}catch(e){}
+
+}
+
+// প্রথম টাচ/ক্লিকেই audio unlock হবে (মোবাইল ব্রাউজারের নিয়ম)
+document.addEventListener(
+"pointerdown",
+ensureAudio
+);
+
+
+function playTone(
+freq,
+delay,
+dur,
+type,
+vol
+){
+
+try{
+
+ensureAudio();
+
+if(!audioCtx) return;
+
+const t =
+audioCtx.currentTime + delay;
+
+const o =
+audioCtx.createOscillator();
+
+const g =
+audioCtx.createGain();
+
+o.type = type || "sine";
+
+o.frequency.value = freq;
+
+g.gain.setValueAtTime(
+0.0001, t
+);
+
+g.gain.exponentialRampToValueAtTime(
+vol || 0.25, t + 0.03
+);
+
+g.gain.exponentialRampToValueAtTime(
+0.0001, t + dur
+);
+
+o.connect(g);
+
+g.connect(audioCtx.destination);
+
+o.start(t);
+
+o.stop(t + dur + 0.05);
+
+}catch(e){}
+
+}
+
+
+// Ride accept — খুশির ascending chime
+function playAcceptSound(){
+
+playTone(523.25, 0, .2, "sine", .3);
+
+playTone(659.25, .16, .2, "sine", .3);
+
+playTone(783.99, .32, .4, "sine", .3);
+
+buzz([150, 80, 150]);
+
+}
+
+
+// Ride complete — সমাপ্তির jingle
+function playCompleteSound(){
+
+playTone(659.25, 0, .18, "sine", .3);
+
+playTone(783.99, .14, .18, "sine", .3);
+
+playTone(1046.5, .28, .45, "sine", .3);
+
+buzz([200, 100, 200, 100, 300]);
+
+}
+
+
+// নতুন ride request — ড্রাইভারের জন্য alert beep
+function playRequestSound(){
+
+playTone(880, 0, .16, "square", .12);
+
+playTone(880, .22, .16, "square", .12);
+
+playTone(1174.66, .44, .28, "square", .12);
+
+buzz([120, 60, 120, 60, 120]);
+
+}
+
+
+// Vibration fallback — ফোন silent থাকলেও notification টের পাওয়া যাবে
+function buzz(pattern){
+
+try{
+
+if(navigator.vibrate){
+
+navigator.vibrate(pattern);
+
+}
+
+}catch(e){}
+
+}
+
+
+// 🔊 সাউন্ড টেস্ট — audio unlock + কাজ করছে কিনা চেক
+function testSound(){
+
+ensureAudio();
+
+playAcceptSound();
+
+buzz(200);
+
+setTimeout(()=>{
+
+alert("🔊 টেস্ট: chime শুনতে পেয়েছেন?");
+
+}, 900);
+
+}
+
+
+/* =========================
+LIVE RIDE TRACKING
+========================= */
+
+let trackingRideId = null;
+
+let trackingDriverId = null;
+
+let trackMap = null;
+
+let trackDriverMarker = null;
+
+let trackRouteLine = null;
+
+let trackTimer = null;
+
+let prevRideStatus = {};
+
+let knownRequestIds = new Set();
+
+let firstDriverLoad = true;
+
+
+function startTracking(ride){
+
+stopTracking();
+
+trackingRideId = ride.id;
+
+trackingDriverId = ride.driver_id;
+
+const card =
+document.getElementById("activeRideCard");
+
+if(card){
+
+card.style.display = "block";
+
+}
+
+
+const info =
+document.getElementById("activeRideInfo");
+
+if(info){
+
+info.innerHTML =
+`🎯 গন্তব্য: <b>${escapeHtml(ride.destination_address)}</b>` +
+`<br>📍 ড্রাইভারের লোকেশন লোড হচ্ছে...`;
+
+}
+
+
+if(!trackMap){
+
+trackMap =
+L.map("trackMap").setView(
+[
+latitude || 24.2513,
+longitude || 89.9167
+],
+14
+);
+
+const osmLayerTrack =
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+maxZoom:19,
+attribution:"© OpenStreetMap"
+}
+).addTo(trackMap);
+
+const satLayerTrack =
+L.tileLayer(
+"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+{
+maxZoom:19,
+attribution:"© Esri World Imagery"
+}
+);
+
+L.control.layers(
+{
+"🗺️ Map": osmLayerTrack,
+"🛰️ Satellite": satLayerTrack
+},
+null,
+{position:"topright"}
+).addTo(trackMap);
+
+setTimeout(
+()=>trackMap.invalidateSize(),
+400
+);
+
+}
+
+
+updateTracking();
+
+trackTimer =
+setInterval(
+updateTracking,
+5000
+);
+
+
+if(card){
+
+card.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+}
+
+
+function stopTracking(){
+
+if(trackTimer){
+
+clearInterval(trackTimer);
+
+trackTimer = null;
+
+}
+
+trackingRideId = null;
+
+trackingDriverId = null;
+
+if(
+trackDriverMarker &&
+trackMap
+){
+
+trackMap.removeLayer(
+trackDriverMarker
+);
+
+trackDriverMarker = null;
+
+}
+
+if(
+trackRouteLine &&
+trackMap
+){
+
+trackMap.removeLayer(
+trackRouteLine
+);
+
+trackRouteLine = null;
+
+}
+
+const card =
+document.getElementById("activeRideCard");
+
+if(card){
+
+card.style.display = "none";
+
+}
+
+}
+
+
+async function updateTracking(){
+
+if(
+!trackingRideId ||
+!trackingDriverId
+){
+return;
+}
+
+try{
+
+const {
+data: ride
+} =
+await db
+.from("ride_requests")
+.select("status")
+.eq("id",trackingRideId)
+.maybeSingle();
+
+
+if(
+ride &&
+(
+ride.status === "completed" ||
+ride.status === "cancelled" ||
+ride.status === "rejected"
+)
+){
+
+stopTracking();
+
+return;
+
+}
+
+
+const {
+data: drv
+} =
+await db
+.from("drivers")
+.select("latitude,longitude")
+.eq("id",trackingDriverId)
+.maybeSingle();
+
+
+const info =
+document.getElementById(
+"activeRideInfo"
+);
+
+
+if(
+drv &&
+drv.latitude !== null &&
+latitude !== null &&
+trackMap
+){
+
+const dlat = drv.latitude;
+
+const dlng = drv.longitude;
+
+
+if(!trackDriverMarker){
+
+trackDriverMarker =
+L.marker([dlat,dlng])
+.addTo(trackMap)
+.bindPopup("🚕 আপনার CNG");
+
+}else{
+
+trackDriverMarker.setLatLng(
+[dlat,dlng]
+);
+
+}
+
+
+if(trackRouteLine){
+
+trackMap.removeLayer(
+trackRouteLine
+);
+
+}
+
+trackRouteLine =
+L.polyline(
+[
+[latitude,longitude],
+[dlat,dlng]
+],
+{
+color:"#087f5b",
+weight:4,
+opacity:.8
+}
+).addTo(trackMap);
+
+
+trackMap.setView(
+[dlat,dlng],
+15
+);
+
+
+const d =
+distanceKm(
+latitude,
+longitude,
+dlat,
+dlng
+);
+
+
+if(info){
+
+// শহরে গড় গতি ~২০ km/h ধরে ETA
+const etaMin =
+Math.max(1, Math.round(d / 20 * 60));
+
+info.innerHTML =
+`🚕 ড্রাইভার আপনার থেকে ` +
+`<b>${d.toFixed(2)} km</b> দূরে — ` +
+`লাইভ আসছে... 🟢` +
+`<br>⏱️ আনুমানিক <b>${etaMin} মিনিটে</b> পৌঁছাবে`;
+
+}
+
+}else if(info){
+
+info.textContent =
+"📍 ড্রাইভারের লোকেশন পাওয়া যাচ্ছে না...";
+
+}
+
+}catch(e){
+
+console.error(e);
+
+}
+
+}
+
+
+/* =========================
+MODAL OUTSIDE CLICK
+========================= */
+
+document
+.getElementById("messageModal")
+.addEventListener("click",function(e){
+
+if(e.target === this){
+
+closeMessageModal();
+
+}
+
+});
+
+
+document
+.getElementById("rideModal")
+.addEventListener("click",function(e){
+
+if(e.target === this){
+
+closeRideModal();
+
+}
+
+});
+
+
+document
+.getElementById("fareModal")
+.addEventListener("click",function(e){
+
+if(e.target === this){
+
+closeFareModal();
+
+}
+
+});
+
+
+document
+.getElementById("rechargeModal")
+.addEventListener("click",function(e){
+
+if(e.target === this){
+
+closeRechargeModal();
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
