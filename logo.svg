@@ -1,0 +1,35 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CNG Ride logo">
+  <defs>
+    <linearGradient id="cng-badge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0dbe82"/>
+      <stop offset="1" stop-color="#046a44"/>
+    </linearGradient>
+    <linearGradient id="cng-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd94d"/>
+      <stop offset="1" stop-color="#ffb703"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="url(#cng-badge)"/>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="none" stroke="#ffffff" stroke-opacity=".25" stroke-width="1.5"/>
+  <!-- motion lines -->
+  <g stroke="#ffffff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round">
+    <line x1="6" y1="30" x2="10" y2="30"/>
+    <line x1="5" y1="36" x2="10" y2="36"/>
+  </g>
+  <!-- canopy -->
+  <path d="M15 31 Q16 21 25 20 L36 20 Q42 20 45 26 L47 31 Z" fill="url(#cng-body)"/>
+  <!-- windshield -->
+  <path d="M37 22.5 L43 30 L37 30 Z" fill="#d9f5e9"/>
+  <!-- side window -->
+  <rect x="19" y="23.5" width="12" height="5.5" rx="2" fill="#046a44" opacity=".9"/>
+  <!-- body -->
+  <path d="M13 33 L47 33 Q51 33 51 37 L51 40 Q51 43 48 43 L16 43 Q13 43 13 40 Z" fill="url(#cng-body)"/>
+  <rect x="13" y="38.5" width="38" height="2.4" fill="#046a44" opacity=".28"/>
+  <!-- headlight -->
+  <circle cx="49" cy="37.5" r="1.8" fill="#fffbe8"/>
+  <!-- wheels -->
+  <circle cx="22" cy="46" r="6.4" fill="#0b2e22"/>
+  <circle cx="22" cy="46" r="2.5" fill="#ffd94d"/>
+  <circle cx="42" cy="46" r="6.4" fill="#0b2e22"/>
+  <circle cx="42" cy="46" r="2.5" fill="#ffd94d"/>
+</svg>
