@@ -1730,7 +1730,12 @@ aria-label="Call driver"
 class="track-btn track-btn-chat"
 onclick="openMessageModal()"
 aria-label="Chat"
-><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button></div></div><div class="track-progress-wrap"><div class="track-progress-bar"><div class="track-progress-fill" id="trackProgressFill" style="width:10%"></div></div><div class="track-eta" id="activeRideInfo">ড্রাইভারের লোকেশন লোড হচ্ছে...</div></div><button
+><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button></div></div><div class="track-progress-wrap"><div class="track-progress-bar"><div class="track-progress-fill" id="trackProgressFill" style="width:10%"></div></div><div class="track-eta" id="activeRideInfo">ড্রাইভারের লোকেশন লোড হচ্ছে...</div></div><div style="display:flex;gap:8px;margin-bottom:8px"><button
+class="btn btn-primary"
+style="flex:1"
+onclick="openPassengerNav()"
+>Navigate
+</button></div><button
 class="track-sos"
 onclick="if(confirm('জরুরি সাহায্য দরকার?')){alert('SOS: হেল্পলাইনে কল করুন 999')}"
 >SOS Emergency</button></div></div><div class="stats-grid"><div class="stat"><div
@@ -1840,7 +1845,7 @@ style="margin-bottom:15px"
 type="text"
 id="rideDestination"
 readonly
-></div><div
+>"></div><div
 style="
 background:#f3faf7;
 padding:14px;
@@ -1849,6 +1854,9 @@ margin-bottom:15px;
 "
 ><div>Pickup: আপনার Live Location
 </div><div style="margin-top:5px">Default Fare Rate: <strong>৳20/km</strong></div><div
+id="fareEstimate"
+style="margin-top:10px;padding:10px;background:#fff;border-radius:8px;border:1.5px dashed #059669"
+><div style="font-size:13px;color:#64748b">ভাড়া হিসাব হচ্ছে...</div></div><div
 style="
 margin-top:5px;
 font-size:13px;
@@ -4362,6 +4370,75 @@ document
 .value.trim();
 
 
+// Fare estimate হিসাব করো
+(async ()=>{
+
+const fareEl =
+document.getElementById("fareEstimate");
+
+if(!fareEl) return;
+
+const dest =
+document.getElementById("rideDestination").value.trim();
+
+if(!dest){
+fareEl.innerHTML =
+'<div style="font-size:13px;color:#64748b">গন্তব্য দিন।</div>';
+return;
+}
+
+try{
+
+const geoRes =
+await fetch(
+"https://nominatim.openstreetmap.org/search?format=json&q=" +
+encodeURIComponent(dest + ", Tangail, Bangladesh") +
+"&limit=1",
+{headers:{"Accept":"application/json"}}
+);
+
+const geoData = await geoRes.json();
+
+if(geoData && geoData.length > 0){
+
+const dlat = parseFloat(geoData[0].lat);
+const dlng = parseFloat(geoData[0].lon);
+
+const distKm =
+distanceKm(latitude, longitude, dlat, dlng);
+
+const estFare =
+Math.max(20, Math.round(distKm * DEFAULT_FARE_PER_KM));
+
+// Store for sendRideRequest
+window._estDistanceKm = distKm;
+window._estFare = estFare;
+
+fareEl.innerHTML =
+`<div style="display:flex;justify-content:space-between;align-items:center">` +
+`<div><div style="font-size:13px;color:#64748b">আনুমানিক দূরত্ব</div>` +
+`<div style="font-weight:700;font-size:16px">${distKm.toFixed(1)} km</div></div>` +
+`<div style="text-align:right"><div style="font-size:13px;color:#64748b">আনুমানিক ভাড়া</div>` +
+`<div style="font-weight:700;font-size:20px;color:#059669">৳${estFare}</div></div>` +
+`</div>`;
+
+}else{
+
+fareEl.innerHTML =
+'<div style="font-size:13px;color:#dc2626">গন্তব্য খুঁজে পাওয়া যায়নি।</div>';
+
+}
+
+}catch(e){
+
+fareEl.innerHTML =
+'<div style="font-size:13px;color:#64748b">ভাড়া হিসাব করা যায়নি।</div>';
+
+}
+
+})();
+
+
 hideMessage("rideStatus");
 
 
@@ -4377,6 +4454,47 @@ function closeRideModal(){
 document
 .getElementById("rideModal")
 .classList.remove("show");
+
+}
+
+
+/* =========================
+PASSENGER NAVIGATION — destination directions
+========================= */
+
+async function openPassengerNav(){
+
+if(!trackingRideId){
+alert("কোনো active ride নেই।");
+return;
+}
+
+try{
+
+const {data: ride} =
+await db
+.from("ride_requests")
+.select("destination_address")
+.eq("id", trackingRideId)
+.maybeSingle();
+
+const dest =
+ride?.destination_address || "";
+
+if(!dest){
+alert("গন্তব্য পাওয়া যায়নি।");
+return;
+}
+
+// Google Maps directions: current location → destination
+const url =
+`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest + ", Tangail, Bangladesh")}`;
+
+window.open(url, "_blank", "noopener");
+
+}catch(e){
+console.error("Passenger nav error:", e);
+}
 
 }
 
@@ -4598,7 +4716,13 @@ status:
 "pending",
 
 fare_per_km:
-DEFAULT_FARE_PER_KM
+DEFAULT_FARE_PER_KM,
+
+distance_km:
+window._estDistanceKm || null,
+
+estimated_fare:
+window._estFare || null
 
 })
 .select()
