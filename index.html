@@ -6333,7 +6333,7 @@ document.getElementById(
 if(
 drv &&
 drv.latitude!== null &&
-latitude!== null &&
+drv.longitude!== null &&
 trackMap
 ){
 
@@ -6356,6 +6356,10 @@ trackDriverMarker.setLatLng(
 );
 
 }
+
+
+// Route line + distance শুধু rider location থাকলে
+if(latitude!== null && longitude!== null){
 
 
 if(trackRouteLine){
@@ -6413,6 +6417,20 @@ if(fill) fill.style.width = prog + "%";
 info.innerHTML =
 `<b>${d.toFixed(2)} km</b> দূরে — ` +
 `আনুমানিক <b>${etaMin} মিনিটে</b> পৌঁছাবে`;
+
+}
+
+}else{
+
+// Rider location নেই — শুধু driver marker দেখাও, map driver-এর দিকে
+trackMap.setView(
+[dlat,dlng],
+15
+);
+
+if(info){
+info.innerHTML = `ড্রাইভার লাইভ আসছে...`;
+}
 
 }
 
