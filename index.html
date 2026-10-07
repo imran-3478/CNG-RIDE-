@@ -4160,6 +4160,9 @@ btn.className =
 btn.textContent =
 "Busy করুন";
 
+// Screen on রাখো — driver duty-তে থাকলে
+requestWakeLock();
+
 }else{
 
 pill.className =
@@ -4173,6 +4176,10 @@ btn.className =
 
 btn.textContent =
 "Available করুন";
+
+// Screen lock ছেড়ে দাও
+releaseWakeLock();
+stopRequestAlert();
 
 }
 
@@ -5425,7 +5432,7 @@ r.status === "pending" &&
 !knownRequestIds.has(r.id)
 ){
 
-playRequestSound();
+startRequestAlert();
 
 }
 
@@ -5640,6 +5647,9 @@ ACCEPT RIDE (with wallet gate)
 
 async function acceptRide(rideId){
 
+// Alert বন্ধ করো — driver সাড়া দিয়েছে
+stopRequestAlert();
+
 // Wallet gate: মিনিমাম ব্যালেন্স না থাকলে রাইড নেওয়া যাবে না
 const balance =
 await getWalletBalance();
@@ -5735,6 +5745,9 @@ REJECT RIDE
 ========================= */
 
 async function rejectRide(rideId){
+
+// Alert বন্ধ করো
+stopRequestAlert();
 
 const {
 error
@@ -6901,6 +6914,62 @@ if(s){ s.classList.add("hide"); }
 
 
 checkSession();
+
+
+/* =========================
+WAKE LOCK + REPEATING ALERT
+Driver Available থাকলে screen off হবে না,
+নতুন request এলে থামবে না যতক্ষণ accept/reject না করে
+========================= */
+
+let wakeLock = null;
+
+async function requestWakeLock(){
+try{
+if('wakeLock' in navigator){
+wakeLock = await navigator.wakeLock.request('screen');
+}
+}catch(e){}
+}
+
+function releaseWakeLock(){
+try{
+if(wakeLock){
+wakeLock.release();
+wakeLock = null;
+}
+}catch(e){}
+}
+
+// Screen visible হলে wake lock আবার নাও (auto-release হয়)
+document.addEventListener('visibilitychange', ()=>{
+if(document.visibilityState === 'visible'){
+const pill = document.getElementById('driverStatusPill');
+if(pill && pill.classList.contains('status-available')){
+requestWakeLock();
+}
+}
+});
+
+
+let requestAlertInterval = null;
+
+function startRequestAlert(){
+stopRequestAlert();
+playRequestSound();
+buzz([300, 100, 300, 100, 500]);
+requestAlertInterval = setInterval(()=>{
+playRequestSound();
+buzz([300, 100, 300, 100, 500]);
+}, 4000);
+}
+
+function stopRequestAlert(){
+if(requestAlertInterval){
+clearInterval(requestAlertInterval);
+requestAlertInterval = null;
+}
+}
 
 
 /* =========================
