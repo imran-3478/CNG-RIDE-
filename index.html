@@ -3387,6 +3387,7 @@ return;
 }
 
 
+
 const {
 error:updateError
 } =
@@ -3929,6 +3930,75 @@ showMessage(
 );
 
 return;
+
+}
+
+
+// Destination geocode করে map-এ দেখাও
+const destInput =
+document.getElementById("destinationInput");
+
+const destText =
+destInput ? destInput.value.trim() : "";
+
+if(destText && typeof map !== "undefined" && map){
+
+try{
+
+const geoRes =
+await fetch(
+"https://nominatim.openstreetmap.org/search?format=json&q=" +
+encodeURIComponent(destText + ", Tangail, Bangladesh") +
+"&limit=1",
+{headers:{"Accept":"application/json"}}
+);
+
+const geoData = await geoRes.json();
+
+if(geoData && geoData.length > 0){
+
+const dlat = parseFloat(geoData[0].lat);
+const dlng = parseFloat(geoData[0].lon);
+
+if(window.destMarker){
+map.removeLayer(window.destMarker);
+}
+
+window.destMarker =
+L.marker([dlat,dlng],{
+icon:L.divIcon({
+className:"dest-pin",
+html:'<div style="background:#dc2626;width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)"></div>',
+iconSize:[28,28],
+iconAnchor:[14,28]
+})
+})
+.addTo(map)
+.bindPopup("গন্তব্য: " + geoData[0].display_name.split(",")[0]);
+
+map.setView([dlat,dlng], 14);
+
+showMessage(
+"passengerMessage",
+"গন্তব্য পাওয়া গেছে: " + geoData[0].display_name.split(",").slice(0,2).join(","),
+"success"
+);
+
+}else{
+
+showMessage(
+"passengerMessage",
+"গন্তব্য খুঁজে পাওয়া যায়নি। অন্য নামে চেষ্টা করুন।",
+"error"
+);
+
+}
+
+}catch(e){
+
+console.error("Geocode error:", e);
+
+}
 
 }
 
@@ -5315,6 +5385,17 @@ stopTracking();
 
 prevRideStatus[ride.id] =
 ride.status;
+
+// Fallback: accepted ride থাকলে tracking চালু করো (prev undefined হলেও)
+if(
+ride.status === "accepted" &&
+currentProfile?.user_type !== "driver" &&
+trackingRideId !== ride.id
+){
+
+startTracking(ride);
+
+}
 
 });
 
