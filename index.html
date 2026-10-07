@@ -1803,7 +1803,29 @@ onclick="sendMessage()"
 </button><div
 id="messageStatus"
 class="message"
-></div></div></div><!-- RIDE REQUEST MODAL --><div
+></div></div></div><!-- DRIVER NAVIGATION MODAL --><div
+class="modal"
+id="driverNavModal"
+><div class="modal-box" style="max-width:500px;padding:0;overflow:hidden"><div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #e2e8f0"><h3 style="margin:0">Rider Pickup Location</h3><button
+class="modal-close"
+onclick="closeDriverNav()"
+style="position:static"
+>×
+</button></div><div
+id="driverNavMap"
+style="height:350px;width:100%;z-index:1"
+></div><div style="padding:14px 16px"><div
+id="driverNavInfo"
+style="margin-bottom:12px;font-size:14px;color:#475569"
+></div><a
+id="driverNavGmaps"
+href="#"
+target="_blank"
+rel="noopener"
+class="btn btn-primary btn-block"
+style="text-decoration:none;text-align:center;display:block"
+>Google Maps-এ Navigate করো
+</a></div></div></div><!-- RIDE REQUEST MODAL --><div
 class="modal"
 id="rideModal"
 ><div class="modal-box"><button
@@ -4360,6 +4382,145 @@ document
 
 
 /* =========================
+DRIVER NAVIGATION — pickup map
+========================= */
+
+let driverNavMap = null;
+let driverNavMarkers = [];
+
+function closeDriverNav(){
+
+document
+.getElementById("driverNavModal")
+.classList.remove("show");
+
+}
+
+async function openDriverNav(rideId){
+
+try{
+
+const {data: ride} =
+await db
+.from("ride_requests")
+.select("pickup_lat,pickup_lng,destination_address")
+.eq("id", rideId)
+.maybeSingle();
+
+if(!ride){
+alert("Ride পাওয়া যায়নি।");
+return;
+}
+
+const plat = parseFloat(ride.pickup_lat);
+const plng = parseFloat(ride.pickup_lng);
+
+if(isNaN(plat) || isNaN(plng)){
+alert("Rider-এর location পাওয়া যায়নি।");
+return;
+}
+
+document
+.getElementById("driverNavModal")
+.classList.add("show");
+
+const infoEl =
+document.getElementById("driverNavInfo");
+
+if(infoEl){
+infoEl.innerHTML =
+`গন্তব্য: <b>${escapeHtml(ride.destination_address || "")}</b>`;
+}
+
+// Google Maps navigation link
+const gmapsEl =
+document.getElementById("driverNavGmaps");
+
+if(gmapsEl){
+gmapsEl.href =
+`https://www.google.com/maps/dir/?api=1&destination=${plat},${plng}`;
+}
+
+// Leaflet map
+setTimeout(()=>{
+
+if(driverNavMap){
+driverNavMap.remove();
+driverNavMap = null;
+}
+driverNavMarkers = [];
+
+const centerLat = (latitude !== null) ? latitude : plat;
+const centerLng = (longitude !== null) ? longitude : plng;
+
+driverNavMap =
+L.map("driverNavMap").setView(
+[centerLat, centerLng],
+14
+);
+
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{maxZoom:19, attribution:"© OpenStreetMap"}
+).addTo(driverNavMap);
+
+// Rider pickup marker (red)
+const pickupMarker =
+L.marker([plat, plng], {
+icon: L.divIcon({
+className: "pickup-pin",
+html: '<div style="background:#dc2626;width:32px;height:32px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)"></div>',
+iconSize: [32,32],
+iconAnchor: [16,32]
+})
+})
+.addTo(driverNavMap)
+.bindPopup("<b>Rider Pickup</b><br>যাত্রী এখানে আছে");
+
+driverNavMarkers.push(pickupMarker);
+
+// Driver location marker (blue) — যদি থাকে
+if(latitude !== null && longitude !== null){
+const driverMarker =
+L.marker([latitude, longitude], {
+icon: L.divIcon({
+className: "driver-pin",
+html: '<div style="background:#2563eb;width:24px;height:24px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)"></div>',
+iconSize: [24,24],
+iconAnchor: [12,12]
+})
+})
+.addTo(driverNavMap)
+.bindPopup("<b>আপনি</b><br>ড্রাইভারের অবস্থান");
+
+driverNavMarkers.push(driverMarker);
+
+// Route line
+L.polyline(
+[[latitude, longitude], [plat, plng]],
+{color:"#059669", weight:4, opacity:.8, dashArray:"10,8"}
+).addTo(driverNavMap);
+
+// Fit bounds
+const bounds = L.latLngBounds(
+[[latitude, longitude], [plat, plng]]
+);
+driverNavMap.fitBounds(bounds, {padding:[40,40]});
+}
+
+driverNavMap.invalidateSize();
+
+}, 300);
+
+}catch(e){
+console.error("Driver nav error:", e);
+alert("Map লোড করতে সমস্যা হয়েছে।");
+}
+
+}
+
+
+/* =========================
 SEND RIDE REQUEST
 ========================= */
 
@@ -4619,7 +4780,11 @@ ride.driver_id === currentUser.id
 
 actionHtml = `
 
-<div class="driver-actions"><button
+<div class="driver-actions" style="display:flex;gap:8px;flex-wrap:wrap"><button
+class="btn btn-primary"
+onclick="openDriverNav('${escapeJs(ride.id)}')"
+>Navigate
+</button><button
 class="btn btn-warning"
 onclick="openFareModal(
 '${escapeJs(ride.id)}',
