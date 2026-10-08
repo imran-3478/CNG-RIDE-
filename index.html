@@ -1832,15 +1832,13 @@ style="height:350px;width:100%;z-index:1"
 ></div><div style="padding:14px 16px"><div
 id="driverNavInfo"
 style="margin-bottom:12px;font-size:14px;color:#475569"
-></div><a
+></div><button
 id="driverNavGmaps"
-href="#"
-target="_blank"
-rel="noopener"
+type="button"
+onclick="openDriverGmaps()"
 class="btn btn-primary btn-block"
-style="text-decoration:none;text-align:center;display:block"
 >Google Maps-এ Navigate করো
-</a></div></div></div><!-- RIDE REQUEST MODAL --><div
+</button></div></div></div><!-- RIDE REQUEST MODAL --><div
 class="modal"
 id="rideModal"
 ><div class="modal-box"><button
@@ -4516,11 +4514,11 @@ alert("গন্তব্য পাওয়া যায়নি।");
 return;
 }
 
-// Google Maps directions: current location → destination
+// Google Maps directions: copy modal (WebView-safe)
 const url =
 `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest + ", Tangail, Bangladesh")}`;
 
-window.open(url, "_blank", "noopener");
+showNavCopyModal(url, dest);
 
 }catch(e){
 console.error("Passenger nav error:", e);
@@ -4593,6 +4591,37 @@ prompt("এই link copy করো:", url); done();
 }
 }
 
+function openDriverGmaps(){
+const el = document.getElementById("driverNavGmaps");
+const url = el ? el.dataset.url : null;
+showNavCopyModal(url, "Pickup Location");
+}
+
+// Generic nav copy modal - সব navigate button-এর জন্য
+function showNavCopyModal(url, destName){
+if(!url) return;
+let modal = document.getElementById("navLinkModal");
+if(!modal){
+modal = document.createElement("div");
+modal.id = "navLinkModal";
+modal.className = "modal";
+modal.innerHTML =
+'<div class="modal-content" style="max-width:400px;text-align:center">'+
+'<button class="modal-close" onclick="document.getElementById(\'navLinkModal\').classList.remove(\'show\')">&times;</button>'+
+'<h3>Google Maps Navigation</h3>'+
+'<p id="navLinkDestName" style="font-weight:700;margin:10px 0"></p>'+
+'<p style="font-size:13px;color:#64748b;margin-bottom:15px">নিচের button-এ tap করে link copy করো,<br>তারপর Chrome-এ paste করে open করো</p>'+
+'<button class="btn btn-primary btn-block" onclick="copyNavLink()">Link Copy করো</button>'+
+'<p id="navCopyMsg" style="font-size:13px;color:#059669;margin-top:10px;display:none">Copy হয়েছে! ✅</p>'+
+'</div>';
+document.body.appendChild(modal);
+}
+document.getElementById("navLinkDestName").textContent = destName || "গন্তব্য";
+modal.dataset.url = url;
+document.getElementById("navCopyMsg").style.display = "none";
+modal.classList.add("show");
+}
+
 async function openDriverNav(rideId){
 
 try{
@@ -4629,12 +4658,12 @@ infoEl.innerHTML =
 `গন্তব্য: <b>${escapeHtml(ride.destination_address || "")}</b>`;
 }
 
-// Google Maps navigation link
+// Google Maps navigation link - store for copy modal
 const gmapsEl =
 document.getElementById("driverNavGmaps");
 
 if(gmapsEl){
-gmapsEl.href =
+gmapsEl.dataset.url =
 `https://www.google.com/maps/dir/?api=1&destination=${plat},${plng}`;
 }
 
