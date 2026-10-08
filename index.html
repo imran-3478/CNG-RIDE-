@@ -4551,18 +4551,29 @@ const btn = document.getElementById("destNavBtn");
 const url = btn ? btn.dataset.url : null;
 if(!url) return;
 
-const ua = navigator.userAgent || "";
-const isWebView = /; wv\)|WebView|Version\/.*Chrome\/.*Mobile/i.test(ua) && !/Chrome\/[.0-9]* (?!.*Edg)/.test(ua + " ") || (window.AndroidInterface !== undefined);
+const ua = (navigator.userAgent || "").toLowerCase();
+// Aggressive WebView detection: Kodular/Niotron/MIT App Inventor WebView
+const isWebView =
+ua.indexOf("; wv") !== -1 ||           // Android System WebView marker
+ua.indexOf("webview") !== -1 ||
+ua.indexOf("niotron") !== -1 ||
+ua.indexOf("kodular") !== -1 ||
+ua.indexOf("makeroid") !== -1 ||
+window.AndroidInterface !== undefined ||
+(typeof window.Android !== "undefined");
 
 if(isWebView){
 // WebView intent:// handle করতে পারে না — link copy করে দাও
+const doCopy = (txt)=>{
 if(navigator.clipboard && navigator.clipboard.writeText){
-navigator.clipboard.writeText(url).then(()=>{
-alert("Link copy হয়েছে! Chrome browser-এ paste করে open করো — Google Maps খুলবে।");
-}).catch(()=>{ prompt("এই link copy করে Chrome-এ open করো:", url); });
+navigator.clipboard.writeText(txt).then(()=>{
+alert("Link copy হয়েছে!\n\nChrome browser open করে paste করো — Google Maps খুলবে।");
+}).catch(()=>{ prompt("এই link copy করে Chrome-এ open করো:", txt); });
 }else{
-prompt("এই link copy করে Chrome-এ open করো:", url);
+prompt("এই link copy করে Chrome-এ open করো:", txt);
 }
+};
+doCopy(url);
 }else{
 window.open(url, "_blank", "noopener");
 }
