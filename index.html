@@ -1765,7 +1765,19 @@ onclick="searchNearbyDrivers()"
 </button><div
 id="passengerMessage"
 class="message"
-></div></div><div class="location-bar"><span id="locationStatus">Location চালু হচ্ছে...</span><span style="display:flex;gap:8px;flex-wrap:wrap"><button
+></div><div
+id="destNavCard"
+class="card"
+style="display:none;margin-top:12px;border:1.5px solid #059669"
+><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:50%;background:#dc2626;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div><div style="flex:1;min-width:0"><div id="destNavName" style="font-weight:700;font-size:15px;color:#0f172a"></div><div id="destNavDist" style="font-size:13px;color:#64748b"></div></div></div><a
+id="destNavBtn"
+href="#"
+target="_blank"
+rel="noopener"
+class="btn btn-primary btn-block"
+style="text-decoration:none;text-align:center;display:block"
+>Navigate করো
+</a></div></div><div class="location-bar"><span id="locationStatus">Location চালু হচ্ছে...</span><span style="display:flex;gap:8px;flex-wrap:wrap"><button
 class="btn btn-warning btn-small"
 id="locationBtn"
 onclick="requestLocation()"
@@ -4014,6 +4026,23 @@ showMessage(
 "success"
 );
 
+// Navigation card দেখাও
+const destName = geoData[0].display_name.split(",").slice(0,2).join(",");
+const distKm = (latitude!==null&&longitude!==null) ? distanceKm(latitude,longitude,dlat,dlng) : null;
+const estFare = distKm!==null ? Math.max(20,Math.round(distKm*DEFAULT_FARE_PER_KM)) : null;
+
+const navCard = document.getElementById("destNavCard");
+if(navCard){
+document.getElementById("destNavName").textContent = destName;
+document.getElementById("destNavDist").textContent =
+distKm!==null ? distKm.toFixed(1)+" km দূরে"+(estFare!==null?" · আনুমানিক ভাড়া ৳"+estFare:"") : "নেভিগেশন";
+document.getElementById("destNavBtn").href =
+"https://www.google.com/maps/dir/?api=1"+
+(latitude!==null&&longitude!==null?"&origin="+latitude+","+longitude:"")+
+"&destination="+dlat+","+dlng;
+navCard.style.display = "block";
+}
+
 }else{
 
 showMessage(
@@ -4021,6 +4050,9 @@ showMessage(
 "গন্তব্য খুঁজে পাওয়া যায়নি। অন্য নামে চেষ্টা করুন।",
 "error"
 );
+
+const navCardHide = document.getElementById("destNavCard");
+if(navCardHide) navCardHide.style.display = "none";
 
 }
 
