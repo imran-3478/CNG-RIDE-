@@ -4552,9 +4552,11 @@ const url = btn ? btn.dataset.url : null;
 if(!url) return;
 
 const ua = (navigator.userAgent || "").toLowerCase();
-// Aggressive WebView detection: Kodular/Niotron/MIT App Inventor WebView
+// WebView detection: real Chrome-এ window.chrome.runtime থাকে, WebView-এ থাকে না
+const hasChromeRuntime = !!(window.chrome && window.chrome.runtime);
 const isWebView =
-ua.indexOf("; wv") !== -1 ||           // Android System WebView marker
+!hasChromeRuntime ||
+ua.indexOf("; wv") !== -1 ||
 ua.indexOf("webview") !== -1 ||
 ua.indexOf("niotron") !== -1 ||
 ua.indexOf("kodular") !== -1 ||
