@@ -4544,42 +4544,53 @@ document
 
 }
 
-// Destination navigate — WebView হলে copy করে Chrome-এ খুলতে বলো
+// Destination navigate — সবসময় copy modal (WebView intent:// handle করতে পারে না)
 function openDestNav(){
 
 const btn = document.getElementById("destNavBtn");
 const url = btn ? btn.dataset.url : null;
 if(!url) return;
 
-const ua = (navigator.userAgent || "").toLowerCase();
-// WebView detection: real Chrome-এ window.chrome.runtime থাকে, WebView-এ থাকে না
-const hasChromeRuntime = !!(window.chrome && window.chrome.runtime);
-const isWebView =
-!hasChromeRuntime ||
-ua.indexOf("; wv") !== -1 ||
-ua.indexOf("webview") !== -1 ||
-ua.indexOf("niotron") !== -1 ||
-ua.indexOf("kodular") !== -1 ||
-ua.indexOf("makeroid") !== -1 ||
-window.AndroidInterface !== undefined ||
-(typeof window.Android !== "undefined");
+const destName = document.getElementById("destNavName") ?
+document.getElementById("destNavName").textContent : "গন্তব্য";
 
-if(isWebView){
-// WebView intent:// handle করতে পারে না — link copy করে দাও
-const doCopy = (txt)=>{
+// Modal দেখাও
+let modal = document.getElementById("navLinkModal");
+if(!modal){
+modal = document.createElement("div");
+modal.id = "navLinkModal";
+modal.className = "modal";
+modal.innerHTML =
+'<div class="modal-content" style="max-width:400px;text-align:center">'+
+'<button class="modal-close" onclick="document.getElementById(\'navLinkModal\').classList.remove(\'show\')">&times;</button>'+
+'<h3>Google Maps Navigation</h3>'+
+'<p id="navLinkDestName" style="font-weight:700;margin:10px 0"></p>'+
+'<p style="font-size:13px;color:#64748b;margin-bottom:15px">নিচের button-এ tap করে link copy করো,<br>তারপর Chrome-এ paste করে open করো</p>'+
+'<button class="btn btn-primary btn-block" onclick="copyNavLink()">Link Copy করো</button>'+
+'<p id="navCopyMsg" style="font-size:13px;color:#059669;margin-top:10px;display:none">Copy হয়েছে! ✅</p>'+
+'</div>';
+document.body.appendChild(modal);
+}
+document.getElementById("navLinkDestName").textContent = destName;
+modal.dataset.url = url;
+document.getElementById("navCopyMsg").style.display = "none";
+modal.classList.add("show");
+
+}
+
+function copyNavLink(){
+const modal = document.getElementById("navLinkModal");
+const url = modal ? modal.dataset.url : "";
+if(!url) return;
+const msg = document.getElementById("navCopyMsg");
+const done = ()=>{ if(msg) msg.style.display = "block"; };
 if(navigator.clipboard && navigator.clipboard.writeText){
-navigator.clipboard.writeText(txt).then(()=>{
-alert("Link copy হয়েছে!\n\nChrome browser open করে paste করো — Google Maps খুলবে।");
-}).catch(()=>{ prompt("এই link copy করে Chrome-এ open করো:", txt); });
+navigator.clipboard.writeText(url).then(done).catch(()=>{
+prompt("এই link copy করো:", url); done();
+});
 }else{
-prompt("এই link copy করে Chrome-এ open করো:", txt);
+prompt("এই link copy করো:", url); done();
 }
-};
-doCopy(url);
-}else{
-window.open(url, "_blank", "noopener");
-}
-
 }
 
 async function openDriverNav(rideId){
