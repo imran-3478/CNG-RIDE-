@@ -1769,15 +1769,13 @@ class="message"
 id="destNavCard"
 class="card"
 style="display:none;margin-top:12px;border:1.5px solid #059669"
-><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:50%;background:#dc2626;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div><div style="flex:1;min-width:0"><div id="destNavName" style="font-weight:700;font-size:15px;color:#0f172a"></div><div id="destNavDist" style="font-size:13px;color:#64748b"></div></div></div><a
+><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:40px;height:40px;border-radius:50%;background:#dc2626;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div><div style="flex:1;min-width:0"><div id="destNavName" style="font-weight:700;font-size:15px;color:#0f172a"></div><div id="destNavDist" style="font-size:13px;color:#64748b"></div></div></div><button
 id="destNavBtn"
-href="#"
-target="_blank"
-rel="noopener"
+type="button"
+onclick="openDestNav()"
 class="btn btn-primary btn-block"
-style="text-decoration:none;text-align:center;display:block"
 >Navigate করো
-</a></div></div><div class="location-bar"><span id="locationStatus">Location চালু হচ্ছে...</span><span style="display:flex;gap:8px;flex-wrap:wrap"><button
+</button></div></div><div class="location-bar"><span id="locationStatus">Location চালু হচ্ছে...</span><span style="display:flex;gap:8px;flex-wrap:wrap"><button
 class="btn btn-warning btn-small"
 id="locationBtn"
 onclick="requestLocation()"
@@ -4036,7 +4034,7 @@ if(navCard){
 document.getElementById("destNavName").textContent = destName;
 document.getElementById("destNavDist").textContent =
 distKm!==null ? distKm.toFixed(1)+" km দূরে"+(estFare!==null?" · আনুমানিক ভাড়া ৳"+estFare:"") : "নেভিগেশন";
-document.getElementById("destNavBtn").href =
+document.getElementById("destNavBtn").dataset.url =
 "https://www.google.com/maps/dir/?api=1"+
 (latitude!==null&&longitude!==null?"&origin="+latitude+","+longitude:"")+
 "&destination="+dlat+","+dlng;
@@ -4543,6 +4541,31 @@ function closeDriverNav(){
 document
 .getElementById("driverNavModal")
 .classList.remove("show");
+
+}
+
+// Destination navigate — WebView হলে copy করে Chrome-এ খুলতে বলো
+function openDestNav(){
+
+const btn = document.getElementById("destNavBtn");
+const url = btn ? btn.dataset.url : null;
+if(!url) return;
+
+const ua = navigator.userAgent || "";
+const isWebView = /; wv\)|WebView|Version\/.*Chrome\/.*Mobile/i.test(ua) && !/Chrome\/[.0-9]* (?!.*Edg)/.test(ua + " ") || (window.AndroidInterface !== undefined);
+
+if(isWebView){
+// WebView intent:// handle করতে পারে না — link copy করে দাও
+if(navigator.clipboard && navigator.clipboard.writeText){
+navigator.clipboard.writeText(url).then(()=>{
+alert("Link copy হয়েছে! Chrome browser-এ paste করে open করো — Google Maps খুলবে।");
+}).catch(()=>{ prompt("এই link copy করে Chrome-এ open করো:", url); });
+}else{
+prompt("এই link copy করে Chrome-এ open করো:", url);
+}
+}else{
+window.open(url, "_blank", "noopener");
+}
 
 }
 
