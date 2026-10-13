@@ -7019,4 +7019,56 @@ closeRechargeModal();
 
 });
 
-</script></body></html>
+</script><style>
+/* ================= PREMIUM UI PACK (added 2026-10-13) ================= */
+html{scroll-behavior:smooth}
+.px-reveal{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .65s ease,transform .65s cubic-bezier(.22,1,.36,1);transition-delay:var(--px-d,0s)}
+.px-reveal.px-in{opacity:1;transform:none}
+.px-orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0;animation:px-float 9s ease-in-out infinite}
+.hero>*:not(.px-orb){position:relative;z-index:1}
+@keyframes px-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-26px) scale(1.08)}}
+.px-tilt{transform-style:preserve-3d;will-change:transform;transition:transform .25s ease,box-shadow .3s ease}
+.px-shine{position:relative;overflow:hidden}
+.px-shine::after{content:"";position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-20deg);transition:left .65s ease;pointer-events:none}
+.px-shine:hover::after,.px-shine:active::after{left:135%}
+.px-press{transition:transform .15s ease}
+.px-press:active{transform:scale(.965)}
+.px-scrolled{box-shadow:0 8px 28px rgba(0,0,0,.20)!important}
+@media (prefers-reduced-motion:reduce){
+.px-reveal{opacity:1!important;transform:none!important;transition:none}
+.px-orb{animation:none}
+.px-shine::after{display:none}
+}
+/* =============== /PREMIUM UI PACK =============== */
+</style>
+<script>
+/* ================= PREMIUM UI PACK JS (added 2026-10-13) ================= */
+(function(){try{
+var REVEAL_SEL="section.hero,section.auth-section,#appSection,.native-hero,.hero-card,.card,.driver-card,.history-card",TILT_SEL=".hero-card,.card,.driver-card",BTN_SEL=".btn-primary,.btn",HEADER_SEL="header",ACCENT="#FFC107";
+function revealAll(){document.querySelectorAll('.px-reveal').forEach(function(el){el.classList.add('px-in');});}
+if('IntersectionObserver' in window){
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('px-in');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll(REVEAL_SEL).forEach(function(el,i){el.classList.add('px-reveal');el.style.setProperty('--px-d',(Math.min((i%4)*0.07,0.21)).toFixed(2)+'s');io.observe(el);});
+}else{revealAll();}
+document.querySelectorAll('.hero').forEach(function(h){
+if(!h.querySelector('.px-orb')){
+if(getComputedStyle(h).position==='static')h.style.position='relative';
+h.style.overflow='hidden';
+var orbs=[[ACCENT,'0.16','6pct','10pct','230px'],['#ffffff','0.10','72pct','55pct','270px'],[ACCENT,'0.10','40pct','78pct','180px']];
+orbs.forEach(function(o,i){var d=document.createElement('div');d.className='px-orb';
+d.style.background=o[0];d.style.opacity=o[1];d.style.left=o[2].replace('pct','%');d.style.top=o[3].replace('pct','%');d.style.width=o[4];d.style.height=o[4];d.style.animationDelay=(i*2.2)+'s';
+h.insertBefore(d,h.firstChild);});}});
+if(!('ontouchstart' in window)&&window.matchMedia&&matchMedia('(pointer:fine)').matches){
+document.querySelectorAll(TILT_SEL).forEach(function(c){c.classList.add('px-tilt');
+c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-0.5,y=(e.clientY-r.top)/r.height-0.5;
+c.style.transform='perspective(950px) rotateX('+(-y*6).toFixed(2)+'deg) rotateY('+(x*8).toFixed(2)+'deg) translateY(-3px)';});
+c.addEventListener('mouseleave',function(){c.style.transform='';});});}
+document.querySelectorAll(BTN_SEL).forEach(function(b){b.classList.add('px-shine','px-press');});
+var hd=document.querySelector(HEADER_SEL);
+if(hd){var onS=function(){hd.classList.toggle('px-scrolled',window.scrollY>24);};addEventListener('scroll',onS,{passive:true});onS();}
+}catch(err){try{document.querySelectorAll('.px-reveal').forEach(function(el){el.classList.add('px-in');});}catch(e2){}}
+})();
+/* =============== /PREMIUM UI PACK JS =============== */
+</script>
+
+</body></html>
